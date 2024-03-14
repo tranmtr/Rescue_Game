@@ -250,15 +250,15 @@ bool loadMedia()
 	{
 		//Set sprite clips
 
-        gSpriteClips[ 0 ].x =      0;
-		gSpriteClips[ 0 ].y =   64*2;
-		gSpriteClips[ 0 ].w =   64*2;
-		gSpriteClips[ 0 ].h =   64*2;
+        gSpriteClips[ 0 ].x =       0;
+		gSpriteClips[ 0 ].y =    64*2;
+		gSpriteClips[ 0 ].w =    64*2;
+		gSpriteClips[ 0 ].h =    64*2;
 
-		gSpriteClips[ 1 ].x =   64*2;
-		gSpriteClips[ 1 ].y =   64*2;
-		gSpriteClips[ 1 ].w =   64*2;
-		gSpriteClips[ 1 ].h =   64*2;
+		gSpriteClips[ 1 ].x =    64*2;
+		gSpriteClips[ 1 ].y =    64*2;
+		gSpriteClips[ 1 ].w =    64*2;
+		gSpriteClips[ 1 ].h =    64*2;
 
 		gSpriteClips[ 2 ].x =   128*2;
 		gSpriteClips[ 2 ].y =    64*2;
@@ -333,6 +333,9 @@ int main( int argc, char* args[] )
 			//Event handler
 			SDL_Event e;
 
+            //Flip type
+			SDL_RendererFlip flipType = SDL_FLIP_NONE;
+
 			//Current animation frame
 			int frame = 0;
 
@@ -347,6 +350,20 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
+					else if( e.type == SDL_KEYDOWN )
+					{
+						switch( e.key.keysym.sym )
+						{
+							case SDLK_LEFT:
+							flipType = SDL_FLIP_HORIZONTAL;
+							break;
+
+							case SDLK_RIGHT:
+							flipType = SDL_FLIP_NONE;
+							break;
+
+						}
+					}
 				}
 
 				//Clear screen
@@ -355,7 +372,7 @@ int main( int argc, char* args[] )
 
 				//Render current frame
 				SDL_Rect* currentClip = &gSpriteClips[ frame / 4 ];
-				gSpriteSheetTexture.render( ( SCREEN_WIDTH - currentClip->w ) / 2, ( SCREEN_HEIGHT - currentClip->h ) / 2, currentClip );
+				gSpriteSheetTexture.render( ( SCREEN_WIDTH - currentClip->w ) / 2, ( SCREEN_HEIGHT - currentClip->h ) / 2, currentClip, NULL, NULL, flipType );
 
 				//Update screen
 				SDL_RenderPresent( gRenderer );
