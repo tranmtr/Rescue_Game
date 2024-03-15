@@ -13,7 +13,10 @@ const int SCREEN_HEIGHT = 480;
 
 SDL_Rect* currentClip = NULL;
 int frame = 0;
+int frameIdle = 0;
 SDL_RendererFlip flipType = SDL_FLIP_NONE;
+
+bool moving = false;
 
 //Texture wrapper class
 class LTexture
@@ -144,7 +147,9 @@ SDL_Renderer* gRenderer = NULL;
 
 //Walking animation
 const int WALKING_ANIMATION_FRAMES = 8;
+const int IDLE_ANIMATION_FRAMES = 5;
 SDL_Rect gSpriteClips[ WALKING_ANIMATION_FRAMES ];
+SDL_Rect gIdle[ IDLE_ANIMATION_FRAMES ];
 LTexture gSpriteSheetTexture;
 
 
@@ -293,6 +298,7 @@ void Dot::handleEvent( SDL_Event& e )
                 flipType = SDL_FLIP_NONE;
                 break;
         }
+        moving = true;
     }
     //If a key was released
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
@@ -305,6 +311,8 @@ void Dot::handleEvent( SDL_Event& e )
             case SDLK_LEFT: mVelX += DOT_VEL; break;
             case SDLK_RIGHT: mVelX -= DOT_VEL; break;
         }
+        cout << "test" << endl << endl;
+        moving = false;
     }
 }
 
@@ -338,8 +346,21 @@ void Dot::move( SDL_Rect& wall )
 void Dot::render()
 {
     //Show the dot
-    SDL_Rect* currentClip = &gSpriteClips[ frame / 4 ];
-	gSpriteSheetTexture.render( mPosX, mPosY, currentClip, NULL, NULL, flipType );
+
+    if(moving == true){
+        SDL_Rect* currentClip = &gSpriteClips[ frame / 4 ];
+        gSpriteSheetTexture.render( mPosX, mPosY, currentClip, NULL, NULL, flipType );
+    }
+
+    else{
+        SDL_Rect* currentClip = &gIdle[ frameIdle / 4 ];
+        gSpriteSheetTexture.render( mPosX, mPosY, currentClip, NULL, NULL, flipType );
+    }
+
+    //SDL_Rect* currentClip = &gIdle[ frameIdle / 4 ];
+    //SDL_Rect* currentClip = &gSpriteClips[ frame / 4 ];
+	//gSpriteSheetTexture.render( mPosX, mPosY, currentClip, NULL, NULL, flipType );
+	cout << "4" << endl;
 }
 
 
@@ -403,14 +424,66 @@ bool loadMedia()
 	bool success = true;
 
 	//Load sprite sheet texture
-	if( !gSpriteSheetTexture.loadFromFile( "16x16_knight_1(phongto).png" ) )
+	if( !gSpriteSheetTexture.loadFromFile( "File_Image/16x16_knight_1(phongto).png" ) )
 	{
 		printf( "Failed to load walking animation texture!\n" );
 		success = false;
 	}
 	else
 	{
-		//Set sprite clips
+	    //Set sprite clips idle
+
+        gIdle[ 0 ].x =     0;
+        gIdle[ 0 ].y =     0;
+        gIdle[ 0 ].w =  64*2;
+        gIdle[ 0 ].h =  64*2;
+
+        gIdle[ 1 ].x =  64*2;
+        gIdle[ 1 ].y =     0;
+        gIdle[ 1 ].w =  64*2;
+        gIdle[ 1 ].h =  64*2;
+
+        gIdle[ 2 ].x = 128*2;
+        gIdle[ 2 ].y =     0;
+        gIdle[ 2 ].w =  64*2;
+        gIdle[ 2 ].h =  64*2;
+
+        gIdle[ 3 ].x = 192*2;
+        gIdle[ 3 ].y =     0;
+        gIdle[ 3 ].w =  64*2;
+        gIdle[ 3 ].h =  64*2;
+
+        gIdle[ 4 ].x = 256*2;
+        gIdle[ 4 ].y =     0;
+        gIdle[ 4 ].w =  64*2;
+        gIdle[ 4 ].h =  64*2;
+/*
+        gIdle[ 0 ].x =       0;
+		gIdle[ 0 ].y =    64*2;
+		gIdle[ 0 ].w =    64*2;
+		gIdle[ 0 ].h =    64*2;
+
+		gIdle[ 1 ].x =    64*2;
+		gIdle[ 1 ].y =    64*2;
+		gIdle[ 1 ].w =    64*2;
+		gIdle[ 1 ].h =    64*2;
+
+		gIdle[ 2 ].x =   128*2;
+		gIdle[ 2 ].y =    64*2;
+		gIdle[ 2 ].w =    64*2;
+		gIdle[ 2 ].h =    64*2;
+
+        gIdle[ 3 ].x =   192*2;
+		gIdle[ 3 ].y =    64*2;
+		gIdle[ 3 ].w =    64*2;
+		gIdle[ 3 ].h =    64*2;
+
+        gIdle[ 4 ].x =   256*2;
+		gIdle[ 4 ].y =    64*2;
+		gIdle[ 4 ].w =    64*2;
+		gIdle[ 4 ].h =    64*2;
+*/
+		//Set sprite clips waking
 
         gSpriteClips[ 0 ].x =       0;
 		gSpriteClips[ 0 ].y =    64*2;
@@ -521,6 +594,7 @@ bool checkCollision( SDL_Rect a, SDL_Rect b )
 int main( int argc, char* args[] )
 {
 	//Start up SDL and create window
+	cout << "Mo dau" << endl;
 	if( !init() )
 	{
 		printf( "Failed to initialize!\n" );
@@ -562,6 +636,7 @@ int main( int argc, char* args[] )
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
+				    cout <<"1" << endl;
 					//User requests quit
 					if( e.type == SDL_QUIT )
 					{
@@ -569,6 +644,7 @@ int main( int argc, char* args[] )
 					}
 					//Handle input for the dot
 					dot.handleEvent( e );
+                    cout << "3" << endl;
 
 				}
 				//Move the dot
@@ -592,13 +668,26 @@ int main( int argc, char* args[] )
 				SDL_RenderPresent( gRenderer );
 
 				//Go to next frame
-				++frame;
 
-				//Cycle animation
-				if( frame / 4 >= WALKING_ANIMATION_FRAMES )
-				{
-					frame = 0;
-				}
+				if(moving == true){
+                    ++frame;
+
+                    //Cycle animation
+                    if( frame / 4 >= WALKING_ANIMATION_FRAMES )
+                    {
+                        frame = 0;
+                    }
+                    cout << "chay\n\n";
+                }
+                else{
+                    ++frameIdle;
+                    if( frameIdle / 4 >= IDLE_ANIMATION_FRAMES )
+                    {
+                        frameIdle = 0;
+                    }
+                    cout << "dungyen\n\n";
+                }
+
 			}
 		}
 	}

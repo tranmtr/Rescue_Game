@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710434641 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
+1710509332 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
