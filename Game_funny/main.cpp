@@ -96,8 +96,8 @@ class Dot
 {
     public:
 		//The dimensions of the dot
-		static const int DOT_WIDTH = 64*2;
-		static const int DOT_HEIGHT = 64*2;
+		static const int DOT_WIDTH = 45;
+		static const int DOT_HEIGHT = 54;
 
 		//Maximum axis velocity of the dot
 		static const int DOT_VEL = 5;
@@ -424,7 +424,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load sprite sheet texture
-	if( !gSpriteSheetTexture.loadFromFile( "File_Image/16x16_knight_1(phongto).png" ) )
+	if( !gSpriteSheetTexture.loadFromFile( "File_Image/16x16_knight_1(phongto)testIDLEvaRUN.png" ) )
 	{
 		printf( "Failed to load walking animation texture!\n" );
 		success = false;
@@ -433,30 +433,30 @@ bool loadMedia()
 	{
 	    //Set sprite clips idle
 
-        gIdle[ 0 ].x =     0;
-        gIdle[ 0 ].y =     0;
-        gIdle[ 0 ].w =  64*2;
-        gIdle[ 0 ].h =  64*2;
+        gIdle[ 0 ].x =    40;
+        gIdle[ 0 ].y =    43;
+        gIdle[ 0 ].w =    45;
+        gIdle[ 0 ].h =    54;
 
-        gIdle[ 1 ].x =  64*2;
-        gIdle[ 1 ].y =     0;
-        gIdle[ 1 ].w =  64*2;
-        gIdle[ 1 ].h =  64*2;
+        gIdle[ 1 ].x =   168;
+        gIdle[ 1 ].y =    43;
+        gIdle[ 1 ].w =    45;
+        gIdle[ 1 ].h =    54;
 
-        gIdle[ 2 ].x = 128*2;
-        gIdle[ 2 ].y =     0;
-        gIdle[ 2 ].w =  64*2;
-        gIdle[ 2 ].h =  64*2;
+        gIdle[ 2 ].x =   296;
+        gIdle[ 2 ].y =    43;
+        gIdle[ 2 ].w =    45;
+        gIdle[ 2 ].h =    54;
 
-        gIdle[ 3 ].x = 192*2;
-        gIdle[ 3 ].y =     0;
-        gIdle[ 3 ].w =  64*2;
-        gIdle[ 3 ].h =  64*2;
+        gIdle[ 3 ].x =   424;
+        gIdle[ 3 ].y =    43;
+        gIdle[ 3 ].w =    45;
+        gIdle[ 3 ].h =    54;
 
-        gIdle[ 4 ].x = 256*2;
-        gIdle[ 4 ].y =     0;
-        gIdle[ 4 ].w =  64*2;
-        gIdle[ 4 ].h =  64*2;
+        gIdle[ 4 ].x =   552;
+        gIdle[ 4 ].y =    43;
+        gIdle[ 4 ].w =    45;
+        gIdle[ 4 ].h =    54;
 /*
         gIdle[ 0 ].x =       0;
 		gIdle[ 0 ].y =    64*2;
@@ -485,45 +485,45 @@ bool loadMedia()
 */
 		//Set sprite clips waking
 
-        gSpriteClips[ 0 ].x =       0;
-		gSpriteClips[ 0 ].y =    64*2;
-		gSpriteClips[ 0 ].w =    64*2;
-		gSpriteClips[ 0 ].h =    64*2;
+        gSpriteClips[ 0 ].x =      40;
+		gSpriteClips[ 0 ].y =     171;
+		gSpriteClips[ 0 ].w =      45;
+		gSpriteClips[ 0 ].h =      54;
 
-		gSpriteClips[ 1 ].x =    64*2;
-		gSpriteClips[ 1 ].y =    64*2;
-		gSpriteClips[ 1 ].w =    64*2;
-		gSpriteClips[ 1 ].h =    64*2;
+		gSpriteClips[ 1 ].x =     168;
+		gSpriteClips[ 1 ].y =     171;
+		gSpriteClips[ 1 ].w =      45;
+		gSpriteClips[ 1 ].h =      54;
 
-		gSpriteClips[ 2 ].x =   128*2;
-		gSpriteClips[ 2 ].y =    64*2;
-		gSpriteClips[ 2 ].w =    64*2;
-		gSpriteClips[ 2 ].h =    64*2;
+		gSpriteClips[ 2 ].x =     296;
+		gSpriteClips[ 2 ].y =     171;
+		gSpriteClips[ 2 ].w =      45;
+		gSpriteClips[ 2 ].h =      54;
 
-        gSpriteClips[ 3 ].x =   192*2;
-		gSpriteClips[ 3 ].y =    64*2;
-		gSpriteClips[ 3 ].w =    64*2;
-		gSpriteClips[ 3 ].h =    64*2;
+        gSpriteClips[ 3 ].x =   192*2 + 40;
+		gSpriteClips[ 3 ].y =    171;
+		gSpriteClips[ 3 ].w =    45;
+		gSpriteClips[ 3 ].h =    54;
 
-        gSpriteClips[ 4 ].x =   256*2;
-		gSpriteClips[ 4 ].y =    64*2;
-		gSpriteClips[ 4 ].w =    64*2;
-		gSpriteClips[ 4 ].h =    64*2;
+        gSpriteClips[ 4 ].x =   256*2+40;
+		gSpriteClips[ 4 ].y =    171;
+		gSpriteClips[ 4 ].w =    45;
+		gSpriteClips[ 4 ].h =    54;
 
-		gSpriteClips[ 5 ].x =   320*2;
-		gSpriteClips[ 5 ].y =    64*2;
-		gSpriteClips[ 5 ].w =    64*2;
-		gSpriteClips[ 5 ].h =    64*2;
+		gSpriteClips[ 5 ].x =   320*2 + 40;
+		gSpriteClips[ 5 ].y =    171;
+		gSpriteClips[ 5 ].w =    45;
+		gSpriteClips[ 5 ].h =    54;
 
-        gSpriteClips[ 6 ].x =   384*2;
-		gSpriteClips[ 6 ].y =    64*2;
-		gSpriteClips[ 6 ].w =    64*2;
-		gSpriteClips[ 6 ].h =    64*2;
+        gSpriteClips[ 6 ].x =   384*2 + 40;
+		gSpriteClips[ 6 ].y =    171;
+		gSpriteClips[ 6 ].w =    45;
+		gSpriteClips[ 6 ].h =    54;
 
-        gSpriteClips[ 7 ].x =   448*2;
-		gSpriteClips[ 7 ].y =    64*2;
-		gSpriteClips[ 7 ].w =    64*2;
-		gSpriteClips[ 7 ].h =    64*2;
+        gSpriteClips[ 7 ].x =   448*2 + 40;
+		gSpriteClips[ 7 ].y =    171;
+		gSpriteClips[ 7 ].w =    45;
+		gSpriteClips[ 7 ].h =    54;
 
 	}
 
@@ -697,5 +697,3 @@ int main( int argc, char* args[] )
 
 	return 0;
 }
-
-
