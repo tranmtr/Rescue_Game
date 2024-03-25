@@ -31,6 +31,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="check_collision.cpp" />
+		<Unit filename="check_collision.h" />
+		<Unit filename="figure.cpp" />
+		<Unit filename="figure.h" />
+		<Unit filename="header.h" />
+		<Unit filename="init_and_close.cpp" />
+		<Unit filename="init_and_close.h" />
+		<Unit filename="load_texture.cpp" />
+		<Unit filename="load_texture.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
