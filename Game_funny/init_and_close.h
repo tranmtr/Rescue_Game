@@ -7,6 +7,6 @@
 bool init(SDL_Window*& gWindow, SDL_Renderer*& gRenderer);
 
 //Frees media and shuts down SDL
-void close(SDL_Window*& gWindow, SDL_Renderer*& gRenderer, LTexture& gSpriteSheetTexture);
+void close(SDL_Window*& gWindow, SDL_Renderer*& gRenderer, LTexture& figureTexture);
 
 

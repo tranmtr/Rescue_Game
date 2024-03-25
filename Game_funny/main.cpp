@@ -92,10 +92,6 @@ int main( int argc, char* args[] )
 				//Update screen
 				SDL_RenderPresent( gRenderer );
 
-				//Go to next frame
-				++frameRun;
-
-				//Cycle animation
 				if(moving == true)
                 {
                     ++frameRun;

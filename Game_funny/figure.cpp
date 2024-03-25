@@ -87,7 +87,7 @@ void Figure::render(SDL_Rect gSpriteClipsIdle[], SDL_Rect gSpriteClipsRun[], int
     {
         figureTexture.render( mPosX, mPosY, &gSpriteClipsIdle[ frameIdle / 4 ], 0, NULL, flipType, gRenderer  );
     }
-	figureTexture.render( mPosX, mPosY, &gSpriteClipsRun[ frameRun / 4 ], 0, NULL, flipType, gRenderer  );
+
 	cout << "Chay" << endl;
 }
 

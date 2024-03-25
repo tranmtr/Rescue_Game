@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1711378287 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
+1711379127 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
 	"header.h"
 	"init_and_close.h"
 	"load_texture.h"
@@ -19,16 +19,16 @@
 
 1710901603 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\tile.h
 
-1711378252 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.cpp
+1711378353 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.cpp
 	"figure.h"
 
 1711377387 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_texture.cpp
 	"load_texture.h"
 
-1711377517 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\init_and_close.cpp
+1711378789 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\init_and_close.cpp
 	"init_and_close.h"
 
-1711373862 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\init_and_close.h
+1711378768 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\init_and_close.h
 	"header.h"
 	"load_texture.h"
 

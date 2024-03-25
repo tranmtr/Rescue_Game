@@ -57,10 +57,10 @@ bool init(SDL_Window*& gWindow, SDL_Renderer*& gRenderer)
 	return success;
 }
 
-void close(SDL_Window*& gWindow, SDL_Renderer*& gRenderer, LTexture& gSpriteSheetTexture)
+void close(SDL_Window*& gWindow, SDL_Renderer*& gRenderer, LTexture& figureTexture)
 {
 	//Free loaded images
-	gSpriteSheetTexture.free();
+	figureTexture.free();
 
 	//Destroy window
 	SDL_DestroyRenderer( gRenderer );
