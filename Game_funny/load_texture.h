@@ -45,4 +45,7 @@ class LTexture
 };
 
 //Loads media
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, SDL_Rect clipsIdle[], SDL_Rect clipsRun[]);
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture);
+
+//Load rec animation
+void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[]);

@@ -117,7 +117,7 @@ int LTexture::getHeight()
 
 
 
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, SDL_Rect clipsIdle[], SDL_Rect clipsRun[] )
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture )
 {
 	//Loading success flag
 	bool success = true;
@@ -128,9 +128,22 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, SDL_Rect clips
 		printf( "Failed to load walking animation texture!\n" );
 		success = false;
 	}
-	else
-	{
-		//Set sprite clips idle
+
+	if(!mazeMapTexture.loadFromFile("File_Image/image_Maze/testmap.jpg", aRenderer))
+    {
+        printf( "Failed to load walking animation texture!\n" );
+		success = false;
+    }
+    else
+    {
+        cout << "OK" << "   ";
+    }
+	return success;
+}
+
+void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[])
+{
+    //Set sprite clips idle
 
         clipsIdle[ 0 ].x =    40;
         clipsIdle[ 0 ].y =    43;
@@ -199,7 +212,5 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, SDL_Rect clips
 		clipsRun[ 7 ].y =    171;
 		clipsRun[ 7 ].w =    45;
 		clipsRun[ 7 ].h =    54;
-	}
-
-	return success;
 }
+

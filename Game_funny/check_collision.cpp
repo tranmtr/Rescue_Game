@@ -44,5 +44,6 @@ bool checkCollision( SDL_Rect a, SDL_Rect b )
     }
 
     //If none of the sides from A are outside B
+
     return true;
 }

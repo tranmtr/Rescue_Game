@@ -57,7 +57,7 @@ void Figure::move()
     mPosX += mVelX;
 
     //If the dot went too far to the left or right
-    if( ( mPosX < 0 ) || ( mPosX + FIGURE_WIDTH > SCREEN_WIDTH ) )
+    if( ( mPosX < 0 ) || ( mPosX + FIGURE_WIDTH > LEVEL_WIDTH ) )
     {
         //Move back
         mPosX -= mVelX;
@@ -67,26 +67,45 @@ void Figure::move()
     mPosY += mVelY;
 
     //If the dot went too far up or down
-    if( ( mPosY < 0 ) || ( mPosY + FIGURE_HEIGHT > SCREEN_HEIGHT ) )
+    if( ( mPosY < 0 ) || ( mPosY + FIGURE_HEIGHT > LEVEL_HEIGHT ) )
     {
         //Move back
         mPosY -= mVelY;
     }
 }
 
-void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int frameIdle, int frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving)
+void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving, int camX, int camY)
 {
-    //Show the figure
-    //SDL_Rect* currentClip = &gSpriteClips[ frame / 2 ];
-	//gSpriteSheetTexture.render( mPosX, mPosY, currentClip, 0, NULL, SDL_FLIP_NONE, gRenderer  );
+    //Show the figure run
     if(moving == true)
     {
-        figureTexture.render( mPosX, mPosY, &clipsRun[ frameRun / 4 ], 0, NULL, flipType, aRenderer  );
+        ++frameRun;
+        if(frameRun / 4 >= RUN_ANIMATION_FRAMES)
+        {
+            frameRun = 0;
+        }
+        figureTexture.render( mPosX - camX, mPosY - camY, &clipsRun[ frameRun / 4 ], 0, NULL, flipType, aRenderer  );
     }
+    //Show the figure idle
     else
     {
-        figureTexture.render( mPosX, mPosY, &clipsIdle[ frameIdle / 4 ], 0, NULL, flipType, aRenderer  );
+        ++frameIdle;
+        if( frameIdle / 4 >= IDLE_ANIMATION_FRAMES )
+        {
+            frameIdle = 0;
+        }
+        figureTexture.render( mPosX - camX, mPosY - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, flipType, aRenderer  );
     }
 
 	cout << "Chay" << endl;
+}
+
+int Figure::getPosX()
+{
+    return this->mPosX;
+}
+
+int Figure::getPosY()
+{
+    return this->mPosY;
 }

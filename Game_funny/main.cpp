@@ -4,6 +4,7 @@
 #include "load_texture.h"
 #include "figure.h"
 #include "check_collision.h"
+#include "load_camera.h"
 
 int main( int argc, char* args[] )
 {
@@ -16,6 +17,10 @@ int main( int argc, char* args[] )
 
     // Figure
     LTexture figureTexture;
+
+    // Maze map
+
+    LTexture mazeMapTexture;
 
     //Idle animation
     SDL_Rect clipsIdle[ IDLE_ANIMATION_FRAMES ];
@@ -43,12 +48,15 @@ int main( int argc, char* args[] )
 	else
 	{
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture, clipsIdle, clipsRun) )
+		if( !loadMedia(aRenderer, figureTexture, mazeMapTexture) )
 		{
 			printf( "Failed to load media!\n" );
 		}
 		else
 		{
+		    // Load Rec Animation
+		    loadRectAnimation(clipsIdle, clipsRun);
+
 			//Main loop flag
 			bool quit = false;
 
@@ -59,10 +67,13 @@ int main( int argc, char* args[] )
 			Figure Figure;
             cout << "Mo dau" << endl;
 
+            //The camera area
+			SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+
 			//While application is running
 			while( !quit )
 			{
-			    cout << "Chua quit" << endl;
+			    //cout << "Chua quit" << endl;
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
@@ -77,39 +88,28 @@ int main( int argc, char* args[] )
                 //Move the figure
 				Figure.move();
 
+                //Load camera:
+                loadCamera(camera, Figure);
+
 				//Clear screen
 				SDL_SetRenderDrawColor( aRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( aRenderer );
 
+                //Render background
+                mazeMapTexture.render(0, 0, &camera, 0, NULL, SDL_FLIP_NONE, aRenderer);
 
                 //Render objects
-				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, flipType, moving);
+				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, flipType, moving, camera.x, camera.y);
 
 				//Update screen
 				SDL_RenderPresent( aRenderer );
 
-				if(moving == true)
-                {
-                    ++frameRun;
-                    if(frameRun / 4 >= RUN_ANIMATION_FRAMES)
-                    {
-                        frameRun = 0;
-                    }
-                }
-                else
-                {
-                    ++frameIdle;
-                    if( frameIdle / 4 >= IDLE_ANIMATION_FRAMES )
-                    {
-                        frameIdle = 0;
-                    }
-                }
 			}
 		}
 	}
 
 	//Free resources and close SDL
-	close(aWindow, aRenderer,figureTexture);
+	close(aWindow, aRenderer,figureTexture, mazeMapTexture);
 
 	return 0;
 }

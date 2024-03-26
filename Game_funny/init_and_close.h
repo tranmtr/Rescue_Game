@@ -7,4 +7,4 @@
 bool init(SDL_Window*& aWindow, SDL_Renderer*& aRenderer);
 
 //Frees media and shuts down SDL
-void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture& figureTexture);
+void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture);

@@ -23,8 +23,13 @@ class Figure
 		void move();
 
 		//Shows the dot on the screen
-		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int frameIdle, int frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving);
+		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving, int camX, int camY);
 
+        //Get mPosX:
+        int getPosX();
+
+        //Get mPosY:
+        int getPosY();
     private:
 		//The X and Y offsets of the dot
 		int mPosX, mPosY;

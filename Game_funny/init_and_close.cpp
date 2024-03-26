@@ -57,10 +57,11 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
 	return success;
 }
 
-void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture& figureTexture)
+void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture)
 {
 	//Free loaded images
 	figureTexture.free();
+    mazeMapTexture.free();
 
 	//Destroy window
 	SDL_DestroyRenderer( aRenderer );
