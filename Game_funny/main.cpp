@@ -1,5 +1,3 @@
-/*This source code copyrighted by Lazy Foo' Productions 2004-2024
-and may not be redistributed without written permission.*/
 
 #include "header.h"
 #include "init_and_close.h"
@@ -11,19 +9,19 @@ int main( int argc, char* args[] )
 {
 
     //The window we'll be rendering to
-    SDL_Window* gWindow = NULL;
+    SDL_Window* aWindow = NULL;
 
     //The window renderer
-    SDL_Renderer* gRenderer = NULL;
+    SDL_Renderer* aRenderer = NULL;
 
     // Figure
     LTexture figureTexture;
 
     //Idle animation
-    SDL_Rect gSpriteClipsIdle[ IDLE_ANIMATION_FRAMES ];
+    SDL_Rect clipsIdle[ IDLE_ANIMATION_FRAMES ];
 
     //Run animation
-    SDL_Rect gSpriteClipsRun[ RUN_ANIMATION_FRAMES ];
+    SDL_Rect clipsRun[ RUN_ANIMATION_FRAMES ];
 
     // Flip animation
     SDL_RendererFlip flipType = SDL_FLIP_NONE;
@@ -38,14 +36,14 @@ int main( int argc, char* args[] )
     bool moving = false;
 
 	//Start up SDL and create window
-	if( !init(gWindow, gRenderer) )
+	if( !init(aWindow, aRenderer) )
 	{
 		printf( "Failed to initialize!\n" );
 	}
 	else
 	{
 		//Load media
-		if( !loadMedia(gRenderer, figureTexture, gSpriteClipsIdle, gSpriteClipsRun) )
+		if( !loadMedia(aRenderer, figureTexture, clipsIdle, clipsRun) )
 		{
 			printf( "Failed to load media!\n" );
 		}
@@ -60,6 +58,7 @@ int main( int argc, char* args[] )
 			//The figure that will be moving around on the screen
 			Figure Figure;
             cout << "Mo dau" << endl;
+
 			//While application is running
 			while( !quit )
 			{
@@ -79,18 +78,15 @@ int main( int argc, char* args[] )
 				Figure.move();
 
 				//Clear screen
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
+				SDL_SetRenderDrawColor( aRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+				SDL_RenderClear( aRenderer );
 
-				//Render current frame
-				//SDL_Rect* currentClip = &gSpriteClips[ frame / 2 ];
-				//gSpriteSheetTexture.render( 0, 0, &gSpriteClips[ frame / 2 ], 0, NULL, SDL_FLIP_NONE, gRenderer  );
 
                 //Render objects
-				Figure.render(gSpriteClipsIdle, gSpriteClipsRun, frameIdle, frameRun, figureTexture, gRenderer, flipType, moving);
+				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, flipType, moving);
 
 				//Update screen
-				SDL_RenderPresent( gRenderer );
+				SDL_RenderPresent( aRenderer );
 
 				if(moving == true)
                 {
@@ -113,8 +109,7 @@ int main( int argc, char* args[] )
 	}
 
 	//Free resources and close SDL
-	close(gWindow, gRenderer,figureTexture);
+	close(aWindow, aRenderer,figureTexture);
 
 	return 0;
 }
-

@@ -74,32 +74,19 @@ void Figure::move()
     }
 }
 
-void Figure::render(SDL_Rect gSpriteClipsIdle[], SDL_Rect gSpriteClipsRun[], int frameIdle, int frameRun, LTexture& figureTexture, SDL_Renderer* gRenderer, SDL_RendererFlip flipType, bool moving)
+void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int frameIdle, int frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving)
 {
     //Show the figure
     //SDL_Rect* currentClip = &gSpriteClips[ frame / 2 ];
 	//gSpriteSheetTexture.render( mPosX, mPosY, currentClip, 0, NULL, SDL_FLIP_NONE, gRenderer  );
     if(moving == true)
     {
-        figureTexture.render( mPosX, mPosY, &gSpriteClipsRun[ frameRun / 4 ], 0, NULL, flipType, gRenderer  );
+        figureTexture.render( mPosX, mPosY, &clipsRun[ frameRun / 4 ], 0, NULL, flipType, aRenderer  );
     }
     else
     {
-        figureTexture.render( mPosX, mPosY, &gSpriteClipsIdle[ frameIdle / 4 ], 0, NULL, flipType, gRenderer  );
+        figureTexture.render( mPosX, mPosY, &clipsIdle[ frameIdle / 4 ], 0, NULL, flipType, aRenderer  );
     }
 
 	cout << "Chay" << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

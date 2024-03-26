@@ -29,7 +29,7 @@ class LTexture
 		void setAlpha( Uint8 alpha );
 
 		//Renders texture at given point
-		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, SDL_Renderer* gRenderer = NULL );
+		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, SDL_Renderer* aRenderer = NULL );
 
 		//Gets image dimensions
 		int getWidth();
@@ -45,6 +45,4 @@ class LTexture
 };
 
 //Loads media
-bool loadMedia(SDL_Renderer*& gRenderer, LTexture& figureTexture, SDL_Rect gSpriteClipsIdle[], SDL_Rect gSpriteClipsRun[]);
-
-
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, SDL_Rect clipsIdle[], SDL_Rect clipsRun[]);

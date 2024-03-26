@@ -23,7 +23,7 @@ class Figure
 		void move();
 
 		//Shows the dot on the screen
-		void render(SDL_Rect gSpriteClipsIdle[], SDL_Rect gSpriteClipsRun[], int frameIdle, int frameRun, LTexture& figureTexture, SDL_Renderer* gRenderer, SDL_RendererFlip flipType, bool moving);
+		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int frameIdle, int frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving);
 
     private:
 		//The X and Y offsets of the dot
@@ -32,14 +32,3 @@ class Figure
 		//The velocity of the dot
 		int mVelX, mVelY;
 };
-
-
-
-
-
-
-
-
-
-
-

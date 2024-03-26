@@ -38,6 +38,8 @@
 		<Unit filename="header.h" />
 		<Unit filename="init_and_close.cpp" />
 		<Unit filename="init_and_close.h" />
+		<Unit filename="load_maze.cpp" />
+		<Unit filename="load_maze.h" />
 		<Unit filename="load_texture.cpp" />
 		<Unit filename="load_texture.h" />
 		<Unit filename="main.cpp" />

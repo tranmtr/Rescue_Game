@@ -3,7 +3,7 @@
 
 #include "init_and_close.h"
 
-bool init(SDL_Window*& gWindow, SDL_Renderer*& gRenderer)
+bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
 {
 	//Initialization flag
 	bool success = true;
@@ -23,8 +23,8 @@ bool init(SDL_Window*& gWindow, SDL_Renderer*& gRenderer)
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL )
+		aWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		if( aWindow == NULL )
 		{
 			printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
 			success = false;
@@ -32,7 +32,7 @@ bool init(SDL_Window*& gWindow, SDL_Renderer*& gRenderer)
 		else
 		{
 			//Create vsynced renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			gRenderer = SDL_CreateRenderer( aWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 			if( gRenderer == NULL )
 			{
 				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -57,19 +57,18 @@ bool init(SDL_Window*& gWindow, SDL_Renderer*& gRenderer)
 	return success;
 }
 
-void close(SDL_Window*& gWindow, SDL_Renderer*& gRenderer, LTexture& figureTexture)
+void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture& figureTexture)
 {
 	//Free loaded images
 	figureTexture.free();
 
 	//Destroy window
-	SDL_DestroyRenderer( gRenderer );
-	SDL_DestroyWindow( gWindow );
-	gWindow = NULL;
-	gRenderer = NULL;
+	SDL_DestroyRenderer( aRenderer );
+	SDL_DestroyWindow( aWindow );
+	aWindow = NULL;
+	aRenderer = NULL;
 
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
 }
-

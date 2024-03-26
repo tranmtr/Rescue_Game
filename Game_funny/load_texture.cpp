@@ -17,7 +17,7 @@ LTexture::~LTexture()
 	free();
 }
 
-bool LTexture::loadFromFile( std::string path, SDL_Renderer*& gRenderer )
+bool LTexture::loadFromFile( std::string path, SDL_Renderer*& aRenderer )
 {
 	//Get rid of preexisting texture
 	free();
@@ -37,7 +37,7 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer*& gRenderer )
 		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
 
 		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
+        newTexture = SDL_CreateTextureFromSurface( aRenderer, loadedSurface );
 		if( newTexture == NULL )
 		{
 			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
@@ -88,7 +88,7 @@ void LTexture::setAlpha( Uint8 alpha )
 	SDL_SetTextureAlphaMod( mTexture, alpha );
 }
 
-void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip , SDL_Renderer* gRenderer)
+void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip , SDL_Renderer* aRenderer)
 {
 	//Set rendering space and render to screen
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
@@ -101,7 +101,7 @@ void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* ce
 	}
 
 	//Render to screen
-	SDL_RenderCopyEx( gRenderer, mTexture, clip, &renderQuad, angle, center, flip );
+	SDL_RenderCopyEx( aRenderer, mTexture, clip, &renderQuad, angle, center, flip );
 }
 
 int LTexture::getWidth()
@@ -117,13 +117,13 @@ int LTexture::getHeight()
 
 
 
-bool loadMedia(SDL_Renderer*& gRenderer, LTexture& figureTexture, SDL_Rect gSpriteClipsIdle[], SDL_Rect gSpriteClipsRun[] )
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, SDL_Rect clipsIdle[], SDL_Rect clipsRun[] )
 {
 	//Loading success flag
 	bool success = true;
 
 	//Load sprite sheet texture
-	if( !figureTexture.loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)testIDLEvaRUN.png",gRenderer ) )
+	if( !figureTexture.loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)testIDLEvaRUN.png",aRenderer ) )
 	{
 		printf( "Failed to load walking animation texture!\n" );
 		success = false;
@@ -132,76 +132,74 @@ bool loadMedia(SDL_Renderer*& gRenderer, LTexture& figureTexture, SDL_Rect gSpri
 	{
 		//Set sprite clips idle
 
-        gSpriteClipsIdle[ 0 ].x =    40;
-        gSpriteClipsIdle[ 0 ].y =    43;
-        gSpriteClipsIdle[ 0 ].w =    45;
-        gSpriteClipsIdle[ 0 ].h =    54;
+        clipsIdle[ 0 ].x =    40;
+        clipsIdle[ 0 ].y =    43;
+        clipsIdle[ 0 ].w =    45;
+        clipsIdle[ 0 ].h =    54;
 
-        gSpriteClipsIdle[ 1 ].x =   168;
-        gSpriteClipsIdle[ 1 ].y =    43;
-        gSpriteClipsIdle[ 1 ].w =    45;
-        gSpriteClipsIdle[ 1 ].h =    54;
+        clipsIdle[ 1 ].x =   168;
+        clipsIdle[ 1 ].y =    43;
+        clipsIdle[ 1 ].w =    45;
+        clipsIdle[ 1 ].h =    54;
 
-        gSpriteClipsIdle[ 2 ].x =   296;
-        gSpriteClipsIdle[ 2 ].y =    43;
-        gSpriteClipsIdle[ 2 ].w =    45;
-        gSpriteClipsIdle[ 2 ].h =    54;
+        clipsIdle[ 2 ].x =   296;
+        clipsIdle[ 2 ].y =    43;
+        clipsIdle[ 2 ].w =    45;
+        clipsIdle[ 2 ].h =    54;
 
-        gSpriteClipsIdle[ 3 ].x =   424;
-        gSpriteClipsIdle[ 3 ].y =    43;
-        gSpriteClipsIdle[ 3 ].w =    45;
-        gSpriteClipsIdle[ 3 ].h =    54;
+        clipsIdle[ 3 ].x =   424;
+        clipsIdle[ 3 ].y =    43;
+        clipsIdle[ 3 ].w =    45;
+        clipsIdle[ 3 ].h =    54;
 
-        gSpriteClipsIdle[ 4 ].x =   552;
-        gSpriteClipsIdle[ 4 ].y =    43;
-        gSpriteClipsIdle[ 4 ].w =    45;
-        gSpriteClipsIdle[ 4 ].h =    54;
+        clipsIdle[ 4 ].x =   552;
+        clipsIdle[ 4 ].y =    43;
+        clipsIdle[ 4 ].w =    45;
+        clipsIdle[ 4 ].h =    54;
 
 
         //Set sprite clips run
 
-        gSpriteClipsRun[ 0 ].x =      40;
-		gSpriteClipsRun[ 0 ].y =     171;
-		gSpriteClipsRun[ 0 ].w =      45;
-		gSpriteClipsRun[ 0 ].h =      54;
+        clipsRun[ 0 ].x =      40;
+		clipsRun[ 0 ].y =     171;
+		clipsRun[ 0 ].w =      45;
+		clipsRun[ 0 ].h =      54;
 
-		gSpriteClipsRun[ 1 ].x =     168;
-		gSpriteClipsRun[ 1 ].y =     171;
-		gSpriteClipsRun[ 1 ].w =      45;
-		gSpriteClipsRun[ 1 ].h =      54;
+		clipsRun[ 1 ].x =     168;
+		clipsRun[ 1 ].y =     171;
+		clipsRun[ 1 ].w =      45;
+		clipsRun[ 1 ].h =      54;
 
-		gSpriteClipsRun[ 2 ].x =     296;
-		gSpriteClipsRun[ 2 ].y =     171;
-		gSpriteClipsRun[ 2 ].w =      45;
-		gSpriteClipsRun[ 2 ].h =      54;
+		clipsRun[ 2 ].x =     296;
+		clipsRun[ 2 ].y =     171;
+		clipsRun[ 2 ].w =      45;
+		clipsRun[ 2 ].h =      54;
 
-        gSpriteClipsRun[ 3 ].x =   192*2 + 40;
-		gSpriteClipsRun[ 3 ].y =    171;
-		gSpriteClipsRun[ 3 ].w =    45;
-		gSpriteClipsRun[ 3 ].h =    54;
+        clipsRun[ 3 ].x =   192*2 + 40;
+		clipsRun[ 3 ].y =    171;
+		clipsRun[ 3 ].w =    45;
+		clipsRun[ 3 ].h =    54;
 
-        gSpriteClipsRun[ 4 ].x =   256*2+40;
-		gSpriteClipsRun[ 4 ].y =    171;
-		gSpriteClipsRun[ 4 ].w =    45;
-		gSpriteClipsRun[ 4 ].h =    54;
+        clipsRun[ 4 ].x =   256*2+40;
+		clipsRun[ 4 ].y =    171;
+		clipsRun[ 4 ].w =    45;
+		clipsRun[ 4 ].h =    54;
 
-		gSpriteClipsRun[ 5 ].x =   320*2 + 40;
-		gSpriteClipsRun[ 5 ].y =    171;
-		gSpriteClipsRun[ 5 ].w =    45;
-		gSpriteClipsRun[ 5 ].h =    54;
+		clipsRun[ 5 ].x =   320*2 + 40;
+		clipsRun[ 5 ].y =    171;
+		clipsRun[ 5 ].w =    45;
+		clipsRun[ 5 ].h =    54;
 
-        gSpriteClipsRun[ 6 ].x =   384*2 + 40;
-		gSpriteClipsRun[ 6 ].y =    171;
-		gSpriteClipsRun[ 6 ].w =    45;
-		gSpriteClipsRun[ 6 ].h =    54;
+        clipsRun[ 6 ].x =   384*2 + 40;
+		clipsRun[ 6 ].y =    171;
+		clipsRun[ 6 ].w =    45;
+		clipsRun[ 6 ].h =    54;
 
-        gSpriteClipsRun[ 7 ].x =   448*2 + 40;
-		gSpriteClipsRun[ 7 ].y =    171;
-		gSpriteClipsRun[ 7 ].w =    45;
-		gSpriteClipsRun[ 7 ].h =    54;
+        clipsRun[ 7 ].x =   448*2 + 40;
+		clipsRun[ 7 ].y =    171;
+		clipsRun[ 7 ].w =    45;
+		clipsRun[ 7 ].h =    54;
 	}
 
 	return success;
 }
-
-
