@@ -27,9 +27,6 @@ int main( int argc, char* args[] )
     //Run animation
     SDL_Rect clipsRun[ RUN_ANIMATION_FRAMES ];
 
-    // Flip animation
-    SDL_RendererFlip flipType = SDL_FLIP_NONE;
-
     //Scene textures
     LTexture gTileTexture;
     SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
@@ -42,9 +39,6 @@ int main( int argc, char* args[] )
 
     //Current animation frame Run
     int frameRun = 0;
-
-    // Idle or Moving
-    bool moving = false;
 
 	//Start up SDL and create window
 	if( !init(aWindow, aRenderer) )
@@ -91,7 +85,7 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-					Figure.handleEvent(e, flipType, moving);
+					Figure.handleEvent(e);
 				}
 
                 //Move the figure
@@ -115,7 +109,7 @@ int main( int argc, char* args[] )
 				}
 
                 //Render objects
-				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, flipType, camera.x, camera.y);
+				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, camera.x, camera.y);
 
 				//Update screen
 				SDL_RenderPresent( aRenderer );

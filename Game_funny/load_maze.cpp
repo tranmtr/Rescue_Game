@@ -23,18 +23,18 @@ void Tile::render( SDL_Rect& camera, LTexture& gTileTexture, LTexture& floorText
     if( checkCollision( camera, mBox ) )
     {
         //Show the tile
-        if(this->mType > 2 && this->mType != 4)
+        if(this->mType > 2 )
         {
             gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ], 0, NULL, SDL_FLIP_NONE, aRenderer );
         }
         else if(this->mType <= 2)
         {
             floorTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ], 0, NULL, SDL_FLIP_NONE, aRenderer );
-        }
+        }/*
         else
         {
             wallTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ], 0, NULL, SDL_FLIP_NONE, aRenderer );
-        }
+        }*/
     }
 }
 
@@ -58,7 +58,7 @@ bool setTiles( Tile* tiles[], SDL_Rect gTileClips[] )
     int x = 0, y = 0;
 
     //Open the map
-    ifstream map( "lazy.map" );
+    ifstream map( "firstmap.txt" );
 
     //If the map couldn't be loaded
     if( map.fail() )
@@ -147,7 +147,7 @@ bool setTiles( Tile* tiles[], SDL_Rect gTileClips[] )
 			gTileClips[ TILE_BOTTOMLEFT ].w = TILE_WIDTH;
 			gTileClips[ TILE_BOTTOMLEFT ].h = TILE_HEIGHT;
 
-			gTileClips[ TILE_TOP ].x = 0;
+			gTileClips[ TILE_TOP ].x = 160;
 			gTileClips[ TILE_TOP ].y = 0;
 			gTileClips[ TILE_TOP ].w = TILE_WIDTH;
 			gTileClips[ TILE_TOP ].h = TILE_HEIGHT;

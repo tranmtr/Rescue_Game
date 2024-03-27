@@ -6,7 +6,7 @@ Figure::Figure()
 {
     //Initialize the collision box
     mBox.x = 0;
-    mBox.y = 0;
+    mBox.y = 2160;
 	mBox.w = FIGURE_WIDTH;
 	mBox.h = FIGURE_HEIGHT;
 
@@ -20,9 +20,12 @@ Figure::Figure()
     checkdown = false;
     checkleft = false;
     checkright = false;
+
+    //Initialize animation flip
+    flipType = SDL_FLIP_NONE;
 }
 
-void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving )
+void Figure::handleEvent( SDL_Event& e )
 {
     //If a key was pressed
 	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
@@ -42,13 +45,13 @@ void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving
                 break;
             case SDLK_LEFT:
                 mVelX -= this->FIGURE_VEL;
-                flipType = SDL_FLIP_HORIZONTAL;
+                this->flipType = SDL_FLIP_HORIZONTAL;
                 this->checkleft = true;
                 this->moving = true;
                 break;
             case SDLK_RIGHT:
                 mVelX += this->FIGURE_VEL;
-                flipType = SDL_FLIP_NONE;
+                this->flipType = SDL_FLIP_NONE;
                 this->checkright = true;
                 this->moving = true;
                 break;
@@ -111,7 +114,7 @@ void Figure::move(Tile *tiles[])
     }
 }
 
-void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, int camX, int camY)
+void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, int camX, int camY)
 {
     //Show the figure run
     if(this->moving == true)
@@ -121,7 +124,7 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, i
         {
             frameRun = 0;
         }
-        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsRun[ frameRun / 4 ], 0, NULL, flipType, aRenderer  );
+        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsRun[ frameRun / 4 ], 0, NULL, this->flipType, aRenderer  );
     }
     //Show the figure idle
     else
@@ -131,7 +134,7 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, i
         {
             frameIdle = 0;
         }
-        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, flipType, aRenderer  );
+        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, this->flipType, aRenderer  );
     }
 
 	cout << "Chay" << endl;

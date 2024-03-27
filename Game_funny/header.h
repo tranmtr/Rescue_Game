@@ -11,8 +11,8 @@
 using namespace std;
 
 //The dimensions of the level
-const int LEVEL_WIDTH = 1280;
-const int LEVEL_HEIGHT = 960;
+const int LEVEL_WIDTH = 34*80;
+const int LEVEL_HEIGHT = 33*80;
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -25,7 +25,7 @@ const int IDLE_ANIMATION_FRAMES = 5;
 //Tile constants
 const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 80;
-const int TOTAL_TILES = 192;
+const int TOTAL_TILES = 34*33;
 const int TOTAL_TILE_SPRITES = 12;
 
 //The different tile sprites

@@ -17,13 +17,13 @@ class Figure
 		Figure();
 
 		//Takes key presses and adjusts the dot's velocity
-		void handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving );
+		void handleEvent( SDL_Event& e );
 
 		//Moves the dot
 		void move(Tile *tiles[]);
 
 		//Shows the dot on the screen
-		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, int camX, int camY);
+		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, int camX, int camY);
 
         //Get mPosX:
         int getBoxX();
@@ -43,5 +43,8 @@ class Figure
 		bool checkdown;
 		bool checkleft;
 		bool checkright;
+
+		//Check flip
+		SDL_RendererFlip flipType;
 
 };
