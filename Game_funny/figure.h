@@ -23,7 +23,7 @@ class Figure
 		void move(Tile *tiles[]);
 
 		//Shows the dot on the screen
-		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving, int camX, int camY);
+		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, int camX, int camY);
 
         //Get mPosX:
         int getBoxX();
@@ -36,5 +36,12 @@ class Figure
 
 		//Collision box of the dot
 		SDL_Rect mBox;
+
+		//Check moving
+		bool moving;
+		bool checkup;
+		bool checkdown;
+		bool checkleft;
+		bool checkright;
 
 };

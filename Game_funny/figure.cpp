@@ -13,6 +13,13 @@ Figure::Figure()
     //Initialize the velocity
     mVelX = 0;
     mVelY = 0;
+
+    //Initialize moving
+    moving = false;
+    checkup = false;
+    checkdown = false;
+    checkleft = false;
+    checkright = false;
 }
 
 void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving )
@@ -25,21 +32,28 @@ void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving
         {
             case SDLK_UP:
                 mVelY -= this->FIGURE_VEL;
+                this->checkup = true;
+                this->moving = true;
                 break;
             case SDLK_DOWN:
                 mVelY += this->FIGURE_VEL;
+                this->checkdown = true;
+                this->moving = true;
                 break;
             case SDLK_LEFT:
                 mVelX -= this->FIGURE_VEL;
                 flipType = SDL_FLIP_HORIZONTAL;
+                this->checkleft = true;
+                this->moving = true;
                 break;
             case SDLK_RIGHT:
                 mVelX += this->FIGURE_VEL;
                 flipType = SDL_FLIP_NONE;
+                this->checkright = true;
+                this->moving = true;
                 break;
         }
         cout << "nhan" << endl;
-        moving = true;
     }
     //If a key was released
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
@@ -49,19 +63,26 @@ void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving
         {
             case SDLK_UP:
                 mVelY += this->FIGURE_VEL;
+                this->checkup = false;
                 break;
             case SDLK_DOWN:
                 mVelY -= this->FIGURE_VEL;
+                this->checkdown = false;
                 break;
             case SDLK_LEFT:
                 mVelX += this->FIGURE_VEL;
+                this->checkleft = false;
                 break;
             case SDLK_RIGHT:
                 mVelX -= this->FIGURE_VEL;
+                this->checkright = false;
                 break;
         }
         cout << "Tha" << endl;
-        moving = false;
+        if(this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false)
+        {
+            this->moving = false;
+        }
     }
 }
 
@@ -90,10 +111,10 @@ void Figure::move(Tile *tiles[])
     }
 }
 
-void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, bool moving, int camX, int camY)
+void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, SDL_RendererFlip flipType, int camX, int camY)
 {
     //Show the figure run
-    if(moving == true)
+    if(this->moving == true)
     {
         ++frameRun;
         if(frameRun / 4 >= RUN_ANIMATION_FRAMES)

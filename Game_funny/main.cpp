@@ -115,7 +115,7 @@ int main( int argc, char* args[] )
 				}
 
                 //Render objects
-				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, flipType, moving, camera.x, camera.y);
+				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, flipType, camera.x, camera.y);
 
 				//Update screen
 				SDL_RenderPresent( aRenderer );
