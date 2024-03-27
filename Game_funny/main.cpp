@@ -1,4 +1,3 @@
-
 #include "header.h"
 #include "init_and_close.h"
 #include "load_texture.h"
@@ -19,7 +18,6 @@ int main( int argc, char* args[] )
     LTexture figureTexture;
 
     // Maze map
-
     LTexture mazeMapTexture;
 
     //Idle animation
@@ -43,14 +41,14 @@ int main( int argc, char* args[] )
 	//Start up SDL and create window
 	if( !init(aWindow, aRenderer) )
 	{
-		printf( "Failed to initialize!\n" );
+		cout <<  "Failed to initialize!\n" ;
 	}
 	else
 	{
 		//Load media
 		if( !loadMedia(aRenderer, figureTexture, mazeMapTexture) )
 		{
-			printf( "Failed to load media!\n" );
+			cout << "Failed to load media!\n" ;
 		}
 		else
 		{

@@ -21,14 +21,18 @@ void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP: mVelY -= FIGURE_VEL; break;
-            case SDLK_DOWN: mVelY += FIGURE_VEL; break;
+            case SDLK_UP:
+                mVelY -= this->FIGURE_VEL;
+                break;
+            case SDLK_DOWN:
+                mVelY += this->FIGURE_VEL;
+                break;
             case SDLK_LEFT:
-                mVelX -= FIGURE_VEL;
+                mVelX -= this->FIGURE_VEL;
                 flipType = SDL_FLIP_HORIZONTAL;
                 break;
             case SDLK_RIGHT:
-                mVelX += FIGURE_VEL;
+                mVelX += this->FIGURE_VEL;
                 flipType = SDL_FLIP_NONE;
                 break;
         }
@@ -41,10 +45,18 @@ void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
-            case SDLK_UP: mVelY += FIGURE_VEL; break;
-            case SDLK_DOWN: mVelY -= FIGURE_VEL; break;
-            case SDLK_LEFT: mVelX += FIGURE_VEL; break;
-            case SDLK_RIGHT: mVelX -= FIGURE_VEL; break;
+            case SDLK_UP:
+                mVelY += this->FIGURE_VEL;
+                break;
+            case SDLK_DOWN:
+                mVelY -= this->FIGURE_VEL;
+                break;
+            case SDLK_LEFT:
+                mVelX += this->FIGURE_VEL;
+                break;
+            case SDLK_RIGHT:
+                mVelX -= this->FIGURE_VEL;
+                break;
         }
         cout << "Tha" << endl;
         moving = false;
@@ -54,23 +66,23 @@ void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving
 void Figure::move()
 {
     //Move the dot left or right
-    mPosX += mVelX;
+    this->mPosX += this->mVelX;
 
     //If the dot went too far to the left or right
-    if( ( mPosX < 0 ) || ( mPosX + FIGURE_WIDTH > LEVEL_WIDTH ) )
+    if( ( this->mPosX < 0 ) || ( this->mPosX + this->FIGURE_WIDTH > LEVEL_WIDTH ) )
     {
         //Move back
-        mPosX -= mVelX;
+        this->mPosX -= this->mVelX;
     }
 
     //Move the dot up or down
-    mPosY += mVelY;
+    this->mPosY += this->mVelY;
 
     //If the dot went too far up or down
-    if( ( mPosY < 0 ) || ( mPosY + FIGURE_HEIGHT > LEVEL_HEIGHT ) )
+    if( ( this->mPosY < 0 ) || ( this->mPosY + this->FIGURE_HEIGHT > LEVEL_HEIGHT ) )
     {
         //Move back
-        mPosY -= mVelY;
+        this->mPosY -= this->mVelY;
     }
 }
 

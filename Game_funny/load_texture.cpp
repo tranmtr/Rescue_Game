@@ -17,10 +17,10 @@ LTexture::~LTexture()
 	free();
 }
 
-bool LTexture::loadFromFile( std::string path, SDL_Renderer*& aRenderer )
+bool LTexture::loadFromFile( string path, SDL_Renderer*& aRenderer )
 {
 	//Get rid of preexisting texture
-	free();
+	this->free();
 
 	//The final texture
 	SDL_Texture* newTexture = NULL;
@@ -29,7 +29,7 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer*& aRenderer )
 	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
 	if( loadedSurface == NULL )
 	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
+		cout << "Unable to load image %s! SDL_image Error" << path <<  IMG_GetError() ;
 	}
 	else
 	{
@@ -40,13 +40,13 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer*& aRenderer )
         newTexture = SDL_CreateTextureFromSurface( aRenderer, loadedSurface );
 		if( newTexture == NULL )
 		{
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
+			cout << "Unable to create texture from %s! SDL Error:" << path << SDL_GetError() ;
 		}
 		else
 		{
 			//Get image dimensions
-			mWidth = loadedSurface->w;
-			mHeight = loadedSurface->h;
+			this->mWidth = loadedSurface->w;
+			this->mHeight = loadedSurface->h;
 		}
 
 		//Get rid of old loaded surface
@@ -54,44 +54,44 @@ bool LTexture::loadFromFile( std::string path, SDL_Renderer*& aRenderer )
 	}
 
 	//Return success
-	mTexture = newTexture;
-	return mTexture != NULL;
+	this->mTexture = newTexture;
+	return this->mTexture != NULL;
 }
 
 void LTexture::free()
 {
 	//Free texture if it exists
-	if( mTexture != NULL )
+	if( this->mTexture != NULL )
 	{
-		SDL_DestroyTexture( mTexture );
-		mTexture = NULL;
-		mWidth = 0;
-		mHeight = 0;
+		SDL_DestroyTexture( this->mTexture );
+		this->mTexture = NULL;
+		this->mWidth = 0;
+		this->mHeight = 0;
 	}
 }
 
 void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
 {
 	//Modulate texture rgb
-	SDL_SetTextureColorMod( mTexture, red, green, blue );
+	SDL_SetTextureColorMod( this->mTexture, red, green, blue );
 }
 
 void LTexture::setBlendMode( SDL_BlendMode blending )
 {
 	//Set blending function
-	SDL_SetTextureBlendMode( mTexture, blending );
+	SDL_SetTextureBlendMode( this->mTexture, blending );
 }
 
 void LTexture::setAlpha( Uint8 alpha )
 {
 	//Modulate texture alpha
-	SDL_SetTextureAlphaMod( mTexture, alpha );
+	SDL_SetTextureAlphaMod( this->mTexture, alpha );
 }
 
 void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip , SDL_Renderer* aRenderer)
 {
 	//Set rendering space and render to screen
-	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
+	SDL_Rect renderQuad = { x, y, this->mWidth, this->mHeight };
 
 	//Set clip rendering dimensions
 	if( clip != NULL )
@@ -101,20 +101,18 @@ void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* ce
 	}
 
 	//Render to screen
-	SDL_RenderCopyEx( aRenderer, mTexture, clip, &renderQuad, angle, center, flip );
+	SDL_RenderCopyEx( aRenderer, this->mTexture, clip, &renderQuad, angle, center, flip );
 }
 
 int LTexture::getWidth()
 {
-	return mWidth;
+	return this->mWidth;
 }
 
 int LTexture::getHeight()
 {
-	return mHeight;
+	return this->mHeight;
 }
-
-
 
 
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture )
@@ -125,13 +123,13 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& maze
 	//Load sprite sheet texture
 	if( !figureTexture.loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)testIDLEvaRUN.png",aRenderer ) )
 	{
-		printf( "Failed to load walking animation texture!\n" );
+		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
 
 	if(!mazeMapTexture.loadFromFile("File_Image/image_Maze/testmap.jpg", aRenderer))
     {
-        printf( "Failed to load walking animation texture!\n" );
+        cout << "Failed to load walking animation texture!\n" ;
 		success = false;
     }
     else
