@@ -115,7 +115,7 @@ int LTexture::getHeight()
 }
 
 
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture )
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture,LTexture& gTileTexture, LTexture& wallTexture, LTexture& floorTexture, Tile* tiles[],SDL_Rect gTileClips[] )
 {
 	//Loading success flag
 	bool success = true;
@@ -136,8 +136,36 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& maze
     {
         cout << "OK" << "   ";
     }
+
+    if( !gTileTexture.loadFromFile( "File_Image/image_Maze/tiles.png", aRenderer ) )
+	{
+		printf( "Failed to load tile set texture!\n" );
+		success = false;
+	}
+
+	if( !wallTexture.loadFromFile( "File_Image/image_Maze/bottomtest(80_80).jpg", aRenderer ) )
+	{
+		printf( "Failed to load tile set texture!\n" );
+		success = false;
+	}
+
+	if( !floorTexture.loadFromFile( "File_Image/image_Maze/nen_mau_tim_2(thu_nho_2).jpg", aRenderer ) )
+	{
+		printf( "Failed to load tile set texture!\n" );
+		success = false;
+	}
+
+    //Load tile map
+	if( !setTiles( tiles, gTileClips ) )
+	{
+		printf( "Failed to load tile set!\n" );
+		success = false;
+	}
+
 	return success;
 }
+
+
 
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[])
 {

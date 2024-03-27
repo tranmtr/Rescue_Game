@@ -4,6 +4,7 @@
 #include "figure.h"
 #include "check_collision.h"
 #include "load_camera.h"
+#include "load_maze.h"
 
 int main( int argc, char* args[] )
 {
@@ -29,6 +30,13 @@ int main( int argc, char* args[] )
     // Flip animation
     SDL_RendererFlip flipType = SDL_FLIP_NONE;
 
+    //Scene textures
+    LTexture gTileTexture;
+    SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
+
+    LTexture wallTexture;
+    LTexture floorTexture;
+
     //Current animation frame Idle
     int frameIdle = 0;
 
@@ -45,8 +53,11 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
+	    //The level tiles
+		Tile* tileSet[ TOTAL_TILES ];
+
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture, mazeMapTexture) )
+		if( !loadMedia(aRenderer, figureTexture, mazeMapTexture,gTileTexture ,wallTexture ,floorTexture,  tileSet, gTileClips) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
@@ -84,7 +95,7 @@ int main( int argc, char* args[] )
 				}
 
                 //Move the figure
-				Figure.move();
+				Figure.move(tileSet);
 
                 //Load camera:
                 loadCamera(camera, Figure);
@@ -94,7 +105,14 @@ int main( int argc, char* args[] )
 				SDL_RenderClear( aRenderer );
 
                 //Render background
-                mazeMapTexture.render(0, 0, &camera, 0, NULL, SDL_FLIP_NONE, aRenderer);
+                //mazeMapTexture.render(0, 0, &camera, 0, NULL, SDL_FLIP_NONE, aRenderer);
+
+                //Render level
+				for( int i = 0; i < TOTAL_TILES; ++i )
+				{
+					tileSet[ i ]->render( camera, gTileTexture, floorTexture, wallTexture, gTileClips, aRenderer );
+
+				}
 
                 //Render objects
 				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, flipType, moving, camera.x, camera.y);

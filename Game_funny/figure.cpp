@@ -4,9 +4,11 @@
 
 Figure::Figure()
 {
-    //Initialize the offsets
-    mPosX = 0;
-    mPosY = 0;
+    //Initialize the collision box
+    mBox.x = 0;
+    mBox.y = 0;
+	mBox.w = FIGURE_WIDTH;
+	mBox.h = FIGURE_HEIGHT;
 
     //Initialize the velocity
     mVelX = 0;
@@ -63,26 +65,28 @@ void Figure::handleEvent( SDL_Event& e, SDL_RendererFlip& flipType, bool& moving
     }
 }
 
-void Figure::move()
+void Figure::move(Tile *tiles[])
 {
     //Move the dot left or right
-    this->mPosX += this->mVelX;
+    this->mBox.x += this->mVelX;
 
     //If the dot went too far to the left or right
-    if( ( this->mPosX < 0 ) || ( this->mPosX + this->FIGURE_WIDTH > LEVEL_WIDTH ) )
+    if( ( this->mBox.x < 0 ) || ( this->mBox.x + this->FIGURE_WIDTH > LEVEL_WIDTH  ) || touchesWall( this->mBox, tiles ))
     {
         //Move back
-        this->mPosX -= this->mVelX;
+        this->mBox.x -= this->mVelX;
+        cout << "Va cham 1" << endl;
     }
 
     //Move the dot up or down
-    this->mPosY += this->mVelY;
+    this->mBox.y += this->mVelY;
 
     //If the dot went too far up or down
-    if( ( this->mPosY < 0 ) || ( this->mPosY + this->FIGURE_HEIGHT > LEVEL_HEIGHT ) )
+    if( ( this->mBox.y < 0 ) || ( this->mBox.y + this->FIGURE_HEIGHT > LEVEL_HEIGHT ) || touchesWall( this->mBox, tiles ) )
     {
         //Move back
-        this->mPosY -= this->mVelY;
+        this->mBox.y -= this->mVelY;
+        cout << "Va cham 2" << endl;
     }
 }
 
@@ -96,7 +100,7 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, i
         {
             frameRun = 0;
         }
-        figureTexture.render( mPosX - camX, mPosY - camY, &clipsRun[ frameRun / 4 ], 0, NULL, flipType, aRenderer  );
+        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsRun[ frameRun / 4 ], 0, NULL, flipType, aRenderer  );
     }
     //Show the figure idle
     else
@@ -106,18 +110,18 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, i
         {
             frameIdle = 0;
         }
-        figureTexture.render( mPosX - camX, mPosY - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, flipType, aRenderer  );
+        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, flipType, aRenderer  );
     }
 
 	cout << "Chay" << endl;
 }
 
-int Figure::getPosX()
+int Figure::getBoxX()
 {
-    return this->mPosX;
+    return this->mBox.x;
 }
 
-int Figure::getPosY()
+int Figure::getBoxY()
 {
-    return this->mPosY;
+    return this->mBox.y;
 }

@@ -3,8 +3,8 @@
 void loadCamera(SDL_Rect& camera, Figure Figure)
 {
     //Center the camera over the figure
-    camera.x = ( Figure.getPosX() + Figure::FIGURE_WIDTH / 2 ) - SCREEN_WIDTH / 2;
-    camera.y = ( Figure.getPosY() + Figure::FIGURE_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
+    camera.x = ( Figure.getBoxX() + Figure::FIGURE_WIDTH / 2 ) - SCREEN_WIDTH / 2;
+    camera.y = ( Figure.getBoxY() + Figure::FIGURE_HEIGHT / 2 ) - SCREEN_HEIGHT / 2;
 
     //Keep the camera in bounds
     if( camera.x < 0 )
