@@ -115,7 +115,7 @@ int LTexture::getHeight()
 }
 
 
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture,LTexture& gTileTexture, LTexture& wallTexture, LTexture& floorTexture, Tile* tiles[],SDL_Rect gTileClips[] )
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, Tile* tiles[]/*,SDL_Rect gTileClips[]*/ )
 {
 	//Loading success flag
 	bool success = true;
@@ -127,28 +127,14 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& maze
 		success = false;
 	}
 
-	if(!mazeMapTexture.loadFromFile("File_Image/image_Maze/testmap.jpg", aRenderer))
-    {
-        cout << "Failed to load walking animation texture!\n" ;
-		success = false;
-    }
-    else
-    {
-        cout << "OK" << "   ";
-    }
-
-    if( !gTileTexture.loadFromFile( "File_Image/image_Maze/tiles.png", aRenderer ) )
+    // Load wall
+	if( !wallTexture.loadFromFile( "File_Image/image_Maze/wall.png", aRenderer ) )
 	{
 		printf( "Failed to load tile set texture!\n" );
 		success = false;
 	}
 
-	if( !wallTexture.loadFromFile( "File_Image/image_Maze/bottomtest(80_80).jpg", aRenderer ) )
-	{
-		printf( "Failed to load tile set texture!\n" );
-		success = false;
-	}
-
+    // Load floor
 	if( !floorTexture.loadFromFile( "File_Image/image_Maze/nen_mau_tim_2(thu_nho_2).jpg", aRenderer ) )
 	{
 		printf( "Failed to load tile set texture!\n" );
@@ -156,7 +142,7 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& maze
 	}
 
     //Load tile map
-	if( !setTiles( tiles, gTileClips ) )
+	if( !setTiles( tiles ) )
 	{
 		printf( "Failed to load tile set!\n" );
 		success = false;

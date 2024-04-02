@@ -18,19 +18,13 @@ int main( int argc, char* args[] )
     // Figure
     LTexture figureTexture;
 
-    // Maze map
-    LTexture mazeMapTexture;
-
     //Idle animation
     SDL_Rect clipsIdle[ IDLE_ANIMATION_FRAMES ];
 
     //Run animation
     SDL_Rect clipsRun[ RUN_ANIMATION_FRAMES ];
 
-    //Scene textures
-    LTexture gTileTexture;
-    SDL_Rect gTileClips[ TOTAL_TILE_SPRITES ];
-
+    // Load wall, floor
     LTexture wallTexture;
     LTexture floorTexture;
 
@@ -51,7 +45,7 @@ int main( int argc, char* args[] )
 		Tile* tileSet[ TOTAL_TILES ];
 
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture, mazeMapTexture,gTileTexture ,wallTexture ,floorTexture,  tileSet, gTileClips) )
+		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture,  tileSet) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
@@ -95,16 +89,13 @@ int main( int argc, char* args[] )
                 loadCamera(camera, Figure);
 
 				//Clear screen
-				SDL_SetRenderDrawColor( aRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+				SDL_SetRenderDrawColor( aRenderer, 255, 255, 255, 255 );
 				SDL_RenderClear( aRenderer );
-
-                //Render background
-                //mazeMapTexture.render(0, 0, &camera, 0, NULL, SDL_FLIP_NONE, aRenderer);
 
                 //Render level
 				for( int i = 0; i < TOTAL_TILES; ++i )
 				{
-					tileSet[ i ]->render( camera, gTileTexture, floorTexture, wallTexture, gTileClips, aRenderer );
+					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer );
 
 				}
 
@@ -119,7 +110,7 @@ int main( int argc, char* args[] )
 	}
 
 	//Free resources and close SDL
-	close(aWindow, aRenderer,figureTexture, mazeMapTexture);
+	close(aWindow, aRenderer,figureTexture);
 
 	return 0;
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "load_maze.h"
+//#include "load_maze.h"
 #include "load_texture.h"
 #include "check_collision.h"
 Tile::Tile( int x, int y, int tileType )
@@ -17,7 +17,7 @@ Tile::Tile( int x, int y, int tileType )
     mType = tileType;
 }
 
-void Tile::render( SDL_Rect& camera, LTexture& gTileTexture, LTexture& floorTexture, LTexture& wallTexture, SDL_Rect gTileClips[], SDL_Renderer*& aRenderer   )
+void Tile::render( SDL_Rect& camera, LTexture& floorTexture, LTexture& wallTexture, SDL_Renderer*& aRenderer   )
 {
     //If the tile is on screen
     if( checkCollision( camera, mBox ) )
@@ -25,16 +25,12 @@ void Tile::render( SDL_Rect& camera, LTexture& gTileTexture, LTexture& floorText
         //Show the tile
         if(this->mType > 2 )
         {
-            gTileTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ], 0, NULL, SDL_FLIP_NONE, aRenderer );
+            wallTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
         }
         else if(this->mType <= 2)
         {
-            floorTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ], 0, NULL, SDL_FLIP_NONE, aRenderer );
-        }/*
-        else
-        {
-            wallTexture.render( mBox.x - camera.x, mBox.y - camera.y, &gTileClips[ mType ], 0, NULL, SDL_FLIP_NONE, aRenderer );
-        }*/
+            floorTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+        }
     }
 }
 
@@ -49,7 +45,7 @@ SDL_Rect Tile::getBox()
 }
 
 
-bool setTiles( Tile* tiles[], SDL_Rect gTileClips[] )
+bool setTiles( Tile* tiles[] )
 {
 	//Success flag
 	bool tilesLoaded = true;
@@ -69,7 +65,7 @@ bool setTiles( Tile* tiles[], SDL_Rect gTileClips[] )
 	else
 	{
 		//Initialize the tiles
-		for( int i = 0; i < TOTAL_TILES; ++i )
+		for( int i = 0; i < TOTAL_TILES; i++ )
 		{
 			//Determines what kind of tile will be made
 			int tileType = -1;
@@ -114,69 +110,6 @@ bool setTiles( Tile* tiles[], SDL_Rect gTileClips[] )
 			}
 		}
 
-		//Clip the sprite sheet
-		if( tilesLoaded )
-		{
-			gTileClips[ TILE_RED ].x = 0;
-			gTileClips[ TILE_RED ].y = 0;
-			gTileClips[ TILE_RED ].w = TILE_WIDTH;
-			gTileClips[ TILE_RED ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_GREEN ].x = 0;
-			gTileClips[ TILE_GREEN ].y = 0;
-			gTileClips[ TILE_GREEN ].w = TILE_WIDTH;
-			gTileClips[ TILE_GREEN ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_BLUE ].x = 0;
-			gTileClips[ TILE_BLUE ].y = 0;
-			gTileClips[ TILE_BLUE ].w = TILE_WIDTH;
-			gTileClips[ TILE_BLUE ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_TOPLEFT ].x = 80;
-			gTileClips[ TILE_TOPLEFT ].y = 0;
-			gTileClips[ TILE_TOPLEFT ].w = TILE_WIDTH;
-			gTileClips[ TILE_TOPLEFT ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_LEFT ].x = 80;
-			gTileClips[ TILE_LEFT ].y = 80;
-			gTileClips[ TILE_LEFT ].w = TILE_WIDTH;
-			gTileClips[ TILE_LEFT ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_BOTTOMLEFT ].x = 80;
-			gTileClips[ TILE_BOTTOMLEFT ].y = 160;
-			gTileClips[ TILE_BOTTOMLEFT ].w = TILE_WIDTH;
-			gTileClips[ TILE_BOTTOMLEFT ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_TOP ].x = 160;
-			gTileClips[ TILE_TOP ].y = 0;
-			gTileClips[ TILE_TOP ].w = TILE_WIDTH;
-			gTileClips[ TILE_TOP ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_CENTER ].x = 160;
-			gTileClips[ TILE_CENTER ].y = 80;
-			gTileClips[ TILE_CENTER ].w = TILE_WIDTH;
-			gTileClips[ TILE_CENTER ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_BOTTOM ].x = 160;
-			gTileClips[ TILE_BOTTOM ].y = 160;
-			gTileClips[ TILE_BOTTOM ].w = TILE_WIDTH;
-			gTileClips[ TILE_BOTTOM ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_TOPRIGHT ].x = 240;
-			gTileClips[ TILE_TOPRIGHT ].y = 0;
-			gTileClips[ TILE_TOPRIGHT ].w = TILE_WIDTH;
-			gTileClips[ TILE_TOPRIGHT ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_RIGHT ].x = 240;
-			gTileClips[ TILE_RIGHT ].y = 80;
-			gTileClips[ TILE_RIGHT ].w = TILE_WIDTH;
-			gTileClips[ TILE_RIGHT ].h = TILE_HEIGHT;
-
-			gTileClips[ TILE_BOTTOMRIGHT ].x = 240;
-			gTileClips[ TILE_BOTTOMRIGHT ].y = 160;
-			gTileClips[ TILE_BOTTOMRIGHT ].w = TILE_WIDTH;
-			gTileClips[ TILE_BOTTOMRIGHT ].h = TILE_HEIGHT;
-		}
 	}
 
     //Close the file

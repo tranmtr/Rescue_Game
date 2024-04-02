@@ -54,7 +54,7 @@ class Tile
 		Tile( int x, int y, int tileType );
 
 		//Shows the tile
-		void render( SDL_Rect& camera, LTexture& gTileTexture, LTexture& floorTexture, LTexture& wallTexture, SDL_Rect gTileClips[], SDL_Renderer*& aRenderer   );
+		void render( SDL_Rect& camera,  LTexture& floorTexture, LTexture& wallTexture,  SDL_Renderer*& aRenderer   );
 
 		//Get the tile type
 		int getType();
@@ -74,11 +74,10 @@ class Tile
 bool touchesWall( SDL_Rect box, Tile* tiles[] );
 
 //Sets tiles from tile map
-bool setTiles( Tile *tiles[], SDL_Rect gTileClips[] );
-
+bool setTiles( Tile *tiles[]);
 
 //Loads media
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& mazeMapTexture,LTexture& gTileTexture, LTexture& wallTexture, LTexture& floorTexture, Tile* tiles[],SDL_Rect gTileClips[] );
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, Tile* tiles[] );
 
 //Load rec animation
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[]);
