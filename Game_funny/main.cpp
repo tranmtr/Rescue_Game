@@ -28,6 +28,11 @@ int main( int argc, char* args[] )
     LTexture wallTexture;
     LTexture floorTexture;
 
+    // Load lava, ice, cake
+    LTexture lavaTexture;
+    LTexture iceTexture;
+    LTexture cakeTexture;
+
     //Current animation frame Idle
     int frameIdle = 0;
 
@@ -45,7 +50,7 @@ int main( int argc, char* args[] )
 		Tile* tileSet[ TOTAL_TILES ];
 
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture,  tileSet) )
+		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, tileSet) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
@@ -95,7 +100,7 @@ int main( int argc, char* args[] )
                 //Render level
 				for( int i = 0; i < TOTAL_TILES; ++i )
 				{
-					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer );
+					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture );
 
 				}
 
@@ -110,7 +115,7 @@ int main( int argc, char* args[] )
 	}
 
 	//Free resources and close SDL
-	close(aWindow, aRenderer,figureTexture);
+	close(aWindow, aRenderer,figureTexture, wallTexture, floorTexture,lavaTexture, iceTexture,cakeTexture);
 
 	return 0;
 }

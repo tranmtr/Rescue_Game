@@ -10,19 +10,19 @@ class Figure
 		static const int FIGURE_WIDTH = 45;
 		static const int FIGURE_HEIGHT = 54;
 
-		//Maximum axis velocity of the dot
+		//Maximum axis velocity of the figure
 		static const int FIGURE_VEL = 5;
 
 		//Initializes the variables
 		Figure();
 
-		//Takes key presses and adjusts the dot's velocity
+		//Takes key presses and adjusts the figure's velocity
 		void handleEvent( SDL_Event& e );
 
-		//Moves the dot
+		//Moves the figure
 		void move(Tile *tiles[]);
 
-		//Shows the dot on the screen
+		//Shows the figure on the screen
 		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, int camX, int camY);
 
         //Get mPosX:
@@ -43,7 +43,6 @@ class Figure
 		bool checkdown;
 		bool checkleft;
 		bool checkright;
-
 		//Check flip
 		SDL_RendererFlip flipType;
 

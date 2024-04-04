@@ -20,15 +20,6 @@ class LTexture
 		//Deallocates texture
 		void free();
 
-		//Set color modulation
-		void setColor( Uint8 red, Uint8 green, Uint8 blue );
-
-		//Set blending
-		void setBlendMode( SDL_BlendMode blending );
-
-		//Set alpha modulation
-		void setAlpha( Uint8 alpha );
-
 		//Renders texture at given point
 		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, SDL_Renderer* aRenderer = NULL );
 
@@ -54,7 +45,7 @@ class Tile
 		Tile( int x, int y, int tileType );
 
 		//Shows the tile
-		void render( SDL_Rect& camera,  LTexture& floorTexture, LTexture& wallTexture,  SDL_Renderer*& aRenderer   );
+		void render( SDL_Rect& camera,  LTexture& floorTexture, LTexture& wallTexture,  SDL_Renderer*& aRenderer , LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture  );
 
 		//Get the tile type
 		int getType();
@@ -77,9 +68,33 @@ bool touchesWall( SDL_Rect box, Tile* tiles[] );
 bool setTiles( Tile *tiles[]);
 
 //Loads media
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, Tile* tiles[] );
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture,LTexture& iceTexture,LTexture& cakeTexture,Tile* tiles[] );
 
 //Load rec animation
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[]);
+
+bool collisionLavaDie(SDL_Rect box, Tile* tiles[]);
+
+bool collisionIceSlow(SDL_Rect box, Tile* tiles[]);
+
+bool collisionCakeFast(SDL_Rect box, Tile* tiles[]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

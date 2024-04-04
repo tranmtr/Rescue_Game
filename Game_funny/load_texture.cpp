@@ -34,7 +34,7 @@ bool LTexture::loadFromFile( string path, SDL_Renderer*& aRenderer )
 	else
 	{
 		//Color key image
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
+		//SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
 
 		//Create texture from surface pixels
         newTexture = SDL_CreateTextureFromSurface( aRenderer, loadedSurface );
@@ -70,24 +70,6 @@ void LTexture::free()
 	}
 }
 
-void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
-{
-	//Modulate texture rgb
-	SDL_SetTextureColorMod( this->mTexture, red, green, blue );
-}
-
-void LTexture::setBlendMode( SDL_BlendMode blending )
-{
-	//Set blending function
-	SDL_SetTextureBlendMode( this->mTexture, blending );
-}
-
-void LTexture::setAlpha( Uint8 alpha )
-{
-	//Modulate texture alpha
-	SDL_SetTextureAlphaMod( this->mTexture, alpha );
-}
-
 void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip , SDL_Renderer* aRenderer)
 {
 	//Set rendering space and render to screen
@@ -115,7 +97,7 @@ int LTexture::getHeight()
 }
 
 
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, Tile* tiles[]/*,SDL_Rect gTileClips[]*/ )
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, Tile* tiles[] )
 {
 	//Loading success flag
 	bool success = true;
@@ -136,6 +118,28 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wall
 
     // Load floor
 	if( !floorTexture.loadFromFile( "File_Image/image_Maze/nen_mau_tim_2(thu_nho_2).jpg", aRenderer ) )
+	{
+		printf( "Failed to load tile set texture!\n" );
+		success = false;
+	}
+
+	// Load floor
+	if( !lavaTexture.loadFromFile( "File_Image/image_Maze/lavaPixel(80_80).jpg", aRenderer ) )
+	{
+		printf( "Failed to load tile set texture!\n" );
+		success = false;
+	}
+
+	// Load floor
+	if( !iceTexture.loadFromFile( "File_Image/image_Maze/ice_block_slow.jpg", aRenderer ) )
+	{
+		printf( "Failed to load tile set texture!\n" );
+		success = false;
+	}
+
+	// Load floor
+
+	if( !cakeTexture.loadFromFile( "File_Image/image_Maze/cake_fast(80_80).jpg", aRenderer ) )
 	{
 		printf( "Failed to load tile set texture!\n" );
 		success = false;
@@ -225,4 +229,3 @@ void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[])
 		clipsRun[ 7 ].w =    45;
 		clipsRun[ 7 ].h =    54;
 }
-

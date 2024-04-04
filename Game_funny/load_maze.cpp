@@ -6,31 +6,43 @@
 Tile::Tile( int x, int y, int tileType )
 {
     //Get the offsets
-    mBox.x = x;
-    mBox.y = y;
+    this->mBox.x = x;
+    this->mBox.y = y;
 
     //Set the collision box
-    mBox.w = TILE_WIDTH;
-    mBox.h = TILE_HEIGHT;
+    this->mBox.w = TILE_WIDTH;
+    this->mBox.h = TILE_HEIGHT;
 
     //Get the tile type
     mType = tileType;
 }
 
-void Tile::render( SDL_Rect& camera, LTexture& floorTexture, LTexture& wallTexture, SDL_Renderer*& aRenderer   )
+void Tile::render( SDL_Rect& camera, LTexture& floorTexture, LTexture& wallTexture, SDL_Renderer*& aRenderer, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture )
 {
-    //If the tile is on screen
+    //Hien thi tile va cham camera
     if( checkCollision( camera, mBox ) )
     {
-        //Show the tile
-        if(this->mType > 2 )
+        if(this->mType == TILE_WALL )
         {
             wallTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
         }
-        else if(this->mType <= 2)
+        else if(this->mType == TILE_FLOOR)
         {
             floorTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
         }
+        else if(this->mType == TILE_LAVA)
+        {
+            lavaTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+        }
+        else if(this->mType == TILE_ICE)
+        {
+            iceTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+        }
+        else if(this->mType == TILE_CAKE)
+        {
+            cakeTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+        }
+
     }
 }
 
@@ -92,6 +104,7 @@ bool setTiles( Tile* tiles[] )
 			{
 				//Stop loading map
 				printf( "Error loading map: Invalid tile type at %d!\n", i );
+                cout << "1" << endl;
 				tilesLoaded = false;
 				break;
 			}
@@ -126,12 +139,72 @@ bool touchesWall( SDL_Rect box, Tile* tiles[] )
     for( int i = 0; i < TOTAL_TILES; ++i )
     {
         //If the tile is a wall type tile
-        if( ( tiles[ i ]->getType() >= TILE_CENTER ) && ( tiles[ i ]->getType() <= TILE_TOPLEFT ) )
+        if( ( tiles[ i ]->getType() == TILE_WALL ))
         {
             //If the collision box touches the wall tile
             if( checkCollision( box, tiles[ i ]->getBox() ) )
             {
                 cout << "O day : " << i << endl;
+                return true;
+            }
+        }
+    }
+
+    //If no wall tiles were touched
+    return false;
+}
+
+bool collisionLavaDie(SDL_Rect box, Tile* tiles[])
+{
+    for( int i = 0; i < TOTAL_TILES; ++i )
+    {
+        //If the tile is a wall type tile
+        if( ( tiles[ i ]->getType() == TILE_LAVA ))
+        {
+            //If the collision box touches the wall tile
+            if( checkCollision( box, tiles[ i ]->getBox() ) )
+            {
+                cout << "LAVA" << i << endl;
+                return true;
+            }
+        }
+    }
+
+    //If no wall tiles were touched
+    return false;
+}
+
+bool collisionIceSlow(SDL_Rect box, Tile* tiles[])
+{
+    for( int i = 0; i < TOTAL_TILES; ++i )
+    {
+        //If the tile is a wall type tile
+        if( ( tiles[ i ]->getType() == TILE_ICE ))
+        {
+            //If the collision box touches the wall tile
+            if( checkCollision( box, tiles[ i ]->getBox() ) )
+            {
+                cout << "ICE" << i << endl;
+                return true;
+            }
+        }
+    }
+
+    //If no wall tiles were touched
+    return false;
+}
+
+bool collisionCakeFast(SDL_Rect box, Tile* tiles[])
+{
+    for( int i = 0; i < TOTAL_TILES; ++i )
+    {
+        //If the tile is a wall type tile
+        if( ( tiles[ i ]->getType() == TILE_CAKE ))
+        {
+            //If the collision box touches the wall tile
+            if( checkCollision( box, tiles[ i ]->getBox() ) )
+            {
+                cout << "CAKE" << i << endl;
                 return true;
             }
         }

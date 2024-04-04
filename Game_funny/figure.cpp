@@ -112,6 +112,19 @@ void Figure::move(Tile *tiles[])
         this->mBox.y -= this->mVelY;
         cout << "Va cham 2" << endl;
     }
+
+    if(collisionLavaDie(this->mBox, tiles))
+    {
+        cout << "DIE" << endl;
+    }
+    if(collisionIceSlow(this->mBox, tiles))
+    {
+        cout << "SLOW" << endl;
+    }
+    if(collisionCakeFast(this->mBox, tiles))
+    {
+        cout << "FAST" << endl;
+    }
 }
 
 void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, int camX, int camY)
