@@ -58,6 +58,8 @@ class Figure
 		bool checkleft;
 		bool checkright;
 
+		//Check attack
+        bool checkspace;
 		//Check flip
 		SDL_RendererFlip flipType;
 

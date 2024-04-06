@@ -144,7 +144,7 @@ bool touchesWall( SDL_Rect box, Tile* tiles[] )
             //If the collision box touches the wall tile
             if( checkCollision( box, tiles[ i ]->getBox() ) )
             {
-                cout << "O day : " << i << endl;
+                //cout << "O day : " << i << endl;
                 return true;
             }
         }

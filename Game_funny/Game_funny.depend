@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1712409266 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
+1712418238 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
 	"header.h"
 	"init_and_close.h"
 	"load_texture.h"
@@ -17,13 +17,13 @@
 	<fstream>
 	<vector>
 
-1712407859 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.h
+1712414850 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.h
 	"header.h"
 	"load_texture.h"
 
 1710901603 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\tile.h
 
-1712409331 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.cpp
+1712420575 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.cpp
 	"figure.h"
 
 1712407921 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_texture.cpp
@@ -51,7 +51,7 @@
 	"check_collision.h"
 	"load_texture.h"
 
-1712375241 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_maze.cpp
+1712412083 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_maze.cpp
 	"load_texture.h"
 	"check_collision.h"
 

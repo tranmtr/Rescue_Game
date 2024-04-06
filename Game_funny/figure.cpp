@@ -20,7 +20,7 @@ Figure::Figure()
     checkdown = false;
     checkleft = false;
     checkright = false;
-
+    checkspace = false;
     //Initialize animation flip
     flipType = SDL_FLIP_NONE;
 }
@@ -36,72 +36,88 @@ void Figure::handleEvent( SDL_Event& e )
     //If a key was pressed
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
+        //SDL_Delay(100);
         //Adjust the velocity
-        switch( e.key.keysym.sym )
+        if(e.key.keysym.sym == SDLK_SPACE && this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false)
         {
-            case SDLK_SPACE:
-                this->checkstatus = ANIMATION_STATUS_ATTACK;
-                break;
-            case SDLK_UP:
-                this->mVelY -= this->FIGURE_VEL;
-                this->checkup = true;
-                //this->checkstatus = ANIMATION_STATUS_RUN;
-                break;
-            case SDLK_DOWN:
-                this->mVelY += this->FIGURE_VEL;
-                this->checkdown = true;
-                //this->checkstatus = ANIMATION_STATUS_RUN;
-                break;
-            case SDLK_LEFT:
-                this->mVelX -= this->FIGURE_VEL;
-                this->flipType = SDL_FLIP_HORIZONTAL;
-                this->checkleft = true;
-                //this->checkstatus = ANIMATION_STATUS_RUN;
-                break;
-            case SDLK_RIGHT:
-                this->mVelX += this->FIGURE_VEL;
-                this->flipType = SDL_FLIP_NONE;
-                this->checkright = true;
-                //this->checkstatus = ANIMATION_STATUS_RUN;
-                break;
+            this->checkspace = true;
+            this->checkstatus = ANIMATION_STATUS_ATTACK;
         }
-        if(this->checkstatus != ANIMATION_STATUS_ATTACK &&
-           (this->checkdown == true || this->checkup == true || this->checkleft == true || this->checkright == true ))
+        else if(e.key.keysym.sym == SDLK_UP && this->checkspace == false)
         {
+            this->mVelY -= this->FIGURE_VEL;
+            this->checkup = true;
             this->checkstatus = ANIMATION_STATUS_RUN;
         }
-        cout << "nhan" << endl;
+        else if(e.key.keysym.sym == SDLK_DOWN && this->checkspace == false)
+        {
+            this->mVelY += this->FIGURE_VEL;
+            this->checkdown = true;
+            this->checkstatus = ANIMATION_STATUS_RUN;
+        }
+        else if(e.key.keysym.sym == SDLK_LEFT && this->checkspace == false)
+        {
+            this->mVelX -= this->FIGURE_VEL;
+            this->flipType = SDL_FLIP_HORIZONTAL;
+            this->checkleft = true;
+            this->checkstatus = ANIMATION_STATUS_RUN;
+        }
+        else if(e.key.keysym.sym == SDLK_RIGHT && this->checkspace == false)
+        {
+            this->mVelX += this->FIGURE_VEL;
+            this->flipType = SDL_FLIP_NONE;
+            this->checkright = true;
+            this->checkstatus = ANIMATION_STATUS_RUN;
+            cout << "DUOC NHAN" << endl;
+        }
+    cout << "nhan" << endl;
     }
+
     //If a key was released
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
         //Adjust the velocity
-        switch( e.key.keysym.sym )
+        //SDL_Delay(100);
+        if(e.key.keysym.sym == SDLK_SPACE &&  this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false)
         {
-            case SDLK_UP:
-                mVelY += this->FIGURE_VEL;
-                this->checkup = false;
-                break;
-            case SDLK_DOWN:
-                mVelY -= this->FIGURE_VEL;
-                this->checkdown = false;
-                break;
-            case SDLK_LEFT:
-                mVelX += this->FIGURE_VEL;
-                this->checkleft = false;
-                break;
-            case SDLK_RIGHT:
-                mVelX -= this->FIGURE_VEL;
-                this->checkright = false;
-                break;
+            this->checkspace = false;
+            cout << "NHA SPACE" << endl;
         }
+        else if(e.key.keysym.sym == SDLK_UP && this->checkspace == false)
+        {
+            mVelY += this->FIGURE_VEL;
+            this->checkup = false;
+            //cout << "checkspaceup = " << checkspace << endl;
+        }
+        else if(e.key.keysym.sym == SDLK_DOWN && this->checkspace == false)
+        {
+            mVelY -= this->FIGURE_VEL;
+            this->checkdown = false;
+            //cout << "checkspacedown = " << checkspace << endl;
+        }
+        else if(e.key.keysym.sym == SDLK_LEFT && this->checkspace == false)
+        {
+            mVelX += this->FIGURE_VEL;
+            this->checkleft = false;
+            //cout << "checkspaceleft = " << checkspace << endl;
+        }
+        else if(e.key.keysym.sym == SDLK_RIGHT && this->checkspace == false)
+        {
+            mVelX -= this->FIGURE_VEL;
+            this->checkright = false;
+            //cout << "checkspaceright = " << checkspace << endl;
+            cout << "DUOC THA" << endl;
+
+        }
+
         cout << "Tha" << endl;
-        if(this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false )
+        if(this->checkspace == false && this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false )
         {
             this->checkstatus = ANIMATION_STATUS_IDLE;
         }
     }
     cout << "this->mVelX = " << this->mVelX << endl;
+    cout << "this->mVelY = " << this->mVelY << endl;
 }
 
 void Figure::move(Tile *tiles[])

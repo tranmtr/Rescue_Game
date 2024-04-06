@@ -99,7 +99,7 @@ int main( int argc, char* args[] )
 					if(Figure.getStatus() != ANIMATION_STATUS_DIE)
                     {
                         Figure.handleEvent(e);
-                        cout << "Vao" << endl;
+                        //cout << "Vao" << endl;
                     }
                     else
                     {
