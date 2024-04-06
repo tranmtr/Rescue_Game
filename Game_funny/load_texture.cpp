@@ -97,13 +97,28 @@ int LTexture::getHeight()
 }
 
 
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, Tile* tiles[] )
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, Tile* tiles[] )
 {
 	//Loading success flag
 	bool success = true;
 
 	//Load sprite sheet texture
-	if( !figureTexture.loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)testIDLEvaRUN.png",aRenderer ) )
+	if( !figureTexture[ANIMATION_STATUS_IDLE].loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)idle.png",aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+	if( !figureTexture[ANIMATION_STATUS_RUN].loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)run.png",aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+	if( !figureTexture[ANIMATION_STATUS_DIE].loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)die.png",aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+	if( !figureTexture[ANIMATION_STATUS_ATTACK].loadFromFile( "File_Image/image_Figure/16x16_knight_1(phongto)attack.png",aRenderer ) )
 	{
 		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
@@ -112,28 +127,28 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wall
     // Load wall
 	if( !wallTexture.loadFromFile( "File_Image/image_Maze/wall.png", aRenderer ) )
 	{
-		printf( "Failed to load tile set texture!\n" );
+		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
 
     // Load floor
 	if( !floorTexture.loadFromFile( "File_Image/image_Maze/nen_mau_tim_2(thu_nho_2).jpg", aRenderer ) )
 	{
-		printf( "Failed to load tile set texture!\n" );
+		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
 
 	// Load floor
 	if( !lavaTexture.loadFromFile( "File_Image/image_Maze/lavaPixel(80_80).jpg", aRenderer ) )
 	{
-		printf( "Failed to load tile set texture!\n" );
+		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
 
 	// Load floor
 	if( !iceTexture.loadFromFile( "File_Image/image_Maze/ice_block_slow.jpg", aRenderer ) )
 	{
-		printf( "Failed to load tile set texture!\n" );
+		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
 
@@ -141,14 +156,14 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wall
 
 	if( !cakeTexture.loadFromFile( "File_Image/image_Maze/cake_fast(80_80).jpg", aRenderer ) )
 	{
-		printf( "Failed to load tile set texture!\n" );
+		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
 
     //Load tile map
 	if( !setTiles( tiles ) )
 	{
-		printf( "Failed to load tile set!\n" );
+		cout << "Failed to load tile set!\n" ;
 		success = false;
 	}
 
@@ -157,7 +172,7 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wall
 
 
 
-void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[])
+void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[])
 {
     //Set sprite clips idle
 
@@ -190,42 +205,91 @@ void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[])
         //Set sprite clips run
 
         clipsRun[ 0 ].x =      40;
-		clipsRun[ 0 ].y =     171;
+		clipsRun[ 0 ].y =      43;
 		clipsRun[ 0 ].w =      45;
 		clipsRun[ 0 ].h =      54;
 
 		clipsRun[ 1 ].x =     168;
-		clipsRun[ 1 ].y =     171;
+		clipsRun[ 1 ].y =      43;
 		clipsRun[ 1 ].w =      45;
 		clipsRun[ 1 ].h =      54;
 
 		clipsRun[ 2 ].x =     296;
-		clipsRun[ 2 ].y =     171;
+		clipsRun[ 2 ].y =      43;
 		clipsRun[ 2 ].w =      45;
 		clipsRun[ 2 ].h =      54;
 
         clipsRun[ 3 ].x =   192*2 + 40;
-		clipsRun[ 3 ].y =    171;
+		clipsRun[ 3 ].y =     43;
 		clipsRun[ 3 ].w =    45;
 		clipsRun[ 3 ].h =    54;
 
         clipsRun[ 4 ].x =   256*2+40;
-		clipsRun[ 4 ].y =    171;
+		clipsRun[ 4 ].y =    43;
 		clipsRun[ 4 ].w =    45;
 		clipsRun[ 4 ].h =    54;
 
 		clipsRun[ 5 ].x =   320*2 + 40;
-		clipsRun[ 5 ].y =    171;
+		clipsRun[ 5 ].y =    43;
 		clipsRun[ 5 ].w =    45;
 		clipsRun[ 5 ].h =    54;
 
         clipsRun[ 6 ].x =   384*2 + 40;
-		clipsRun[ 6 ].y =    171;
+		clipsRun[ 6 ].y =    43;
 		clipsRun[ 6 ].w =    45;
 		clipsRun[ 6 ].h =    54;
 
         clipsRun[ 7 ].x =   448*2 + 40;
-		clipsRun[ 7 ].y =    171;
+		clipsRun[ 7 ].y =     43;
 		clipsRun[ 7 ].w =    45;
 		clipsRun[ 7 ].h =    54;
+
+		//Set sprite clips die
+
+        clipsDie[ 0 ].x =      20;
+		clipsDie[ 0 ].y =      43;
+		clipsDie[ 0 ].w =      84;
+		clipsDie[ 0 ].h =      54;
+
+		clipsDie[ 1 ].x =      20+128;
+		clipsDie[ 1 ].y =      0+43;
+		clipsDie[ 1 ].w =      84;
+		clipsDie[ 1 ].h =      54;
+
+		clipsDie[ 2 ].x =      20+256;
+		clipsDie[ 2 ].y =      0+43;
+		clipsDie[ 2 ].w =      84;
+		clipsDie[ 2 ].h =      54;
+
+		clipsDie[ 3 ].x =      20+384;
+		clipsDie[ 3 ].y =      0+43;
+		clipsDie[ 3 ].w =      84;
+		clipsDie[ 3 ].h =      54;
+
+		clipsDie[ 4 ].x =      20+512;
+		clipsDie[ 4 ].y =      0+43;
+		clipsDie[ 4 ].w =      84;
+		clipsDie[ 4 ].h =      54;
+
+		clipsDie[ 5 ].x =      20+640;
+		clipsDie[ 5 ].y =      0+43;
+		clipsDie[ 5 ].w =      84;
+		clipsDie[ 5 ].h =      54;
+
+		//Set sprite clips attcak
+
+        clipsAttack[ 0 ].x =      36;
+		clipsAttack[ 0 ].y =      43;
+		clipsAttack[ 0 ].w =      76;
+		clipsAttack[ 0 ].h =      54;
+
+		clipsAttack[ 1 ].x =      36+128;
+		clipsAttack[ 1 ].y =      43;
+		clipsAttack[ 1 ].w =      76;
+		clipsAttack[ 1 ].h =      54;
+
+		clipsAttack[ 2 ].x =      36+256;
+		clipsAttack[ 2 ].y =      43;
+		clipsAttack[ 2 ].w =      76;
+		clipsAttack[ 2 ].h =      54;
 }

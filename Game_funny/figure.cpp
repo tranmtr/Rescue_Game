@@ -15,7 +15,7 @@ Figure::Figure()
     mVelY = 0;
 
     //Initialize moving
-    moving = false;
+    checkstatus = ANIMATION_STATUS_IDLE;
     checkup = false;
     checkdown = false;
     checkleft = false;
@@ -25,36 +25,50 @@ Figure::Figure()
     flipType = SDL_FLIP_NONE;
 }
 
+void Figure::resetVel()
+{
+    this->mVelX = 0;
+    this->mVelY = 0;
+}
+
 void Figure::handleEvent( SDL_Event& e )
 {
     //If a key was pressed
-	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+    if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
         //Adjust the velocity
         switch( e.key.keysym.sym )
         {
+            case SDLK_SPACE:
+                this->checkstatus = ANIMATION_STATUS_ATTACK;
+                break;
             case SDLK_UP:
-                mVelY -= this->FIGURE_VEL;
+                this->mVelY -= this->FIGURE_VEL;
                 this->checkup = true;
-                this->moving = true;
+                //this->checkstatus = ANIMATION_STATUS_RUN;
                 break;
             case SDLK_DOWN:
-                mVelY += this->FIGURE_VEL;
+                this->mVelY += this->FIGURE_VEL;
                 this->checkdown = true;
-                this->moving = true;
+                //this->checkstatus = ANIMATION_STATUS_RUN;
                 break;
             case SDLK_LEFT:
-                mVelX -= this->FIGURE_VEL;
+                this->mVelX -= this->FIGURE_VEL;
                 this->flipType = SDL_FLIP_HORIZONTAL;
                 this->checkleft = true;
-                this->moving = true;
+                //this->checkstatus = ANIMATION_STATUS_RUN;
                 break;
             case SDLK_RIGHT:
-                mVelX += this->FIGURE_VEL;
+                this->mVelX += this->FIGURE_VEL;
                 this->flipType = SDL_FLIP_NONE;
                 this->checkright = true;
-                this->moving = true;
+                //this->checkstatus = ANIMATION_STATUS_RUN;
                 break;
+        }
+        if(this->checkstatus != ANIMATION_STATUS_ATTACK &&
+           (this->checkdown == true || this->checkup == true || this->checkleft == true || this->checkright == true ))
+        {
+            this->checkstatus = ANIMATION_STATUS_RUN;
         }
         cout << "nhan" << endl;
     }
@@ -82,11 +96,12 @@ void Figure::handleEvent( SDL_Event& e )
                 break;
         }
         cout << "Tha" << endl;
-        if(this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false)
+        if(this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false )
         {
-            this->moving = false;
+            this->checkstatus = ANIMATION_STATUS_IDLE;
         }
     }
+    cout << "this->mVelX = " << this->mVelX << endl;
 }
 
 void Figure::move(Tile *tiles[])
@@ -99,7 +114,7 @@ void Figure::move(Tile *tiles[])
     {
         //Move back
         this->mBox.x -= this->mVelX;
-        cout << "Va cham 1" << endl;
+        //cout << "Va cham 1" << endl;
     }
 
     //Move the dot up or down
@@ -110,12 +125,16 @@ void Figure::move(Tile *tiles[])
     {
         //Move back
         this->mBox.y -= this->mVelY;
-        cout << "Va cham 2" << endl;
+        //cout << "Va cham 2" << endl;
     }
+
+    //cout << "Vx = " << this->mVelX << endl;
 
     if(collisionLavaDie(this->mBox, tiles))
     {
-        cout << "DIE" << endl;
+        //cout << "DIE" << endl;
+        //cout << "KET THUC" << endl;
+        this->checkstatus = ANIMATION_STATUS_DIE;
     }
     if(collisionIceSlow(this->mBox, tiles))
     {
@@ -127,30 +146,51 @@ void Figure::move(Tile *tiles[])
     }
 }
 
-void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], int& frameIdle, int& frameRun, LTexture& figureTexture, SDL_Renderer* aRenderer, int camX, int camY)
+void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
+                    int& frameIdle, int& frameRun, int& frameDie, int& frameAttack, LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY)
 {
-    //Show the figure run
-    if(this->moving == true)
+    if(this->checkstatus == ANIMATION_STATUS_DIE)
     {
-        ++frameRun;
-        if(frameRun / 4 >= RUN_ANIMATION_FRAMES)
+        if(frameDie / 16 < ANIMATION_FRAMES_DIE-1)
         {
-            frameRun = 0;
+            ++frameDie;
         }
-        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsRun[ frameRun / 4 ], 0, NULL, this->flipType, aRenderer  );
+        figureTexture[ANIMATION_STATUS_DIE].render( this->mBox.x - camX, this->mBox.y - camY, &clipsDie[ frameDie / 16 ], 0, NULL, this->flipType, aRenderer  );
+        //cout << "DIE" << endl;
+
+
     }
-    //Show the figure idle
-    else
+    else if(this->checkstatus == ANIMATION_STATUS_IDLE)
     {
         ++frameIdle;
-        if( frameIdle / 4 >= IDLE_ANIMATION_FRAMES )
+        if( frameIdle / 4 >= ANIMATION_FRAMES_IDLE )
         {
             frameIdle = 0;
         }
-        figureTexture.render( this->mBox.x - camX, this->mBox.y - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, this->flipType, aRenderer  );
-    }
+        figureTexture[ANIMATION_STATUS_IDLE].render( this->mBox.x - camX, this->mBox.y - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, this->flipType, aRenderer  );
+        //cout << "dung yen" << endl;
 
-	cout << "Chay" << endl;
+    }
+    else if(this->checkstatus == ANIMATION_STATUS_RUN)
+    {
+        ++frameRun;
+        if(frameRun / 4 >= ANIMATION_FRAMES_RUN)
+        {
+            frameRun = 0;
+        }
+        figureTexture[ANIMATION_STATUS_RUN].render( this->mBox.x - camX, this->mBox.y - camY, &clipsRun[ frameRun / 4 ], 0, NULL, this->flipType, aRenderer  );
+        //cout << "chay" << endl;
+    }
+    else if(this->checkstatus == ANIMATION_STATUS_ATTACK)
+    {
+        ++frameAttack;
+        if(frameAttack / 4 >= ANIMATION_FRAMES_ATTACK)
+        {
+            frameAttack = 0;
+        }
+        figureTexture[ANIMATION_STATUS_ATTACK].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
+        cout << "ATTACK" << endl;
+    }
 }
 
 int Figure::getBoxX()
@@ -161,4 +201,9 @@ int Figure::getBoxX()
 int Figure::getBoxY()
 {
     return this->mBox.y;
+}
+
+int Figure::getStatus()
+{
+    return this->checkstatus;
 }

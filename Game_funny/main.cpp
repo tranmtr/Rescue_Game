@@ -16,18 +16,23 @@ int main( int argc, char* args[] )
     SDL_Renderer* aRenderer = NULL;
 
     // Figure
-    LTexture figureTexture;
+    LTexture figureTexture[ANIMATION_STATUS_TOTAL];
 
-    //Idle animation
-    SDL_Rect clipsIdle[ IDLE_ANIMATION_FRAMES ];
+    //Clip idle
+    SDL_Rect clipsIdle[ANIMATION_FRAMES_IDLE];
 
-    //Run animation
-    SDL_Rect clipsRun[ RUN_ANIMATION_FRAMES ];
+    //Clip run
+    SDL_Rect clipsRun[ANIMATION_FRAMES_RUN];
+
+    //Clip die
+    SDL_Rect clipsDie[ANIMATION_FRAMES_DIE];
+
+    //Clip attack
+    SDL_Rect clipsAttack[ANIMATION_FRAMES_ATTACK];
 
     // Load wall, floor
     LTexture wallTexture;
     LTexture floorTexture;
-
     // Load lava, ice, cake
     LTexture lavaTexture;
     LTexture iceTexture;
@@ -38,6 +43,13 @@ int main( int argc, char* args[] )
 
     //Current animation frame Run
     int frameRun = 0;
+
+    //Current animation frame Die
+    int frameDie = 0;
+
+    //Current animation frame Attack
+    int frameAttack = 0;
+
 
 	//Start up SDL and create window
 	if( !init(aWindow, aRenderer) )
@@ -57,7 +69,7 @@ int main( int argc, char* args[] )
 		else
 		{
 		    // Load Rec Animation
-		    loadRectAnimation(clipsIdle, clipsRun);
+		    loadRectAnimation(clipsIdle, clipsRun, clipsDie, clipsAttack);
 
 			//Main loop flag
 			bool quit = false;
@@ -67,7 +79,7 @@ int main( int argc, char* args[] )
 
 			//The figure that will be moving around on the screen
 			Figure Figure;
-            cout << "Mo dau" << endl;
+            //cout << "Mo dau" << endl;
 
             //The camera area
 			SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
@@ -84,11 +96,20 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-					Figure.handleEvent(e);
+					if(Figure.getStatus() != ANIMATION_STATUS_DIE)
+                    {
+                        Figure.handleEvent(e);
+                        cout << "Vao" << endl;
+                    }
+                    else
+                    {
+                        Figure.resetVel();
+                    }
+                    cout << "Figure.getStatus() = " << Figure.getStatus() << endl;
 				}
 
-                //Move the figure
-				Figure.move(tileSet);
+				//Move the figure
+                Figure.move(tileSet);
 
                 //Load camera:
                 loadCamera(camera, Figure);
@@ -98,17 +119,18 @@ int main( int argc, char* args[] )
 				SDL_RenderClear( aRenderer );
 
                 //Render level
-				for( int i = 0; i < TOTAL_TILES; ++i )
+				for( int i = 0; i < TOTAL_TILES; i++ )
 				{
 					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture );
 
 				}
 
                 //Render objects
-				Figure.render(clipsIdle, clipsRun, frameIdle, frameRun, figureTexture, aRenderer, camera.x, camera.y);
+				Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
 
 				//Update screen
 				SDL_RenderPresent( aRenderer );
+
 
 			}
 		}

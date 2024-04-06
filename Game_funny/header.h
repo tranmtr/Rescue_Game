@@ -20,20 +20,29 @@ const int LEVEL_HEIGHT = 33*80;
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
-//Walking animation
-const int RUN_ANIMATION_FRAMES = 8;
-const int IDLE_ANIMATION_FRAMES = 5;
-
 //Tile constants
 const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 80;
 const int TOTAL_TILES = 34*33;
 const int TOTAL_TILE_SPRITES = 5;
-
-//The different tile sprites
 const int TILE_FLOOR = 0;
 const int TILE_LAVA = 1;
 const int TILE_ICE = 2;
 const int TILE_CAKE = 3;
 const int TILE_WALL = 4;
+
+//Frame Animation
+const int ANIMATION_FRAMES_DIE = 6;
+const int ANIMATION_FRAMES_IDLE = 5;
+const int ANIMATION_FRAMES_RUN = 8;
+const int ANIMATION_FRAMES_ATTACK = 3;
+
+
+// ANIMATION STATUS
+const int ANIMATION_STATUS_DIE = 0;
+const int ANIMATION_STATUS_IDLE = 1;
+const int ANIMATION_STATUS_RUN = 2;
+const int ANIMATION_STATUS_ATTACK = 3;
+const int ANIMATION_STATUS_TOTAL = 4;
+
 

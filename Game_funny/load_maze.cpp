@@ -164,7 +164,7 @@ bool collisionLavaDie(SDL_Rect box, Tile* tiles[])
             //If the collision box touches the wall tile
             if( checkCollision( box, tiles[ i ]->getBox() ) )
             {
-                cout << "LAVA" << i << endl;
+                //cout << "LAVA" << i << endl;
                 return true;
             }
         }

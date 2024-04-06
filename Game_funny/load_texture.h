@@ -68,10 +68,10 @@ bool touchesWall( SDL_Rect box, Tile* tiles[] );
 bool setTiles( Tile *tiles[]);
 
 //Loads media
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture,LTexture& iceTexture,LTexture& cakeTexture,Tile* tiles[] );
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture,LTexture& iceTexture,LTexture& cakeTexture,Tile* tiles[] );
 
 //Load rec animation
-void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[]);
+void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[]);
 
 bool collisionLavaDie(SDL_Rect box, Tile* tiles[]);
 

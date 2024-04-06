@@ -57,10 +57,11 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
 	return success;
 }
 
-void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture& figureTexture, LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture)
+void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture)
 {
 	//Free loaded images
-	figureTexture.free();
+	figureTexture[ANIMATION_STATUS_IDLE].free();
+	figureTexture[ANIMATION_STATUS_RUN].free();
     wallTexture.free();
     floorTexture.free();
     lavaTexture.free();
