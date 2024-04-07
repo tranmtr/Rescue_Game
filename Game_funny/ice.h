@@ -11,7 +11,7 @@ class LIce
 		static const int ICE_DAMAGE_VEL = 5;
         LIce();
         ~LIce();
-        void moveIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY);
+        void moveIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[]);
         bool checkCollisionIceWithWall(Tile* tiles[]);
         bool checkCollisionIceWithMonster();
         void renderIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY );
@@ -20,4 +20,5 @@ class LIce
         int iceVelX;
         int iceVelY;
         int framesIce;
+        bool direction;
 };

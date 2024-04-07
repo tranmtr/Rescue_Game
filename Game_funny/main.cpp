@@ -135,7 +135,7 @@ int main( int argc, char* args[] )
 				Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
 
                 //Render ice bullet
-                iceDamge.moveIce(Figure, iceImageTexture, aRenderer, camera.x, camera.y);
+                iceDamge.moveIce(Figure, iceImageTexture, aRenderer, camera.x, camera.y, tileSet);
 
 				//Update screen
 				SDL_RenderPresent( aRenderer );

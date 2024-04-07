@@ -184,7 +184,7 @@ bool collisionIceSlow(SDL_Rect box, Tile* tiles[])
             //If the collision box touches the wall tile
             if( checkCollision( box, tiles[ i ]->getBox() ) )
             {
-                cout << "ICE" << i << endl;
+                //cout << "ICE" << i << endl;
                 return true;
             }
         }
@@ -204,7 +204,7 @@ bool collisionCakeFast(SDL_Rect box, Tile* tiles[])
             //If the collision box touches the wall tile
             if( checkCollision( box, tiles[ i ]->getBox() ) )
             {
-                cout << "CAKE" << i << endl;
+                //cout << "CAKE" << i << endl;
                 return true;
             }
         }

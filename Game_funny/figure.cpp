@@ -36,6 +36,11 @@ bool Figure::getSpace()
     return this->checkspace;
 }
 
+SDL_RendererFlip Figure::getFlip()
+
+{
+    return this->flipType;
+}
 void Figure::handleEvent( SDL_Event& e  )
 {
     //If a key was pressed
@@ -163,11 +168,11 @@ void Figure::move(Tile *tiles[])
     }
     if(collisionIceSlow(this->mBox, tiles))
     {
-        cout << "SLOW" << endl;
+        //cout << "SLOW" << endl;
     }
     if(collisionCakeFast(this->mBox, tiles))
     {
-        cout << "FAST" << endl;
+        //cout << "FAST" << endl;
     }
 }
 

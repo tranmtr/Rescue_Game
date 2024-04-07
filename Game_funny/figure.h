@@ -47,6 +47,10 @@ class Figure
         //Get space
         bool getSpace();
 
+        //get flipType
+
+        SDL_RendererFlip getFlip();
+
     private:
         //The velocity of the dot
 		int mVelX, mVelY;
