@@ -5,7 +5,7 @@
 #include "check_collision.h"
 #include "load_camera.h"
 #include "load_maze.h"
-
+#include "ice.h"
 int main( int argc, char* args[] )
 {
 
@@ -37,6 +37,12 @@ int main( int argc, char* args[] )
     LTexture lavaTexture;
     LTexture iceTexture;
     LTexture cakeTexture;
+    // Image ice bullet
+    LTexture iceImageTexture;
+
+    // ice bullet damage
+    LIce iceDamge;
+
 
     //Current animation frame Idle
     int frameIdle = 0;
@@ -62,7 +68,7 @@ int main( int argc, char* args[] )
 		Tile* tileSet[ TOTAL_TILES ];
 
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, tileSet) )
+		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture, tileSet) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
@@ -127,6 +133,9 @@ int main( int argc, char* args[] )
 
                 //Render objects
 				Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
+
+                //Render ice bullet
+                iceDamge.moveIce(Figure, iceImageTexture, aRenderer, camera.x, camera.y);
 
 				//Update screen
 				SDL_RenderPresent( aRenderer );

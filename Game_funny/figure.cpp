@@ -31,12 +31,17 @@ void Figure::resetVel()
     this->mVelY = 0;
 }
 
-void Figure::handleEvent( SDL_Event& e )
+bool Figure::getSpace()
+{
+    return this->checkspace;
+}
+
+void Figure::handleEvent( SDL_Event& e  )
 {
     //If a key was pressed
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
     {
-        //SDL_Delay(100);
+        //SDL_Delay(1000);
         //Adjust the velocity
         if(e.key.keysym.sym == SDLK_SPACE && this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false)
         {
@@ -77,7 +82,7 @@ void Figure::handleEvent( SDL_Event& e )
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
     {
         //Adjust the velocity
-        //SDL_Delay(100);
+        //SDL_Delay(1000);
         if(e.key.keysym.sym == SDLK_SPACE &&  this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false)
         {
             this->checkspace = false;
@@ -85,25 +90,29 @@ void Figure::handleEvent( SDL_Event& e )
         }
         else if(e.key.keysym.sym == SDLK_UP && this->checkspace == false)
         {
-            mVelY += this->FIGURE_VEL;
+            //mVelY += this->FIGURE_VEL;
+            mVelY = 0;
             this->checkup = false;
             //cout << "checkspaceup = " << checkspace << endl;
         }
         else if(e.key.keysym.sym == SDLK_DOWN && this->checkspace == false)
         {
-            mVelY -= this->FIGURE_VEL;
+            //mVelY -= this->FIGURE_VEL;
+            mVelY = 0;
             this->checkdown = false;
             //cout << "checkspacedown = " << checkspace << endl;
         }
         else if(e.key.keysym.sym == SDLK_LEFT && this->checkspace == false)
         {
-            mVelX += this->FIGURE_VEL;
+            //mVelX += this->FIGURE_VEL;
+            mVelX = 0;
             this->checkleft = false;
             //cout << "checkspaceleft = " << checkspace << endl;
         }
         else if(e.key.keysym.sym == SDLK_RIGHT && this->checkspace == false)
         {
-            mVelX -= this->FIGURE_VEL;
+            //mVelX -= this->FIGURE_VEL;
+            mVelX = 0;
             this->checkright = false;
             //cout << "checkspaceright = " << checkspace << endl;
             cout << "DUOC THA" << endl;

@@ -17,7 +17,7 @@ class Figure
 		//static const int FIGURE_HEIGHT_ATTACK = 54;
 
 		//Maximum axis velocity of the figure
-		static const int FIGURE_VEL = 2;
+		static const int FIGURE_VEL = 5;
 
 		//Initializes the variables
 		Figure();
@@ -43,6 +43,9 @@ class Figure
 
         //Reset Vel
         void resetVel();
+
+        //Get space
+        bool getSpace();
 
     private:
         //The velocity of the dot

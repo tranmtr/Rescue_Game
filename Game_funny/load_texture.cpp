@@ -97,7 +97,8 @@ int LTexture::getHeight()
 }
 
 
-bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, Tile* tiles[] )
+bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
+                LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, Tile* tiles[] )
 {
 	//Loading success flag
 	bool success = true;
@@ -155,6 +156,12 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 	// Load floor
 
 	if( !cakeTexture.loadFromFile( "File_Image/image_Maze/cake_fast(80_80).jpg", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+
+	if( !iceImageTexture.loadFromFile( "File_Image/image_Figure/ice_damage.png", aRenderer ) )
 	{
 		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
