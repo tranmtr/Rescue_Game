@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1712497609 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
+1712498033 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
 	"header.h"
 	"init_and_close.h"
 	"load_texture.h"
@@ -63,10 +63,10 @@
 	"header.h"
 	"figure.h"
 
-1712497992 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.cpp
+1712498667 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.cpp
 	"ice.h"
 
-1712497070 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.h
+1712498693 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.h
 	"header.h"
 	"load_texture.h"
 	"figure.h"

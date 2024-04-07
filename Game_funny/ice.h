@@ -8,7 +8,7 @@ class LIce
     public:
         static const int ICE_DAMAGE_WIDTH = 43;
 		static const int ICE_DAMAGE_HEIGHT = 32;
-		static const int ICE_DAMAGE_VEL = 2;
+		static const int ICE_DAMAGE_VEL = 5;
         LIce();
         ~LIce();
         void moveIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY);
