@@ -36,6 +36,8 @@
 		<Unit filename="figure.cpp" />
 		<Unit filename="figure.h" />
 		<Unit filename="header.h" />
+		<Unit filename="ice.cpp" />
+		<Unit filename="ice.h" />
 		<Unit filename="init_and_close.cpp" />
 		<Unit filename="init_and_close.h" />
 		<Unit filename="load_camera.cpp" />

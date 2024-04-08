@@ -3,6 +3,7 @@
 #include "header.h"
 #include "load_texture.h"
 #include "figure.h"
+#include "check_collision.h"
 class LIce
 {
     public:
@@ -12,13 +13,16 @@ class LIce
         LIce();
         ~LIce();
         void moveIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[]);
-        bool checkCollisionIceWithWall(Tile* tiles[]);
-        bool checkCollisionIceWithMonster();
+        bool checkCollisionIceWithMonster(int camX, int camY);
         void renderIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY );
+        SDL_Rect getDragon();
     private:
         SDL_Rect mIce;
         int iceVelX;
         int iceVelY;
         int framesIce;
         bool direction;
+        SDL_Rect dragon;
+        SDL_Rect fire;
+        bool col;
 };

@@ -45,4 +45,5 @@ const int ANIMATION_STATUS_RUN = 2;
 const int ANIMATION_STATUS_ATTACK = 3;
 const int ANIMATION_STATUS_TOTAL = 4;
 
-
+//Dragon
+const int ANIMATION_FRAMES_DRAGON = 15;

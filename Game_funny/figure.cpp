@@ -78,9 +78,9 @@ void Figure::handleEvent( SDL_Event& e  )
             this->flipType = SDL_FLIP_NONE;
             this->checkright = true;
             this->checkstatus = ANIMATION_STATUS_RUN;
-            cout << "DUOC NHAN" << endl;
+            //cout << "DUOC NHAN" << endl;
         }
-    cout << "nhan" << endl;
+    //cout << "nhan" << endl;
     }
 
     //If a key was released
@@ -91,7 +91,7 @@ void Figure::handleEvent( SDL_Event& e  )
         if(e.key.keysym.sym == SDLK_SPACE &&  this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false)
         {
             this->checkspace = false;
-            cout << "NHA SPACE" << endl;
+            //cout << "NHA SPACE" << endl;
         }
         else if(e.key.keysym.sym == SDLK_UP && this->checkspace == false)
         {
@@ -120,18 +120,18 @@ void Figure::handleEvent( SDL_Event& e  )
             mVelX = 0;
             this->checkright = false;
             //cout << "checkspaceright = " << checkspace << endl;
-            cout << "DUOC THA" << endl;
+            //cout << "DUOC THA" << endl;
 
         }
 
-        cout << "Tha" << endl;
+        //cout << "Tha" << endl;
         if(this->checkspace == false && this->checkdown == false && this->checkup == false && this->checkleft == false && this->checkright == false )
         {
             this->checkstatus = ANIMATION_STATUS_IDLE;
         }
     }
-    cout << "this->mVelX = " << this->mVelX << endl;
-    cout << "this->mVelY = " << this->mVelY << endl;
+    //cout << "this->mVelX = " << this->mVelX << endl;
+    //cout << "this->mVelY = " << this->mVelY << endl;
 }
 
 void Figure::move(Tile *tiles[])
@@ -219,8 +219,19 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie
             frameAttack = 0;
         }
         figureTexture[ANIMATION_STATUS_ATTACK].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
+        cout << "Attack" << endl;
+    }/*
+    else if(this->checkstatus == ANIMATION_STATUS_ATTACK)
+    {
+        ++frameAttack;
+        if(frameAttack / 4 >= ANIMATION_FRAMES_ATTACK)
+        {
+            frameAttack = 0;
+            cout << "Da vao" << endl;
+        }
+        figureTexture[ANIMATION_STATUS_RUN].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
         cout << "ATTACK" << endl;
-    }
+    }*/
 }
 
 int Figure::getBoxX()

@@ -98,7 +98,7 @@ int LTexture::getHeight()
 
 
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
-                LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, Tile* tiles[] )
+                LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture, Tile* tiles[] )
 {
 	//Loading success flag
 	bool success = true;
@@ -167,6 +167,12 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		success = false;
 	}
 
+	if( !fireDragonTexture.loadFromFile( "File_Image/image_Figure/SheetDragonRedAll(phun_Lua)(845_240).png", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+
     //Load tile map
 	if( !setTiles( tiles ) )
 	{
@@ -179,7 +185,7 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 
 
 
-void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[])
+void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[], SDL_Rect clipsDragon[])
 {
     //Set sprite clips idle
 
@@ -283,9 +289,9 @@ void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clips
 		clipsDie[ 5 ].w =      84;
 		clipsDie[ 5 ].h =      54;
 
-		//Set sprite clips attcak
+		//Set sprite clips attack
 
-        clipsAttack[ 0 ].x =      36;
+		clipsAttack[ 0 ].x =      36;
 		clipsAttack[ 0 ].y =      43;
 		clipsAttack[ 0 ].w =      76;
 		clipsAttack[ 0 ].h =      54;
@@ -299,4 +305,81 @@ void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clips
 		clipsAttack[ 2 ].y =      43;
 		clipsAttack[ 2 ].w =      76;
 		clipsAttack[ 2 ].h =      54;
+
+		//Dragon
+
+        clipsDragon[ 0 ].x =      0;
+		clipsDragon[ 0 ].y =      0;
+		clipsDragon[ 0 ].w =      169;
+		clipsDragon[ 0 ].h =      80;
+
+		clipsDragon[ 1 ].x =      169;
+		clipsDragon[ 1 ].y =      0;
+		clipsDragon[ 1 ].w =      169;
+		clipsDragon[ 1 ].h =      80;
+
+		clipsDragon[ 2 ].x =      338;
+		clipsDragon[ 2 ].y =      0;
+		clipsDragon[ 2 ].w =      169;
+		clipsDragon[ 2 ].h =      80;
+
+		clipsDragon[ 3 ].x =      507;
+		clipsDragon[ 3 ].y =      0;
+		clipsDragon[ 3 ].w =      169;
+		clipsDragon[ 3 ].h =      80;
+
+		clipsDragon[ 4 ].x =      676;
+		clipsDragon[ 4 ].y =      0;
+		clipsDragon[ 4 ].w =      169;
+		clipsDragon[ 4 ].h =      80;
+
+		clipsDragon[ 5 ].x =      0;
+		clipsDragon[ 5 ].y =      80;
+		clipsDragon[ 5 ].w =      169;
+		clipsDragon[ 5 ].h =      80;
+
+		clipsDragon[ 6 ].x =      169;
+		clipsDragon[ 6 ].y =      80;
+		clipsDragon[ 6 ].w =      169;
+		clipsDragon[ 6 ].h =      80;
+
+		clipsDragon[ 7 ].x =      338;
+		clipsDragon[ 7 ].y =      80;
+		clipsDragon[ 7 ].w =      169;
+		clipsDragon[ 7 ].h =      80;
+
+		clipsDragon[ 8 ].x =      507;
+		clipsDragon[ 8 ].y =      80;
+		clipsDragon[ 8 ].w =      169;
+		clipsDragon[ 8 ].h =      80;
+
+		clipsDragon[ 9 ].x =      676;
+		clipsDragon[ 9 ].y =      80;
+		clipsDragon[ 9 ].w =      169;
+		clipsDragon[ 9 ].h =      80;
+
+		clipsDragon[ 10 ].x =      0;
+		clipsDragon[ 10 ].y =      160;
+		clipsDragon[ 10 ].w =      169;
+		clipsDragon[ 10 ].h =      80;
+
+		clipsDragon[ 11 ].x =      169;
+		clipsDragon[ 11 ].y =      160;
+		clipsDragon[ 11 ].w =      169;
+		clipsDragon[ 11 ].h =      80;
+
+		clipsDragon[ 12 ].x =      338;
+		clipsDragon[ 12 ].y =      160;
+		clipsDragon[ 12 ].w =      169;
+		clipsDragon[ 12 ].h =      80;
+
+		clipsDragon[ 13 ].x =      507;
+		clipsDragon[ 13 ].y =      160;
+		clipsDragon[ 13 ].w =      169;
+		clipsDragon[ 13 ].h =      80;
+
+		clipsDragon[ 14 ].x =      676;
+		clipsDragon[ 14 ].y =      160;
+		clipsDragon[ 14 ].w =      169;
+		clipsDragon[ 14 ].h =      80;
 }

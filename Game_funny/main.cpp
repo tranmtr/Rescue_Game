@@ -30,6 +30,12 @@ int main( int argc, char* args[] )
     //Clip attack
     SDL_Rect clipsAttack[ANIMATION_FRAMES_ATTACK];
 
+    //Clip DRAGON
+    SDL_Rect clipsDragon[ANIMATION_FRAMES_DRAGON];
+
+    // blood dragon
+    SDL_Rect bloodDragon;
+
     // Load wall, floor
     LTexture wallTexture;
     LTexture floorTexture;
@@ -43,6 +49,11 @@ int main( int argc, char* args[] )
     // ice bullet damage
     LIce iceDamge;
 
+    // animation fire
+    int frameFireDragon = 0;
+
+    // Fire Dragon
+    LTexture fireDragonTexture;
 
     //Current animation frame Idle
     int frameIdle = 0;
@@ -68,14 +79,14 @@ int main( int argc, char* args[] )
 		Tile* tileSet[ TOTAL_TILES ];
 
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture, tileSet) )
+		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture, fireDragonTexture, tileSet) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
 		else
 		{
 		    // Load Rec Animation
-		    loadRectAnimation(clipsIdle, clipsRun, clipsDie, clipsAttack);
+		    loadRectAnimation(clipsIdle, clipsRun, clipsDie, clipsAttack, clipsDragon);
 
 			//Main loop flag
 			bool quit = false;
@@ -125,10 +136,10 @@ int main( int argc, char* args[] )
 				SDL_RenderClear( aRenderer );
 
                 //Render level
+
 				for( int i = 0; i < TOTAL_TILES; i++ )
 				{
 					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture );
-
 				}
 
                 //Render objects
@@ -137,7 +148,18 @@ int main( int argc, char* args[] )
                 //Render ice bullet
                 iceDamge.moveIce(Figure, iceImageTexture, aRenderer, camera.x, camera.y, tileSet);
 
-				//Update screen
+                frameFireDragon++;
+                if(frameFireDragon / 4 >= ANIMATION_FRAMES_DRAGON)
+                {
+                    frameFireDragon = 0;
+                }
+                fireDragonTexture.render(iceDamge.getDragon().x - camera.x, iceDamge.getDragon().y - camera.y, &clipsDragon[ frameFireDragon/4 ], 0, NULL, SDL_FLIP_NONE, aRenderer);
+                bloodDragon.x = iceDamge.getDragon().x - camera.x + 48;
+                bloodDragon.y = iceDamge.getDragon().y - camera.y - 10;
+                bloodDragon.w = 110;
+                bloodDragon.h = 10;
+                SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
+                SDL_RenderFillRect(aRenderer, &bloodDragon);
 				SDL_RenderPresent( aRenderer );
 
 
