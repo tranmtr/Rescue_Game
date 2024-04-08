@@ -42,7 +42,6 @@ void Tile::render( SDL_Rect& camera, LTexture& floorTexture, LTexture& wallTextu
         {
             cakeTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
         }
-
     }
 }
 

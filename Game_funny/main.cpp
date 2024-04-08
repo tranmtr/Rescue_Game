@@ -33,7 +33,7 @@ int main( int argc, char* args[] )
     //Clip DRAGON
     SDL_Rect clipsDragon[ANIMATION_FRAMES_DRAGON];
 
-    // blood dragon
+    //blood
     SDL_Rect bloodDragon;
 
     // Load wall, floor
@@ -47,7 +47,7 @@ int main( int argc, char* args[] )
     LTexture iceImageTexture;
 
     // ice bullet damage
-    LIce iceDamge;
+    LIce iceDamage;
 
     // animation fire
     int frameFireDragon = 0;
@@ -146,23 +146,13 @@ int main( int argc, char* args[] )
 				Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
 
                 //Render ice bullet
-                iceDamge.moveIce(Figure, iceImageTexture, aRenderer, camera.x, camera.y, tileSet);
+                iceDamage.moveIce(Figure, iceImageTexture, aRenderer, camera.x, camera.y, tileSet);
 
-                frameFireDragon++;
-                if(frameFireDragon / 4 >= ANIMATION_FRAMES_DRAGON)
+                if(iceDamage.getBloodDragon() != 0)
                 {
-                    frameFireDragon = 0;
+                    iceDamage.renderDragon(fireDragonTexture, camera.x, camera.y, clipsDragon, aRenderer);
                 }
-                fireDragonTexture.render(iceDamge.getDragon().x - camera.x, iceDamge.getDragon().y - camera.y, &clipsDragon[ frameFireDragon/4 ], 0, NULL, SDL_FLIP_NONE, aRenderer);
-                bloodDragon.x = iceDamge.getDragon().x - camera.x + 48;
-                bloodDragon.y = iceDamge.getDragon().y - camera.y - 10;
-                bloodDragon.w = 110;
-                bloodDragon.h = 10;
-                SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
-                SDL_RenderFillRect(aRenderer, &bloodDragon);
 				SDL_RenderPresent( aRenderer );
-
-
 			}
 		}
 	}
