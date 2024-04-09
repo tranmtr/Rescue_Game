@@ -57,7 +57,7 @@ int main( int argc, char* args[] )
     LIce iceDamage;
 
     //fire dragon
-    dragon dragon;
+    dragon dragon[TOTAL_DRAGON];
 
     // animation fire
     int frameFireDragon = 0;
@@ -149,17 +149,23 @@ int main( int argc, char* args[] )
 					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture );
 				}
 
+				setDragon(tileSet, dragon);
+
                 //Render objects
 				Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
 
-                //Render ice bullet
-                iceDamage.moveIce(Figure, iceImageTexture, dragon, aRenderer, camera.x, camera.y, tileSet);
 
-                if(dragon.getBloodDragon() != 0)
+                for(int i = 0; i < TOTAL_DRAGON; i++)
                 {
-                    dragon.render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
-                    dragon.fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet);
+                    //Render ice bullet
+                    iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet);
+                    if(dragon[i].getBloodDragon() != 0 && checkCollision(camera, dragon[i].getBox()))
+                    {
+                        dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
+                        dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet);
+                    }
                 }
+
 				SDL_RenderPresent( aRenderer );
 			}
 		}

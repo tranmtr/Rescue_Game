@@ -26,7 +26,7 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
     {
         this->mIce.x = Figure.getBoxX() + Figure.FIGURE_WIDTH / 2;
         this->mIce.y = Figure.getBoxY() ;
-        this->framesIce = 100;
+        this->framesIce = 1000;
         this->iceCol = false;
         if(Figure.getFlip() == SDL_FLIP_NONE)
         {
@@ -67,7 +67,10 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
         else if(this->framesIce > 0)
         {
             this->framesIce--;
-            renderIce(Figure, iceDamegeTexture, aRenderer, camX, camY);
+            if(framesIce % 10 == 0)
+            {
+                renderIce(Figure, iceDamegeTexture, aRenderer, camX, camY);
+            }
         }
     }
 }

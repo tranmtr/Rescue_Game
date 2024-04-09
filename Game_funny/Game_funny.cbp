@@ -33,6 +33,8 @@
 		</Compiler>
 		<Unit filename="check_collision.cpp" />
 		<Unit filename="check_collision.h" />
+		<Unit filename="dragon.cpp" />
+		<Unit filename="dragon.h" />
 		<Unit filename="figure.cpp" />
 		<Unit filename="figure.h" />
 		<Unit filename="header.h" />

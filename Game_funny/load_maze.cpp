@@ -3,6 +3,7 @@
 //#include "load_maze.h"
 #include "load_texture.h"
 #include "check_collision.h"
+
 Tile::Tile( int x, int y, int tileType )
 {
     //Get the offsets

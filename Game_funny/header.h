@@ -47,7 +47,10 @@ const int ANIMATION_STATUS_TOTAL = 4;
 
 //Dragon
 const int ANIMATION_FRAMES_DRAGON = 15;
+const int TOTAL_DRAGON = 10;
+
 
 //Dramage
 const int DAMAGE_ICE = 25;
 const int DAMAGE_FIRE = 25;
+

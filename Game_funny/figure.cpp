@@ -30,6 +30,12 @@ Figure::Figure()
     bloodFigure.h = 5;
 }
 
+void Figure::setDie()
+{
+    this->checkstatus = ANIMATION_STATUS_DIE;
+    cout << "DIE" << endl;
+}
+
 SDL_Rect Figure::getBoxFigure()
 {
     return this->mBox;
@@ -251,7 +257,7 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie
 
     SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
     SDL_RenderFillRect(aRenderer, &this->bloodFigure);
-    cout << "bloodFigure.w = "<< bloodFigure.w << endl;
+    //cout << "bloodFigure.w = "<< bloodFigure.w << endl;
 }
 
 int Figure::getBoxX()

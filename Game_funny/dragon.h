@@ -16,6 +16,7 @@ class dragon
         int getBloodDragon();
         void decreasedBloodDragon();
         SDL_Rect getBox();
+        void setBox(int x, int y);
         void renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY);
         bool checkCollisionFireWithFigure(int camX, int camY, Figure Figure);
     private:
@@ -28,3 +29,5 @@ class dragon
         int fireVel;
 
 };
+
+void setDragon(Tile* tiles[], dragon dragon[]);

@@ -60,6 +60,8 @@ class Figure
         // get bloodFigure
         int getBloodFigure();
 
+        void setDie();
+
     private:
         //The velocity of the dot
 		int mVelX, mVelY;
