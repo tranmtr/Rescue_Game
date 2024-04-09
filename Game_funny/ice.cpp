@@ -14,28 +14,13 @@ LIce::LIce()
     direction = true;
     col = false;
 
-    dragon.x = 300;
-    dragon.y = 2250;
-    dragon.w = 169;
-    dragon.h = 80;
-    framesDragon = 0;
-
-    bloodDragon.x = 0;
-    bloodDragon.y = 0;
-    bloodDragon.w = 100;
-    bloodDragon.h = 5;
 }
 LIce::~LIce()
 {
 
 }
 
-int LIce::getBloodDragon()
-{
-    return this->bloodDragon.w;
-}
-
-void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[])
+void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[])
 {
     if(Figure.getSpace() == true && this->framesIce == 0 )
     {
@@ -69,15 +54,11 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRe
             this->framesIce = 0;
 
         }
-        else if(this->bloodDragon.w != 0 && this->checkCollisionIceWithMonster(camX, camY))
+        else if(dragon.getBloodDragon() != 0 && this->checkCollisionIceWithDragon(camX, camY, dragon))
         {
-            this->bloodDragon.w -= ICE_DAMAGE_MAX;
+            dragon.decreasedBloodDragon();
             this->col = true;
             this->framesIce = 0;
-            if(this->bloodDragon.w < 0)
-            {
-                this->bloodDragon.w = 0;
-            }
         }
         else if(framesIce < 0)
         {
@@ -87,7 +68,6 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRe
         {
             this->framesIce--;
             renderIce(Figure, iceDamegeTexture, aRenderer, camX, camY);
-
         }
     }
 }
@@ -105,36 +85,17 @@ void LIce::renderIce(Figure Figure, LTexture& iceDamageTexture, SDL_Renderer*& a
 }
 
 
-bool LIce::checkCollisionIceWithMonster(int camX, int camY)
+bool LIce::checkCollisionIceWithDragon(int camX, int camY, dragon dragon)
 {
-    SDL_Rect realDragon = this->dragon;
-    realDragon.x = realDragon.x + 55 ;
+    SDL_Rect colDragon = dragon.getBox();
+    colDragon.x = colDragon.x + 55 ;
     //realDragon.y -= camY;
-    realDragon.w -= 85;
-    cout << "realDragon.x = " << realDragon.x << endl;
-    cout << "realDragon.y = " << realDragon.y << endl;
-    return checkCollision(this->mIce, realDragon);
+    colDragon.w -= 85;
+    cout << "colDragon.x = " << colDragon.x << endl;
+    cout << "colDragon.y = " << colDragon.y << endl;
+    return checkCollision(this->mIce, colDragon);
 }
 
-void LIce::renderDragon(LTexture& fireDragonTexture, int camX, int camY, SDL_Rect clipsDragon[], SDL_Renderer*& aRenderer)
-{
-    this->framesDragon++;
-    if(this->framesDragon / 8 >= ANIMATION_FRAMES_DRAGON)
-    {
-        this->framesDragon = 0;
-    }
-    fireDragonTexture.render(this->dragon.x - camX, this->dragon.y - camY, &clipsDragon[ framesDragon / 8 ], 0, NULL, SDL_FLIP_NONE, aRenderer);
-    bloodDragon.x = this->dragon.x - camX + 48;
-    bloodDragon.y = this->dragon.y - camY - 10;
-
-    SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
-    SDL_RenderFillRect(aRenderer, &this->bloodDragon);
-}
-
-SDL_Rect LIce::getDragon()
-{
-    return this->dragon;
-}
 
 
 

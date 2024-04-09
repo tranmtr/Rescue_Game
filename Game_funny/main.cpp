@@ -6,6 +6,7 @@
 #include "load_camera.h"
 #include "load_maze.h"
 #include "ice.h"
+#include "dragon.h"
 int main( int argc, char* args[] )
 {
 
@@ -48,6 +49,9 @@ int main( int argc, char* args[] )
 
     // ice bullet damage
     LIce iceDamage;
+
+    //fire dragon
+    dragon dragon;
 
     // animation fire
     int frameFireDragon = 0;
@@ -146,11 +150,11 @@ int main( int argc, char* args[] )
 				Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
 
                 //Render ice bullet
-                iceDamage.moveIce(Figure, iceImageTexture, aRenderer, camera.x, camera.y, tileSet);
+                iceDamage.moveIce(Figure, iceImageTexture, dragon, aRenderer, camera.x, camera.y, tileSet);
 
-                if(iceDamage.getBloodDragon() != 0)
+                if(dragon.getBloodDragon() != 0)
                 {
-                    iceDamage.renderDragon(fireDragonTexture, camera.x, camera.y, clipsDragon, aRenderer);
+                    dragon.render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
                 }
 				SDL_RenderPresent( aRenderer );
 			}

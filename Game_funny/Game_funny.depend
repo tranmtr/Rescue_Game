@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1712581027 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
+1712655847 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
 	"header.h"
 	"init_and_close.h"
 	"load_texture.h"
@@ -8,8 +8,9 @@
 	"load_camera.h"
 	"load_maze.h"
 	"ice.h"
+	"dragon.h"
 
-1712506633 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\header.h
+1712654804 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\header.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -63,12 +64,20 @@
 	"header.h"
 	"figure.h"
 
-1712581040 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.cpp
+1712655982 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.cpp
 	"ice.h"
 
-1712580931 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.h
+1712655550 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.h
 	"header.h"
 	"load_texture.h"
 	"figure.h"
 	"check_collision.h"
+	"dragon.h"
+
+1712655691 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\dragon.cpp
+	"dragon.h"
+
+1712655752 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\dragon.h
+	"header.h"
+	"load_texture.h"
 
