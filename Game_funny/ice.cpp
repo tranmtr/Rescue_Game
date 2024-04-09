@@ -12,7 +12,7 @@ LIce::LIce()
     mIce.h = ICE_DAMAGE_HEIGHT;
     framesIce = 0;
     direction = true;
-    col = false;
+    iceCol = false;
 
 }
 LIce::~LIce()
@@ -27,7 +27,7 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
         this->mIce.x = Figure.getBoxX() + Figure.FIGURE_WIDTH / 2;
         this->mIce.y = Figure.getBoxY() ;
         this->framesIce = 100;
-        this->col = false;
+        this->iceCol = false;
         if(Figure.getFlip() == SDL_FLIP_NONE)
         {
             this->direction = true;
@@ -50,14 +50,14 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
         }
         else if( touchesWall(this->mIce, Tiles))
         {
-            this->col = true;
+            this->iceCol = true;
             this->framesIce = 0;
 
         }
         else if(dragon.getBloodDragon() != 0 && this->checkCollisionIceWithDragon(camX, camY, dragon))
         {
             dragon.decreasedBloodDragon();
-            this->col = true;
+            this->iceCol = true;
             this->framesIce = 0;
         }
         else if(framesIce < 0)
@@ -74,7 +74,7 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
 void LIce::renderIce(Figure Figure, LTexture& iceDamageTexture, SDL_Renderer*& aRenderer, int camX, int camY )
 {
     this->mIce.x += this->iceVelX;
-    if(this->col == true)
+    if(this->iceCol == true)
     {
         this->mIce.x -= this->iceVelX;
     }

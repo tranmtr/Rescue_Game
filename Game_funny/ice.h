@@ -24,5 +24,5 @@ class LIce
         int iceVelY;
         int framesIce;
         bool direction;
-        bool col; // va cham
+        bool iceCol; // va cham
 };

@@ -19,6 +19,7 @@ class Figure
 		//Maximum axis velocity of the figure
 		static const int FIGURE_VEL = 5;
 
+		static const int FIGURE_BLOOD = 100;
 		//Initializes the variables
 		Figure();
 
@@ -47,9 +48,17 @@ class Figure
         //Get space
         bool getSpace();
 
-        //get flipType
+        // get Box
+        SDL_Rect getBoxFigure();
 
+        //get flipType
         SDL_RendererFlip getFlip();
+
+        // decreasedBlood
+        void decreasedBlood();
+
+        // get bloodFigure
+        int getBloodFigure();
 
     private:
         //The velocity of the dot
@@ -69,5 +78,7 @@ class Figure
         bool checkspace;
 		//Check flip
 		SDL_RendererFlip flipType;
+
+        SDL_Rect bloodFigure;
 
 };

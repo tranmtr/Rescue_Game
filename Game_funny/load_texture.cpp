@@ -98,7 +98,8 @@ int LTexture::getHeight()
 
 
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
-                LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture, Tile* tiles[] )
+                LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
+                LTexture& fireTexture, Tile* tiles[] )
 {
 	//Loading success flag
 	bool success = true;
@@ -172,6 +173,13 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
+
+	if( !fireTexture.loadFromFile( "File_Image/image_Figure/firePixel(98_60).png", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+
 
     //Load tile map
 	if( !setTiles( tiles ) )

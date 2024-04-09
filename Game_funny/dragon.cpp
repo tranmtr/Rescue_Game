@@ -5,7 +5,7 @@
 dragon::dragon()
 {
     box.x = 300;
-    box.y = 2250;
+    box.y = 2240;
     box.w = 169;
     box.h = 80;
 
@@ -15,6 +15,16 @@ dragon::dragon()
     bloodDragon.y = 0;
     bloodDragon.w = 100;
     bloodDragon.h = 5;
+
+    framesFire = 0;
+
+    fireBox.x = 0;
+    fireBox.y = 0;
+    fireBox.w = 98;
+    fireBox.h = 60;
+
+    fireCol = false;
+    fireVel = 0;
 }
 
 dragon::~dragon()
@@ -37,6 +47,7 @@ void dragon::render(LTexture& fireDragonTexture, SDL_Rect clipsDragon[], SDL_Ren
     SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
     SDL_RenderFillRect(aRenderer, &this->bloodDragon);
 
+
 }
 
 int dragon::getBloodDragon()
@@ -57,6 +68,69 @@ SDL_Rect dragon::getBox()
 {
     return this->box;
 }
+
+void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[] )
+{
+    if(this->framesFire == 0)
+    {
+        this->fireBox.x = this->box.x;
+        this->fireBox.y = this->box.y;
+        this->framesFire = 100;
+        this->fireCol = false;
+        this->fireVel = -5;
+        this->renderFire(fireTexture, aRenderer, camX, camY);
+    }
+    else if( touchesWall(this->fireBox, Tiles))
+    {
+        this->fireCol = true;
+        this->framesFire = 0;
+        //cout << "Cham tuong" << endl;
+
+    }
+    else if(Figure.getBloodFigure() != 0 && this->checkCollisionFireWithFigure(camX, camY, Figure))
+    {
+        Figure.decreasedBlood();
+        this->fireCol = true;
+        this->framesFire = 0;
+        cout << "Va cham" << endl;
+    }
+    else if(framesFire < 0)
+    {
+        this->framesFire = 0;
+    }
+    else if(this->framesFire > 0)
+    {
+        this->framesFire--;
+        renderFire(fireTexture, aRenderer, camX, camY);
+        //cout <<"Render" << endl;
+    }
+    cout << "framesFire = " << framesFire << endl;
+}
+
+void dragon::renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY)
+{
+    this->fireBox.x += this->fireVel;
+    if(this->fireCol == true)
+    {
+        this->fireBox.x -= this->fireVel;
+    }
+    fireTexture.render(this->fireBox.x - camX, this->fireBox.y - camY, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+    //cout << "Vao fire" << endl;
+}
+
+bool dragon::checkCollisionFireWithFigure(int camX, int camY, Figure Figure)
+{
+    //cout <<"FireBox.x = " << fireBox.x << endl;
+    return checkCollision(Figure.getBoxFigure(), this->fireBox);
+}
+
+
+
+
+
+
+
+
 
 
 

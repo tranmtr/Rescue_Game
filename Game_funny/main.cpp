@@ -47,6 +47,12 @@ int main( int argc, char* args[] )
     // Image ice bullet
     LTexture iceImageTexture;
 
+    // Dragon
+    LTexture fireDragonTexture;
+
+    //fire
+    LTexture fireTexture;
+
     // ice bullet damage
     LIce iceDamage;
 
@@ -55,9 +61,6 @@ int main( int argc, char* args[] )
 
     // animation fire
     int frameFireDragon = 0;
-
-    // Fire Dragon
-    LTexture fireDragonTexture;
 
     //Current animation frame Idle
     int frameIdle = 0;
@@ -83,7 +86,7 @@ int main( int argc, char* args[] )
 		Tile* tileSet[ TOTAL_TILES ];
 
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture, fireDragonTexture, tileSet) )
+		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture, fireDragonTexture, fireTexture, tileSet) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
@@ -155,6 +158,7 @@ int main( int argc, char* args[] )
                 if(dragon.getBloodDragon() != 0)
                 {
                     dragon.render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
+                    dragon.fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet);
                 }
 				SDL_RenderPresent( aRenderer );
 			}

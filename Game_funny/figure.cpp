@@ -23,6 +23,30 @@ Figure::Figure()
     checkspace = false;
     //Initialize animation flip
     flipType = SDL_FLIP_NONE;
+
+    bloodFigure.x = 0;
+    bloodFigure.y = 2150;
+    bloodFigure.w = FIGURE_WIDTH;
+    bloodFigure.h = 5;
+}
+
+SDL_Rect Figure::getBoxFigure()
+{
+    return this->mBox;
+}
+
+int Figure::getBloodFigure()
+{
+    return this->bloodFigure.w;
+}
+
+void Figure::decreasedBlood()
+{
+    this->bloodFigure.w -= DAMAGE_FIRE * FIGURE_WIDTH / FIGURE_BLOOD ;
+    if(bloodFigure.w < 0)
+    {
+        bloodFigure.w = 0;
+    }
 }
 
 void Figure::resetVel()
@@ -220,18 +244,14 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie
         }
         figureTexture[ANIMATION_STATUS_ATTACK].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
         cout << "Attack" << endl;
-    }/*
-    else if(this->checkstatus == ANIMATION_STATUS_ATTACK)
-    {
-        ++frameAttack;
-        if(frameAttack / 4 >= ANIMATION_FRAMES_ATTACK)
-        {
-            frameAttack = 0;
-            cout << "Da vao" << endl;
-        }
-        figureTexture[ANIMATION_STATUS_RUN].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
-        cout << "ATTACK" << endl;
-    }*/
+    }
+
+    this->bloodFigure.x = this->mBox.x - camX;
+    this->bloodFigure.y = this->mBox.y - camY;
+
+    SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
+    SDL_RenderFillRect(aRenderer, &this->bloodFigure);
+    cout << "bloodFigure.w = "<< bloodFigure.w << endl;
 }
 
 int Figure::getBoxX()
