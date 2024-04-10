@@ -65,6 +65,8 @@ class Figure
 
         void setDie();
 
+        bool getVictory();
+
     private:
         //The velocity of the dot
 		int mVelX, mVelY;
@@ -85,5 +87,7 @@ class Figure
 		SDL_RendererFlip flipType;
 
         SDL_Rect bloodFigure;
+
+        bool checkVictory;
 
 };

@@ -18,7 +18,8 @@ Tile::Tile( int x, int y, int tileType )
     mType = tileType;
 }
 
-void Tile::render( SDL_Rect& camera, LTexture& floorTexture, LTexture& wallTexture, SDL_Renderer*& aRenderer, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture )
+void Tile::render( SDL_Rect& camera, LTexture& floorTexture, LTexture& wallTexture, SDL_Renderer*& aRenderer, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture,
+                  LTexture& startTexture, LTexture& finishTexture)
 {
     //Hien thi tile va cham camera
     if( checkCollision( camera, mBox ) )
@@ -42,6 +43,14 @@ void Tile::render( SDL_Rect& camera, LTexture& floorTexture, LTexture& wallTextu
         else if(this->mType == TILE_CAKE)
         {
             cakeTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+        }
+        else if(this->mType == TILE_START)
+        {
+            startTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+        }
+        else if(this->mType == TILE_FINISH)
+        {
+            finishTexture.render( mBox.x - camera.x, mBox.y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
         }
     }
 }
@@ -200,6 +209,26 @@ bool collisionCakeFast(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES)
     {
         //If the tile is a wall type tile
         if( ( tiles[ i ]->getType() == TILE_CAKE ))
+        {
+            //If the collision box touches the wall tile
+            if( checkCollision( box, tiles[ i ]->getBox() ) )
+            {
+                //cout << "CAKE" << i << endl;
+                return true;
+            }
+        }
+    }
+
+    //If no wall tiles were touched
+    return false;
+}
+
+bool collisionFinishVictory(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES)
+{
+    for( int i = 0; i < TOTAL_TILES; ++i )
+    {
+        //If the tile is a wall type tile
+        if( ( tiles[ i ]->getType() == TILE_FINISH ))
         {
             //If the collision box touches the wall tile
             if( checkCollision( box, tiles[ i ]->getBox() ) )

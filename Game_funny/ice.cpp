@@ -98,12 +98,3 @@ bool LIce::checkCollisionIceWithDragon(int camX, int camY, dragon dragon)
     cout << "colDragon.y = " << colDragon.y << endl;
     return checkCollision(this->mIce, colDragon);
 }
-
-
-
-
-
-
-
-
-

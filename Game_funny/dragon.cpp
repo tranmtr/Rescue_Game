@@ -145,13 +145,3 @@ void setDragon(Tile* tiles[], dragon dragon[], const int& TOTAL_TILES)
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

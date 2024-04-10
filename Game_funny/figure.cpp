@@ -28,6 +28,8 @@ Figure::Figure()
     bloodFigure.y = 2150;
     bloodFigure.w = FIGURE_WIDTH;
     bloodFigure.h = 5;
+
+    checkVictory = false;
 }
 
 void Figure::setBoxFigure(const int& choose)
@@ -73,6 +75,11 @@ void Figure::resetVel()
 {
     this->mVelX = 0;
     this->mVelY = 0;
+}
+
+bool Figure::getVictory()
+{
+    return this->checkVictory;
 }
 
 bool Figure::getSpace()
@@ -217,6 +224,10 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
     if(collisionCakeFast(this->mBox, tiles, TOTAL_TILES))
     {
         //cout << "FAST" << endl;
+    }
+    if(collisionFinishVictory(this->mBox, tiles, TOTAL_TILES))
+    {
+        checkVictory = true;
     }
 }
 

@@ -99,7 +99,8 @@ int LTexture::getHeight()
 
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                 LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
-                LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze )
+                LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT,
+                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture)
 {
 	//Loading success flag
 	bool success = true;
@@ -187,6 +188,29 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		cout << "Failed to load tile set!\n" ;
 		success = false;
 	}
+
+	if( !startTexture.loadFromFile( "File_Image/image_Maze/start_mau_ghi(80_80).jpg", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+
+	if( !finishTexture.loadFromFile( "File_Image/image_Maze/finish_mau_xanh_la_cay.jpg", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+	if( !victoryTexture.loadFromFile( "File_Image/image_Maze/victory_tach_nen.png", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+	if( !defeatTexture.loadFromFile( "File_Image/image_Maze/defeat_tach_nen.png", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+
 
 	return success;
 }

@@ -9,16 +9,10 @@
 #include "dragon.h"
 int main( int argc, char* args[] )
 {
-
-    //The dimensions of the level
-//    int LEVEL_WIDTH = /*34*/22*80;
-//    int LEVEL_HEIGHT = 33*80;
-//    int TOTAL_TILES = 22*33;
-
     string pathMaze;
     srand(time(0));
     int choose;
-    cout << "Hay chon me cung muon choi : " ;
+    //cout << "Hay chon me cung muon choi : " ;
     choose = rand()%2 + 1;
 
     int LEVEL_WIDTH = 22*80;
@@ -84,6 +78,15 @@ int main( int argc, char* args[] )
     //fire
     LTexture fireTexture;
 
+    //start
+    LTexture startTexture;
+    //finish
+    LTexture finishTexture;
+    //Victory
+    LTexture victoryTexture;
+    //Defeat
+    LTexture defeatTexture;
+
     // ice bullet damage
     LIce iceDamage;
 
@@ -118,7 +121,8 @@ int main( int argc, char* args[] )
 
 		//Load media
 		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
-                 fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze) )
+                 fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze, startTexture, finishTexture,
+                 victoryTexture, defeatTexture) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
@@ -154,16 +158,22 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-					if(Figure.getStatus() != ANIMATION_STATUS_DIE)
+					if(Figure.getStatus() != ANIMATION_STATUS_DIE && Figure.getVictory() != true)
                     {
                         Figure.handleEvent(e);
-                        cout << "Vao" << endl;
+                        //cout << "Vao" << endl;
                     }
-                    else
+                    else if(Figure.getStatus() == ANIMATION_STATUS_DIE)
                     {
                         Figure.resetVel();
+                        //cout << "1" << endl;
                     }
-                    cout << "Figure.getStatus() = " << Figure.getStatus() << endl;
+                    else if(Figure.getVictory() == true)
+                    {
+                        Figure.resetVel();
+                        //choose = choose + 1;
+                    }
+                    //cout << "Figure.getStatus() = " << Figure.getStatus() << endl;
 				}
 
 				//Move the figure
@@ -180,7 +190,7 @@ int main( int argc, char* args[] )
 
 				for( int i = 0; i < TOTAL_TILES; i++ )
 				{
-					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture );
+					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture, startTexture, finishTexture );
 				}
 
 				setDragon(tileSet, dragon, TOTAL_TILES);
@@ -198,6 +208,16 @@ int main( int argc, char* args[] )
                         dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
                         dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
                     }
+                }
+
+                if(Figure.getVictory() == true)
+                {
+                    victoryTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+                }
+
+                if(Figure.getStatus() == ANIMATION_STATUS_DIE)
+                {
+                    defeatTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
                 }
 
 				SDL_RenderPresent( aRenderer );
