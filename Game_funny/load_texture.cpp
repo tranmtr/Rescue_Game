@@ -86,6 +86,59 @@ void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* ce
 	SDL_RenderCopyEx( aRenderer, this->mTexture, clip, &renderQuad, angle, center, flip );
 }
 
+bool LTexture::loadFromRenderedText( string textureText, SDL_Color textColor, TTF_Font*& aFont, SDL_Renderer*& aRenderer )
+{
+	//Get rid of preexisting texture
+	free();
+
+	//Render text surface
+	SDL_Surface* textSurface = TTF_RenderText_Solid( aFont, textureText.c_str(), textColor );
+	if( textSurface == NULL )
+	{
+		printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
+		cout << "NOTTTT" << endl;
+	}
+	else
+	{
+		//Create texture from surface pixels
+        mTexture = SDL_CreateTextureFromSurface( aRenderer, textSurface );
+		if( mTexture == NULL )
+		{
+			printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
+		}
+		else
+		{
+			//Get image dimensions
+			mWidth = textSurface->w;
+			mHeight = textSurface->h;
+		}
+
+		//Get rid of old surface
+		SDL_FreeSurface( textSurface );
+	}
+
+	//Return success
+	return mTexture != NULL;
+}
+
+void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
+{
+	//Modulate texture rgb
+	SDL_SetTextureColorMod( mTexture, red, green, blue );
+}
+
+void LTexture::setBlendMode( SDL_BlendMode blending )
+{
+	//Set blending function
+	SDL_SetTextureBlendMode( mTexture, blending );
+}
+
+void LTexture::setAlpha( Uint8 alpha )
+{
+	//Modulate texture alpha
+	SDL_SetTextureAlphaMod( mTexture, alpha );
+}
+
 int LTexture::getWidth()
 {
 	return this->mWidth;
@@ -100,7 +153,8 @@ int LTexture::getHeight()
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                 LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
                 LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT,
-                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture)
+                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture, TTF_Font*& aFont,
+                LTexture& textTexture)
 {
 	//Loading success flag
 	bool success = true;
@@ -211,6 +265,14 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		success = false;
 	}
 
+	aFont = TTF_OpenFont( "lazy.ttf", 72 );
+    SDL_Color textColor = { 37, 150, 190 };
+
+    if( !textTexture.loadFromRenderedText( "tran mt", textColor, aFont, aRenderer ) )
+    {
+        printf( "Failed to render text texture!\n" );
+        success = false;
+    }
 
 	return success;
 }

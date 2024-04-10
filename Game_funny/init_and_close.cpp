@@ -3,7 +3,7 @@
 
 #include "init_and_close.h"
 
-bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
+bool init(SDL_Window*& aWindow, SDL_Renderer*& aRenderer)
 {
 	//Initialization flag
 	bool success = true;
@@ -32,8 +32,8 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
 		else
 		{
 			//Create vsynced renderer for window
-			gRenderer = SDL_CreateRenderer( aWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-			if( gRenderer == NULL )
+			aRenderer = SDL_CreateRenderer( aWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			if( aRenderer == NULL )
 			{
 				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
 				success = false;
@@ -41,7 +41,7 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
 			else
 			{
 				//Initialize renderer color
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+				SDL_SetRenderDrawColor( aRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
@@ -50,6 +50,13 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
 				}
+				//Initialize SDL_ttf
+				if( TTF_Init() == -1 )
+				{
+					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+					success = false;
+				}
+
 			}
 		}
 	}
@@ -57,7 +64,8 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& gRenderer)
 	return success;
 }
 
-void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture)
+void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture,
+           LTexture& iceTexture, LTexture& cakeTexture, TTF_Font*& aFont)
 {
 	//Free loaded images
 	figureTexture[ANIMATION_STATUS_IDLE].free();
@@ -73,7 +81,11 @@ void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTextur
 	aWindow = NULL;
 	aRenderer = NULL;
 
+	//Free global font
+	TTF_CloseFont( aFont );
+	aFont = NULL;
 	//Quit SDL subsystems
+	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }

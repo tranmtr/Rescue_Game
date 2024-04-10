@@ -23,6 +23,18 @@ class LTexture
 		//Renders texture at given point
 		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE, SDL_Renderer* aRenderer = NULL );
 
+		//Set color modulation
+		void setColor( Uint8 red, Uint8 green, Uint8 blue );
+
+		//Set blending
+		void setBlendMode( SDL_BlendMode blending );
+
+		//Set alpha modulation
+		void setAlpha( Uint8 alpha );
+
+		//Creates image from font string
+		bool loadFromRenderedText( string textureText, SDL_Color textColor, TTF_Font*& aFont, SDL_Renderer*& aRenderer );
+
 		//Gets image dimensions
 		int getWidth();
 		int getHeight();
@@ -72,7 +84,7 @@ bool setTiles( Tile *tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, co
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                LTexture& lavaTexture,LTexture& iceTexture,LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
                LTexture& fireTexture,Tile* tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze,
-               LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture);
+               LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture, TTF_Font*& aFont, LTexture& textTexture);
 
 //Load rec animation
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[], SDL_Rect clipsDragon[]);
