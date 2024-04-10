@@ -73,7 +73,7 @@ void dragon::setBox(int x, int y)
     this->box.x = x;
     this->box.y = y;
 }
-void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[] )
+void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES)
 {
     if(this->framesFire == 0)
     {
@@ -85,7 +85,7 @@ void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRen
         this->fireVel = -5;
         this->renderFire(fireTexture, aRenderer, camX, camY);
     }
-    else if( touchesWall(this->fireBox, Tiles))
+    else if( touchesWall(this->fireBox, Tiles, TOTAL_TILES))
     {
         this->fireCol = true;
         this->framesFire = 0;
@@ -133,7 +133,7 @@ bool dragon::checkCollisionFireWithFigure(int camX, int camY, Figure Figure)
     return checkCollision(Figure.getBoxFigure(), this->fireBox);
 }
 
-void setDragon(Tile* tiles[], dragon dragon[])
+void setDragon(Tile* tiles[], dragon dragon[], const int& TOTAL_TILES)
 {
     int indexDragon = 0;
     for(int i = 0; i < TOTAL_TILES; i++)

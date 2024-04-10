@@ -10,6 +10,37 @@
 int main( int argc, char* args[] )
 {
 
+    //The dimensions of the level
+//    int LEVEL_WIDTH = /*34*/22*80;
+//    int LEVEL_HEIGHT = 33*80;
+//    int TOTAL_TILES = 22*33;
+
+    string pathMaze;
+    srand(time(0));
+    int choose;
+    cout << "Hay chon me cung muon choi : " ;
+    choose = rand()%2 + 1;
+
+    int LEVEL_WIDTH = 22*80;
+    int LEVEL_HEIGHT = 33*80;
+    int TOTAL_TILES = 22*33;
+    pathMaze = "secondmap.txt";
+
+    if(choose == 1)
+    {
+        pathMaze = "firstmap.txt";
+        LEVEL_WIDTH = 34*80;
+        LEVEL_HEIGHT = 33*80;
+        TOTAL_TILES = 34*33;
+    }
+    else if(choose == 2)
+    {
+        pathMaze = "secondmap.txt";
+        LEVEL_WIDTH = 22*80;
+        LEVEL_HEIGHT = 33*80;
+        TOTAL_TILES = 22*33;
+    }
+
     //The window we'll be rendering to
     SDL_Window* aWindow = NULL;
 
@@ -86,7 +117,8 @@ int main( int argc, char* args[] )
 		Tile* tileSet[ TOTAL_TILES ];
 
 		//Load media
-		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture, fireDragonTexture, fireTexture, tileSet) )
+		if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
+                 fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze) )
 		{
 			cout << "Failed to load media!\n" ;
 		}
@@ -104,6 +136,8 @@ int main( int argc, char* args[] )
 			//The figure that will be moving around on the screen
 			Figure Figure;
             //cout << "Mo dau" << endl;
+
+            Figure.setBoxFigure(choose);
 
             //The camera area
 			SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
@@ -123,7 +157,7 @@ int main( int argc, char* args[] )
 					if(Figure.getStatus() != ANIMATION_STATUS_DIE)
                     {
                         Figure.handleEvent(e);
-                        //cout << "Vao" << endl;
+                        cout << "Vao" << endl;
                     }
                     else
                     {
@@ -133,10 +167,10 @@ int main( int argc, char* args[] )
 				}
 
 				//Move the figure
-                Figure.move(tileSet);
+                Figure.move(tileSet, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES);
 
                 //Load camera:
-                loadCamera(camera, Figure);
+                loadCamera(camera, Figure, LEVEL_WIDTH, LEVEL_HEIGHT);
 
 				//Clear screen
 				SDL_SetRenderDrawColor( aRenderer, 255, 255, 255, 255 );
@@ -149,7 +183,7 @@ int main( int argc, char* args[] )
 					tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture );
 				}
 
-				setDragon(tileSet, dragon);
+				setDragon(tileSet, dragon, TOTAL_TILES);
 
                 //Render objects
 				Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
@@ -158,11 +192,11 @@ int main( int argc, char* args[] )
                 for(int i = 0; i < TOTAL_DRAGON; i++)
                 {
                     //Render ice bullet
-                    iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet);
+                    iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
                     if(dragon[i].getBloodDragon() != 0 && checkCollision(camera, dragon[i].getBox()))
                     {
                         dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
-                        dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet);
+                        dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
                     }
                 }
 

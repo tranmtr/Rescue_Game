@@ -12,9 +12,9 @@
 
 using namespace std;
 
-//The dimensions of the level
-const int LEVEL_WIDTH = 34*80;
-const int LEVEL_HEIGHT = 33*80;
+////The dimensions of the level
+//const int LEVEL_WIDTH = /*34*/22*80;
+//const int LEVEL_HEIGHT = 33*80;
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -23,7 +23,7 @@ const int SCREEN_HEIGHT = 480;
 //Tile constants
 const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 80;
-const int TOTAL_TILES = 34*33;
+//const int TOTAL_TILES = 22*33;
 const int TOTAL_TILE_SPRITES = 5;
 const int TILE_FLOOR = 0;
 const int TILE_LAVA = 1;

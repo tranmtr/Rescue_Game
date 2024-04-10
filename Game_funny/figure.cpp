@@ -6,7 +6,7 @@ Figure::Figure()
 {
     //Initialize the collision box
     mBox.x = 0;
-    mBox.y = 2160;
+    mBox.y = 0;
 	mBox.w = FIGURE_WIDTH;
 	mBox.h = FIGURE_HEIGHT;
 
@@ -28,6 +28,20 @@ Figure::Figure()
     bloodFigure.y = 2150;
     bloodFigure.w = FIGURE_WIDTH;
     bloodFigure.h = 5;
+}
+
+void Figure::setBoxFigure(const int& choose)
+{
+    if(choose == 1)
+    {
+        this->mBox.x = 0;
+        this->mBox.y = 2160;
+    }
+    else
+    {
+        this->mBox.x = 1520;
+        this->mBox.y = 0;
+    }
 }
 
 void Figure::setDie()
@@ -164,13 +178,13 @@ void Figure::handleEvent( SDL_Event& e  )
     //cout << "this->mVelY = " << this->mVelY << endl;
 }
 
-void Figure::move(Tile *tiles[])
+void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const int& TOTAL_TILES)
 {
     //Move the dot left or right
     this->mBox.x += this->mVelX;
 
     //If the dot went too far to the left or right
-    if( ( this->mBox.x < 0 ) || ( this->mBox.x + this->FIGURE_WIDTH > LEVEL_WIDTH  ) || touchesWall( this->mBox, tiles ))
+    if( ( this->mBox.x < 0 ) || ( this->mBox.x + this->FIGURE_WIDTH > LEVEL_WIDTH  ) || touchesWall( this->mBox, tiles, TOTAL_TILES ))
     {
         //Move back
         this->mBox.x -= this->mVelX;
@@ -181,7 +195,7 @@ void Figure::move(Tile *tiles[])
     this->mBox.y += this->mVelY;
 
     //If the dot went too far up or down
-    if( ( this->mBox.y < 0 ) || ( this->mBox.y + this->FIGURE_HEIGHT > LEVEL_HEIGHT ) || touchesWall( this->mBox, tiles ) )
+    if( ( this->mBox.y < 0 ) || ( this->mBox.y + this->FIGURE_HEIGHT > LEVEL_HEIGHT ) || touchesWall( this->mBox, tiles, TOTAL_TILES ) )
     {
         //Move back
         this->mBox.y -= this->mVelY;
@@ -190,17 +204,17 @@ void Figure::move(Tile *tiles[])
 
     //cout << "Vx = " << this->mVelX << endl;
 
-    if(collisionLavaDie(this->mBox, tiles))
+    if(collisionLavaDie(this->mBox, tiles, TOTAL_TILES))
     {
         //cout << "DIE" << endl;
         //cout << "KET THUC" << endl;
         this->checkstatus = ANIMATION_STATUS_DIE;
     }
-    if(collisionIceSlow(this->mBox, tiles))
+    if(collisionIceSlow(this->mBox, tiles, TOTAL_TILES))
     {
         //cout << "SLOW" << endl;
     }
-    if(collisionCakeFast(this->mBox, tiles))
+    if(collisionCakeFast(this->mBox, tiles, TOTAL_TILES))
     {
         //cout << "FAST" << endl;
     }

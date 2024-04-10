@@ -62,24 +62,24 @@ class Tile
 };
 
 //Checks collision box against set of tiles
-bool touchesWall( SDL_Rect box, Tile* tiles[] );
+bool touchesWall( SDL_Rect box, Tile* tiles[],const int& TOTAL_TILES );
 
 //Sets tiles from tile map
-bool setTiles( Tile *tiles[]);
+bool setTiles( Tile *tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze);
 
 //Loads media
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                LTexture& lavaTexture,LTexture& iceTexture,LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
-               LTexture& fireTexture,Tile* tiles[] );
+               LTexture& fireTexture,Tile* tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze);
 
 //Load rec animation
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[], SDL_Rect clipsDragon[]);
 
-bool collisionLavaDie(SDL_Rect box, Tile* tiles[]);
+bool collisionLavaDie(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES);
 
-bool collisionIceSlow(SDL_Rect box, Tile* tiles[]);
+bool collisionIceSlow(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES);
 
-bool collisionCakeFast(SDL_Rect box, Tile* tiles[]);
+bool collisionCakeFast(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES);
 
 
 

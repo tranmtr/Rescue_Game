@@ -20,13 +20,13 @@ LIce::~LIce()
 
 }
 
-void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[])
+void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES)
 {
     if(Figure.getSpace() == true && this->framesIce == 0 )
     {
         this->mIce.x = Figure.getBoxX() + Figure.FIGURE_WIDTH / 2;
         this->mIce.y = Figure.getBoxY() ;
-        this->framesIce = 1000;
+        this->framesIce = 100 * TOTAL_DRAGON;
         this->iceCol = false;
         if(Figure.getFlip() == SDL_FLIP_NONE)
         {
@@ -48,7 +48,7 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
             this->mIce.x = Figure.getBoxX() + Figure.FIGURE_WIDTH / 2;
             this->mIce.y = Figure.getBoxY() ;
         }
-        else if( touchesWall(this->mIce, Tiles))
+        else if( touchesWall(this->mIce, Tiles, TOTAL_TILES))
         {
             this->iceCol = true;
             this->framesIce = 0;
@@ -67,7 +67,7 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
         else if(this->framesIce > 0)
         {
             this->framesIce--;
-            if(framesIce % 10 == 0)
+            if(framesIce % TOTAL_DRAGON == 0)
             {
                 renderIce(Figure, iceDamegeTexture, aRenderer, camX, camY);
             }

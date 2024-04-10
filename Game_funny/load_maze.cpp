@@ -57,7 +57,7 @@ SDL_Rect Tile::getBox()
 }
 
 
-bool setTiles( Tile* tiles[] )
+bool setTiles( Tile* tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze )
 {
 	//Success flag
 	bool tilesLoaded = true;
@@ -66,7 +66,7 @@ bool setTiles( Tile* tiles[] )
     int x = 0, y = 0;
 
     //Open the map
-    ifstream map( "firstmap.txt" );
+    ifstream map( pathMaze );
 
     //If the map couldn't be loaded
     if( map.fail() )
@@ -133,7 +133,7 @@ bool setTiles( Tile* tiles[] )
 }
 
 
-bool touchesWall( SDL_Rect box, Tile* tiles[] )
+bool touchesWall( SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES )
 {
     //Go through the tiles
     for( int i = 0; i < TOTAL_TILES; ++i )
@@ -154,7 +154,7 @@ bool touchesWall( SDL_Rect box, Tile* tiles[] )
     return false;
 }
 
-bool collisionLavaDie(SDL_Rect box, Tile* tiles[])
+bool collisionLavaDie(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES)
 {
     for( int i = 0; i < TOTAL_TILES; ++i )
     {
@@ -174,7 +174,7 @@ bool collisionLavaDie(SDL_Rect box, Tile* tiles[])
     return false;
 }
 
-bool collisionIceSlow(SDL_Rect box, Tile* tiles[])
+bool collisionIceSlow(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES)
 {
     for( int i = 0; i < TOTAL_TILES; ++i )
     {
@@ -194,7 +194,7 @@ bool collisionIceSlow(SDL_Rect box, Tile* tiles[])
     return false;
 }
 
-bool collisionCakeFast(SDL_Rect box, Tile* tiles[])
+bool collisionCakeFast(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES)
 {
     for( int i = 0; i < TOTAL_TILES; ++i )
     {

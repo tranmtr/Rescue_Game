@@ -12,7 +12,7 @@ class dragon
         dragon();
         ~dragon();
         void render(LTexture& fireDragonTexture, SDL_Rect clipsDragon[], SDL_Renderer*& aRenderer, int camX, int camY);
-        void fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[] );
+        void fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES );
         int getBloodDragon();
         void decreasedBloodDragon();
         SDL_Rect getBox();
@@ -30,4 +30,4 @@ class dragon
 
 };
 
-void setDragon(Tile* tiles[], dragon dragon[]);
+void setDragon(Tile* tiles[], dragon dragon[], const int& TOTAL_TILES);

@@ -27,7 +27,7 @@ class Figure
 		void handleEvent( SDL_Event& e );
 
 		//Moves the figure
-		void move(Tile *tiles[]);
+		void move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const int& TOTAL_TILES);
 
 		//Shows the figure on the screen
 		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
@@ -38,6 +38,9 @@ class Figure
 
         //Get mPosY:
         int getBoxY();
+
+        //Set Box
+        void setBoxFigure(const int& choose);
 
         //Get status
         int getStatus();

@@ -5,6 +5,7 @@
 #include "figure.h"
 #include "check_collision.h"
 #include "dragon.h"
+#include <ctime>
 class LIce
 {
     public:
@@ -14,7 +15,7 @@ class LIce
 
         LIce();
         ~LIce();
-        void moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[]);
+        void moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES);
         bool checkCollisionIceWithDragon(int camX, int camY, dragon dragon);
         void renderIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY );
 

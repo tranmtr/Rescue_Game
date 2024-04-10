@@ -99,7 +99,7 @@ int LTexture::getHeight()
 
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                 LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
-                LTexture& fireTexture, Tile* tiles[] )
+                LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze )
 {
 	//Loading success flag
 	bool success = true;
@@ -182,7 +182,7 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 
 
     //Load tile map
-	if( !setTiles( tiles ) )
+	if( !setTiles( tiles, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze ) )
 	{
 		cout << "Failed to load tile set!\n" ;
 		success = false;

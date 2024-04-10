@@ -1,6 +1,6 @@
 #include "load_camera.h"
 
-void loadCamera(SDL_Rect& camera, Figure Figure)
+void loadCamera(SDL_Rect& camera, Figure Figure, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT)
 {
     //Center the camera over the figure
     camera.x = ( Figure.getBoxX() + Figure::FIGURE_WIDTH / 2 ) - SCREEN_WIDTH / 2;
