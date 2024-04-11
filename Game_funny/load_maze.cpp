@@ -242,3 +242,8 @@ bool collisionFinishVictory(SDL_Rect box, Tile* tiles[], const int& TOTAL_TILES)
     //If no wall tiles were touched
     return false;
 }
+
+bool collisionPrincess(SDL_Rect mBox, SDL_Rect princessBox)
+{
+    return checkCollision(mBox, princessBox);
+}

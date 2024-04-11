@@ -16,6 +16,9 @@ class Figure
 		//static const int FIGURE_WIDTH_ATTACK = 76;
 		//static const int FIGURE_HEIGHT_ATTACK = 54;
 
+        static const int PRINCESS_WIDTH = 32;
+		static const int PRINCESS_HEIGHT = 52;
+
 		//Maximum axis velocity of the figure
 		static const int FIGURE_VEL = 5;
 
@@ -67,12 +70,25 @@ class Figure
 
         bool getVictory();
 
+        void setPrincess();
+
+        bool getPrincess();
+
+        void setCake();
+
+        bool getCake();
+
+        SDL_Rect getPrincessBox();
+
     private:
-        //The velocity of the dot
+        //The velocity of the figure
 		int mVelX, mVelY;
 
-		//Collision box of the dot
+		//Collision box of the figure
 		SDL_Rect mBox;
+
+		//princess
+		SDL_Rect princessBox;
 
 		//Check moving
 		int checkstatus;
@@ -89,5 +105,8 @@ class Figure
         SDL_Rect bloodFigure;
 
         bool checkVictory;
+
+        bool checkPrincess;
+        bool checkCake;
 
 };

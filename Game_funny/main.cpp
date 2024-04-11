@@ -9,6 +9,8 @@
 #include "dragon.h"
 #include "chooseLevel.h"
 #include "loadText.h"
+#include "load_mouse.h"
+
 int main( int argc, char* args[] )
 {
     int choose = 1;
@@ -49,13 +51,19 @@ int main( int argc, char* args[] )
         //blood
         SDL_Rect bloodDragon;
 
+        //mouse
+        load_Mouse mouse;
+
         //Globally used font
         TTF_Font* aFont = NULL;
 
-        LText nameText;
+        LText textMenu[TOTAL_TEXT];
 
         //Rendered texture
-        LTexture nameTextTexture;
+        LTexture textMenuTexture[TOTAL_TEXT];
+
+        //Next level
+        LTexture nextLevelTexture;
 
         // Load wall, floor
         LTexture wallTexture;
@@ -81,6 +89,9 @@ int main( int argc, char* args[] )
         LTexture victoryTexture;
         //Defeat
         LTexture defeatTexture;
+
+        //princess
+        LTexture princessTexture;
 
         // ice bullet damage
         LIce iceDamage;
@@ -117,7 +128,7 @@ int main( int argc, char* args[] )
             //Load media
             if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
                      fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze, startTexture, finishTexture,
-                     victoryTexture, defeatTexture) || !loadText(aRenderer, nameTextTexture, aFont))
+                     victoryTexture, defeatTexture, princessTexture, nextLevelTexture) || !loadText(aRenderer,textMenuTexture, aFont))
             {
                 cout << "Failed to load media!\n" ;
             }
@@ -141,17 +152,20 @@ int main( int argc, char* args[] )
                 //The camera area
                 SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
+
                 //While application is running
-                while( Figure.getVictory() == false && quit == false)
+                while( mouse.getNextLevel()== false  && quit == false )
                 {
                     //cout << "Chua quit" << endl;
                     //Handle events on queue
                     while( SDL_PollEvent( &e ) != 0 )
                     {
+                        mouse.handleEvent(e, Figure);
                         //User requests quit
                         if( e.type == SDL_QUIT )
                         {
                             quit = true;
+                            cout << "QUIT" << endl;
                         }
                         if(Figure.getStatus() != ANIMATION_STATUS_DIE && Figure.getVictory() != true)
                         {
@@ -169,6 +183,8 @@ int main( int argc, char* args[] )
                             //choose = choose + 1;
                         }
                         //cout << "Figure.getStatus() = " << Figure.getStatus() << endl;
+                        //cout << mouse.getNextLevel() << endl;
+
                     }
 
                     //Move the figure
@@ -193,20 +209,28 @@ int main( int argc, char* args[] )
                     //Render objects
                     Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
 
-
-                    for(int i = 0; i < TOTAL_DRAGON; i++)
+                    if(Figure.getVictory() == false)
                     {
-                        //Render ice bullet
-                        iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
-                        if(dragon[i].getBloodDragon() != 0 && checkCollision(camera, dragon[i].getBox()))
+                        for(int i = 0; i < TOTAL_DRAGON; i++)
                         {
-                            dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
-                            dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
+                            //Render ice bullet
+                            iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
+                            if(dragon[i].getBloodDragon() != 0 && checkCollision(camera, dragon[i].getBox()))
+                            {
+                                dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
+                                dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
+                            }
                         }
+
                     }
-                    nameText.setText(Figure.getBoxFigure().x, Figure.getBoxFigure().y -15);
-                    nameText.renderText(aRenderer, nameTextTexture, camera.x, camera.y);
-                    //textTexture.render( Figure.getBoxFigure().x - camera.x  , Figure.getBoxFigure().y - camera.y - 15 , NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+
+
+                    princessTexture.render(Figure.getPrincessBox().x - camera.x, Figure.getPrincessBox().y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+                    for(int i = 0; i < TOTAL_TEXT; i++)
+                    {
+                        textMenu[i].setText(i, Figure, camera.x, camera.y);
+                        textMenu[i].renderText(aRenderer, textMenuTexture[i], camera.x, camera.y);
+                    }
                     if(Figure.getVictory() == true)
                     {
                         victoryTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
@@ -216,6 +240,7 @@ int main( int argc, char* args[] )
                     {
                         defeatTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
                     }
+                    nextLevelTexture.render(SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
 
                     SDL_RenderPresent( aRenderer );
                 }

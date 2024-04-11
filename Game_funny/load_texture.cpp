@@ -153,7 +153,8 @@ int LTexture::getHeight()
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                 LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
                 LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT,
-                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture)
+                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture,
+                LTexture& princessTexture,LTexture& nextLevelTexture)
 {
 	//Loading success flag
 	bool success = true;
@@ -263,6 +264,16 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
+	if( !princessTexture.loadFromFile( "File_Image/image_Figure/cong_chua_(32_52).png", aRenderer ) )
+	{
+		cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+	}
+	if( !nextLevelTexture.loadFromFile("File_Image/image_Menu/mui_ten_next_level.png", aRenderer))
+    {
+        cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+    }
 	return success;
 }
 

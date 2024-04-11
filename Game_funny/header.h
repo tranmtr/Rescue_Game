@@ -63,3 +63,13 @@ const int BUTTON_SPRITE_MOUSE_OVER_MOTION = 1;
 const int BUTTON_SPRITE_MOUSE_DOWN = 2;
 const int BUTTON_SPRITE_MOUSE_UP = 3;
 const int BUTTON_SPRITE_TOTAL = 4;
+
+// Text
+const int NAME_PLAYER = 0;
+const int NAME_GAME = 1;
+const int PLAY_GAME = 2;
+const int EXIT_GAME = 3;
+const int NEXT_LEVEL = 4;
+const int TOTAL_TEXT = 5;
+
+

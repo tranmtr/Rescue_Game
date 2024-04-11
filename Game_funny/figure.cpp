@@ -30,6 +30,15 @@ Figure::Figure()
     bloodFigure.h = 5;
 
     checkVictory = false;
+
+    checkCake = false;
+    checkPrincess = false;
+
+    princessBox.x = 0;
+    princessBox.y = 0;
+    princessBox.w = PRINCESS_WIDTH;
+    princessBox.h = PRINCESS_HEIGHT;
+
 }
 
 void Figure::setBoxFigure(const int& choose)
@@ -38,11 +47,15 @@ void Figure::setBoxFigure(const int& choose)
     {
         this->mBox.x = 0;
         this->mBox.y = 2160;
+        this->princessBox.x = 160;
+        this->princessBox.y = 2160;
     }
     else
     {
         this->mBox.x = 1520;
         this->mBox.y = 0;
+        this->princessBox.x = 1520;
+        this->princessBox.y = 160;
     }
 }
 
@@ -223,11 +236,17 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
     }
     if(collisionCakeFast(this->mBox, tiles, TOTAL_TILES))
     {
-        //cout << "FAST" << endl;
+        this->checkCake = true;
+        cout << "CAKE" << endl;
     }
-    if(collisionFinishVictory(this->mBox, tiles, TOTAL_TILES))
+    if(collisionFinishVictory(this->mBox, tiles, TOTAL_TILES) && this->checkPrincess == true)
     {
-        checkVictory = true;
+        this->checkVictory = true;
+    }
+    if(collisionPrincess(this->mBox, this->princessBox) && this->checkCake == true)
+    {
+        this->checkPrincess = true;
+        cout << "Giai cuu thanh cong" << endl;
     }
 }
 
@@ -298,4 +317,29 @@ int Figure::getBoxY()
 int Figure::getStatus()
 {
     return this->checkstatus;
+}
+
+void Figure::setPrincess()
+{
+    this->checkPrincess = true;
+}
+
+bool Figure::getPrincess()
+{
+    return this->checkPrincess;
+}
+
+void Figure::setCake()
+{
+    this->checkCake = true;
+}
+
+bool Figure::getCake()
+{
+    return this->checkCake;
+}
+
+SDL_Rect Figure::getPrincessBox()
+{
+    return this->princessBox;
 }
