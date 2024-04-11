@@ -153,8 +153,7 @@ int LTexture::getHeight()
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                 LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
                 LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT,
-                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture, TTF_Font*& aFont,
-                LTexture& textTexture)
+                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture)
 {
 	//Loading success flag
 	bool success = true;
@@ -264,16 +263,6 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		cout << "Failed to load walking animation texture!\n" ;
 		success = false;
 	}
-
-	aFont = TTF_OpenFont( "lazy.ttf", 72 );
-    SDL_Color textColor = { 37, 150, 190 };
-
-    if( !textTexture.loadFromRenderedText( "tran mt", textColor, aFont, aRenderer ) )
-    {
-        printf( "Failed to render text texture!\n" );
-        success = false;
-    }
-
 	return success;
 }
 

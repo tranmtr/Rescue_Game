@@ -7,38 +7,21 @@
 #include "load_maze.h"
 #include "ice.h"
 #include "dragon.h"
-
+#include "chooseLevel.h"
+#include "loadText.h"
 int main( int argc, char* args[] )
 {
     int choose = 1;
     bool quit = false;
+    string pathMaze;
+    int LEVEL_WIDTH;
+    int LEVEL_HEIGHT;
+    int TOTAL_TILES;
+
     while(choose <= 2 && quit == false)
     {
-        string pathMaze;
-        srand(time(0));
-        //cout << "Hay chon me cung muon choi : " ;
-        //choose = rand()%2 + 1;
 
-        int LEVEL_WIDTH = 22*80;
-        int LEVEL_HEIGHT = 33*80;
-        int TOTAL_TILES = 22*33;
-        pathMaze = "secondmap.txt";
-
-        if(choose == 1)
-        {
-            pathMaze = "firstmap.txt";
-            LEVEL_WIDTH = 34*80;
-            LEVEL_HEIGHT = 33*80;
-            TOTAL_TILES = 34*33;
-        }
-        else if(choose == 2)
-        {
-            pathMaze = "secondmap.txt";
-            LEVEL_WIDTH = 22*80;
-            LEVEL_HEIGHT = 33*80;
-            TOTAL_TILES = 22*33;
-        }
-
+        loadLevel(choose, pathMaze, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES);
         //The window we'll be rendering to
         SDL_Window* aWindow = NULL;
 
@@ -69,8 +52,10 @@ int main( int argc, char* args[] )
         //Globally used font
         TTF_Font* aFont = NULL;
 
+        LText nameText;
+
         //Rendered texture
-        LTexture textTexture;
+        LTexture nameTextTexture;
 
         // Load wall, floor
         LTexture wallTexture;
@@ -132,7 +117,7 @@ int main( int argc, char* args[] )
             //Load media
             if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
                      fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze, startTexture, finishTexture,
-                     victoryTexture, defeatTexture, aFont, textTexture) )
+                     victoryTexture, defeatTexture) || !loadText(aRenderer, nameTextTexture, aFont))
             {
                 cout << "Failed to load media!\n" ;
             }
@@ -219,7 +204,9 @@ int main( int argc, char* args[] )
                             dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
                         }
                     }
-
+                    nameText.setText(Figure.getBoxFigure().x, Figure.getBoxFigure().y -15);
+                    nameText.renderText(aRenderer, nameTextTexture, camera.x, camera.y);
+                    //textTexture.render( Figure.getBoxFigure().x - camera.x  , Figure.getBoxFigure().y - camera.y - 15 , NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
                     if(Figure.getVictory() == true)
                     {
                         victoryTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
@@ -229,7 +216,6 @@ int main( int argc, char* args[] )
                     {
                         defeatTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
                     }
-                    textTexture.render( ( SCREEN_WIDTH - textTexture.getWidth() ) / 2, ( SCREEN_HEIGHT - textTexture.getHeight() ) / 2, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
 
                     SDL_RenderPresent( aRenderer );
                 }
