@@ -85,7 +85,7 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
                LTexture& lavaTexture,LTexture& iceTexture,LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
                LTexture& fireTexture,Tile* tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze,
                LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture, LTexture& princessTexture,
-               LTexture& nextLevelTexture);
+               LTexture& nextLevelTexture, LTexture& menuTexture, LTexture& arrowrightMenuTexture, LTexture& arrowleftMenuTexture);
 
 //Load rec animation
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[], SDL_Rect clipsDragon[]);

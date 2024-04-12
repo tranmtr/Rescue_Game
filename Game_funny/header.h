@@ -72,4 +72,10 @@ const int EXIT_GAME = 3;
 const int NEXT_LEVEL = 4;
 const int TOTAL_TEXT = 5;
 
-
+// Menu
+const int START_MENU = 0;
+const int LEVEL_MENU = 1;
+const int HOW_TO_PLAY = 2;
+const int QUIT_MENU = 3;
+const int NEXT_MENU = 4;
+const int TOTAL_MENU = 5;

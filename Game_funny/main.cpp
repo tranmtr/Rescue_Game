@@ -14,6 +14,7 @@
 int main( int argc, char* args[] )
 {
     int choose = 1;
+    bool start = false;
     bool quit = false;
     string pathMaze;
     int LEVEL_WIDTH;
@@ -50,9 +51,6 @@ int main( int argc, char* args[] )
 
         //blood
         SDL_Rect bloodDragon;
-
-        //mouse
-        load_Mouse mouse;
 
         //Globally used font
         TTF_Font* aFont = NULL;
@@ -93,6 +91,19 @@ int main( int argc, char* args[] )
         //princess
         LTexture princessTexture;
 
+        //Menu
+        LTexture menuTexture;
+
+        //mouse
+        load_Mouse mouse;
+
+        // arrowMenu
+        LTexture arrowrightMenuTexture;
+        LTexture arrowleftMenuTexture;
+
+        SDL_Rect arrowrightMenuRect;
+        SDL_Rect arrowleftMenuRect;
+
         // ice bullet damage
         LIce iceDamage;
 
@@ -128,7 +139,8 @@ int main( int argc, char* args[] )
             //Load media
             if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
                      fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze, startTexture, finishTexture,
-                     victoryTexture, defeatTexture, princessTexture, nextLevelTexture) || !loadText(aRenderer,textMenuTexture, aFont))
+                     victoryTexture, defeatTexture, princessTexture, nextLevelTexture, menuTexture, arrowrightMenuTexture, arrowleftMenuTexture)
+               || !loadText(aRenderer,textMenuTexture, aFont))
             {
                 cout << "Failed to load media!\n" ;
             }
@@ -160,12 +172,19 @@ int main( int argc, char* args[] )
                     //Handle events on queue
                     while( SDL_PollEvent( &e ) != 0 )
                     {
-                        mouse.handleEvent(e, Figure);
+                        mouse.handleEvent(e, Figure, arrowrightMenuRect, arrowleftMenuRect, aRenderer, start);
                         //User requests quit
                         if( e.type == SDL_QUIT )
                         {
                             quit = true;
                             cout << "QUIT" << endl;
+                        }
+                        if(start == false)
+                        {
+                            menuTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+                            mouse.render(arrowrightMenuTexture, arrowleftMenuTexture, arrowrightMenuRect, arrowleftMenuRect, aRenderer);
+                            //cout << "O day" << endl;
+
                         }
                         if(Figure.getStatus() != ANIMATION_STATUS_DIE && Figure.getVictory() != true)
                         {
@@ -186,6 +205,9 @@ int main( int argc, char* args[] )
                         //cout << mouse.getNextLevel() << endl;
 
                     }
+
+                    if(start == true)
+                    {
 
                     //Move the figure
                     Figure.move(tileSet, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES);
@@ -242,7 +264,10 @@ int main( int argc, char* args[] )
                     }
                     nextLevelTexture.render(SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
 
-                    SDL_RenderPresent( aRenderer );
+                    //menuTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+
+                }
+                SDL_RenderPresent( aRenderer );
                 }
             }
         }

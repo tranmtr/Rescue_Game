@@ -2,52 +2,99 @@
 
 load_Mouse::load_Mouse()
 {
-    mBox = {SCREEN_WIDTH - 100, SCREEN_HEIGHT - 25, 100, 25};
+    startMenu = {257, 150, 111, 56};
+    levelMenu = {258, 198, 102, 54};
+    howToPlay = {208, 285, 214, 62};
+    quitMenu  = {271, 364,  81, 51};
     mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
     nextLevel = false;
+    rightLeft = false;
 }
 
-void load_Mouse::setBoxMouse(int x, int y, int w, int h)
+void load_Mouse::setBoxMouse()
 {
-    mBox = {x, y, w, h};
+
 }
 
-void load_Mouse::handleEvent( SDL_Event& e, Figure Figure )
+void load_Mouse::handleEvent( SDL_Event& e, Figure Figure,  SDL_Rect& arrowrightMenuRect, SDL_Rect& arrowleftMenuRect, SDL_Renderer*& aRenderer, bool& start )
 {
+    rightLeft = false ;
     //If mouse event happened
 	if( e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP )
 	{
-		//Get mouse position
+
 		int x, y;
 		SDL_GetMouseState( &x, &y );
 
         SDL_Point p = {x, y};
 
-		//Check if mouse is in button
 		bool inside = true;
 
-		if(SDL_PointInRect(&p, &this->mBox) == false)
+		if(SDL_PointInRect(&p, &this->startMenu) == false && SDL_PointInRect(&p, &this->levelMenu) == false
+            &&SDL_PointInRect(&p, &this->howToPlay) == false && SDL_PointInRect(&p, &this->quitMenu) == false)
         {
             inside = false;
         }
+        /*
+        else if(SDL_PointInRect(&p, &this->nextMenu) == false)
+        {
+            inside = false;
+        }*/
+
 		//Mouse is outside button
-		if( !inside )
+
+		if( inside == false )
 		{
 			mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
+			cout << "O ngoai" << endl;
 		}
-		//Mouse is inside button
+
 		else
 		{
-			//Set mouse over sprite
+		    cout << "o trong" << endl;
 			switch( e.type )
 			{
 				case SDL_MOUSEMOTION:
 				mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
+				if(SDL_PointInRect(&p, &this->startMenu) == true)
+                {
+                    rightLeft = true;
+                    arrowrightMenuRect = {257 - 45 + 10, 155,45,35};
+                    arrowleftMenuRect  = {257 + 111 , 155,45,35};
+                    cout << "start" << endl;
+                }
+                else if(SDL_PointInRect(&p, &this->levelMenu) == true)
+                {
+                    rightLeft = true;
+                    arrowrightMenuRect = {258 - 45 + 10, 198 + 20,45,35};
+                    arrowleftMenuRect  = {258 + 102 , 198 + 20,45,35};
+                    cout << "level " << endl;
+                }
+                else if(SDL_PointInRect(&p, &this->howToPlay) == true)
+                {
+                    rightLeft = true;
+                    arrowrightMenuRect = {208 - 45 , 285 + 10,45,35};
+                    arrowleftMenuRect  = {208 + 214 , 285 + 10,45,35};
+                    cout << "how to play" << endl;
+                }
+                else if(SDL_PointInRect(&p, &this->quitMenu) == true)
+                {
+                    rightLeft = true;
+                    arrowrightMenuRect = {271 - 45 + 5, 364 + 5,45,35};
+                    arrowleftMenuRect  = {271 + 81 + 5, 364 + 5,45,35};
+                    cout << "QUIT" << endl;
+                }
 				break;
 
 				case SDL_MOUSEBUTTONDOWN:
 				mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
 				cout << "Nhan" << endl;
+
+				if(SDL_PointInRect(&p, &this->startMenu) == true)
+                {
+                    start = true;
+                }
+
 				if(Figure.getVictory() == true)
                 {
                     this->nextLevel = true;
@@ -60,6 +107,16 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure Figure )
 			}
 		}
 	}
+	cout << "RightLeft = " << rightLeft << endl;
+}
+
+void load_Mouse::render(LTexture& arrowrightMenuTexture, LTexture& arrowleftMenuTexture, SDL_Rect& arrowrightMenuRect, SDL_Rect& arrowleftMenuRect, SDL_Renderer*& aRenderer)
+{
+    if(this->rightLeft == true)
+    {
+        arrowrightMenuTexture.render(arrowrightMenuRect.x, arrowrightMenuRect.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+        arrowleftMenuTexture.render(arrowleftMenuRect.x, arrowleftMenuRect.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+    }
 }
 
 bool load_Mouse::getNextLevel()

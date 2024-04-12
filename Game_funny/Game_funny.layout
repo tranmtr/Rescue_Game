@@ -2,69 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="load_mouse.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="253" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="loadText.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="316" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="figure.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6740" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="load_texture.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2579" topLine="80" />
-		</Cursor>
-	</File>
-	<File name="load_texture.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7801" topLine="241" />
-		</Cursor>
-	</File>
-	<File name="load_maze.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6471" topLine="229" />
-		</Cursor>
-	</File>
 	<File name="init_and_close.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1509" topLine="67" />
 		</Cursor>
 	</File>
-	<File name="ice.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="load_mouse.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2977" topLine="67" />
-		</Cursor>
-	</File>
-	<File name="load_mouse.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="106" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="ice.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="880" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="chooseLevel.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="149" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="check_collision.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="96" topLine="26" />
-		</Cursor>
-	</File>
-	<File name="chooseLevel.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="144" topLine="0" />
+			<Cursor1 position="3048" topLine="78" />
 		</Cursor>
 	</File>
 	<File name="figure.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -72,14 +17,14 @@
 			<Cursor1 position="746" topLine="23" />
 		</Cursor>
 	</File>
-	<File name="loadText.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="load_texture.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2481" topLine="42" />
+			<Cursor1 position="8416" topLine="189" />
 		</Cursor>
 	</File>
-	<File name="header.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="load_maze.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1719" topLine="55" />
+			<Cursor1 position="6471" topLine="229" />
 		</Cursor>
 	</File>
 	<File name="load_maze.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -87,14 +32,14 @@
 			<Cursor1 position="778" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="init_and_close.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="figure.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="410" topLine="0" />
+			<Cursor1 position="6740" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="check_collision.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="111" topLine="0" />
+			<Cursor1 position="4817" topLine="180" />
 		</Cursor>
 	</File>
 	<File name="load_camera.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -102,14 +47,54 @@
 			<Cursor1 position="158" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="dragon.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="header.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3659" topLine="3" />
+			<Cursor1 position="1892" topLine="61" />
 		</Cursor>
 	</File>
-	<File name="load_camera.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="loadText.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="709" topLine="0" />
+			<Cursor1 position="316" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="check_collision.cpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="96" topLine="26" />
+		</Cursor>
+	</File>
+	<File name="check_collision.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="111" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="chooseLevel.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="149" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="init_and_close.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="410" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="chooseLevel.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="144" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="dragon.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1001" topLine="33" />
+		</Cursor>
+	</File>
+	<File name="load_mouse.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="325" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="loadText.cpp" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2481" topLine="42" />
 		</Cursor>
 	</File>
 	<File name="dragon.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -117,12 +102,27 @@
 			<Cursor1 position="1080" topLine="6" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="load_texture.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="8107" topLine="226" />
+			<Cursor1 position="2656" topLine="6" />
 		</Cursor>
 	</File>
-	<Target name="Debug" top="main.cpp">
+	<File name="ice.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="880" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="load_camera.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="709" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="ice.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2977" topLine="67" />
+		</Cursor>
+	</File>
+	<Target name="Debug" top="load_mouse.cpp">
 		<File name="main.cpp" />
 		<File name="load_mouse.cpp" />
 		<File name="load_mouse.h" />
@@ -133,5 +133,6 @@
 		<File name="load_texture.h" />
 		<File name="loadText.cpp" />
 		<File name="loadText.h" />
+		<File name="dragon.cpp" />
 	</Target>
 </CodeBlocks_layout_file>
