@@ -154,7 +154,8 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
                 LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
                 LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT,
                 const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture,
-                LTexture& princessTexture,LTexture& nextLevelTexture, LTexture& menuTexture, LTexture& arrowrightMenuTexture, LTexture& arrowleftMenuTexture)
+                LTexture& princessTexture,LTexture& nextLevelTexture, LTexture& menuTexture, LTexture& arrowrightMenuTexture,
+                LTexture& arrowleftMenuTexture, LTexture& levelAgainTexture)
 {
 	//Loading success flag
 	bool success = true;
@@ -285,6 +286,11 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		success = false;
     }
     if( !arrowleftMenuTexture.loadFromFile("File_Image/image_Menu/left_arrow_xoa_nen(45_35).png", aRenderer))
+    {
+        cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+    }
+    if( !levelAgainTexture.loadFromFile("File_Image/image_Menu/level_again.png", aRenderer))
     {
         cout << "Failed to load walking animation texture!\n" ;
 		success = false;

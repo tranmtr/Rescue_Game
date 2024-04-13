@@ -2,6 +2,7 @@
 
 #include "header.h"
 #include "load_texture.h"
+#include "loadText.h"
 
 class Figure
 {
@@ -34,7 +35,8 @@ class Figure
 
 		//Shows the figure on the screen
 		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
-              int& frameIdle, int& frameRun, int& frameDie, int& frameAttack, LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY);
+              int& frameIdle, int& frameRun, int& frameDie, int& frameAttack, LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
+              Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[]);
 
         //Get mPosX:
         int getBoxX();

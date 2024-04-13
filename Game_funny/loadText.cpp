@@ -12,37 +12,47 @@ LText::~LText()
 {
 
 }
-void LText::renderText(SDL_Renderer*& aRenderer, LTexture& textTexture, int camX, int camY)
+void LText::renderText(SDL_Renderer*& aRenderer, LTexture& textTexture)
 {
-    textTexture.render( this->posX - camX  , this->posY - camY , NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+    textTexture.render( this->posX , this->posY  , NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
 }
 
-void LText::setText(const int& index, Figure Figure, int camX, int camY)
+void LText::setText(const int& index)
 {
-    if(index == NAME_PLAYER)
+    if(index == GAME_HEALING)
     {
-        this->posX = Figure.getBoxFigure().x;
-        this->posY = Figure.getBoxFigure().y - 15;
+        this->posX = 0;
+        this->posY = 15;
     }
-    else if(index == NAME_GAME)
+    else if(index == GAME_GO_GET_CAKE)
     {
-        this->posX = Figure.getBoxFigure().x;
-        this->posY = Figure.getBoxFigure().y - 30;
+        this->posX = 0;
+        this->posY = 30;
     }
-    else if(index == PLAY_GAME)
+    else if(index == GAME_GOT_CAKE)
     {
-        this->posX = Figure.getBoxFigure().x;
-        this->posY = Figure.getBoxFigure().y - 45;
+        this->posX = 0;
+        this->posY = 30;
     }
-    else if(index == EXIT_GAME)
+    else if(index == GAME_CURSE_NOT_LIFTED)
     {
-        this->posX = Figure.getBoxFigure().x;
-        this->posY = Figure.getBoxFigure().y - 60;
+        this->posX = 0;
+        this->posY = 15;
+    }
+    else if(index == GAME_CURSE_LIFTED)
+    {
+        this->posX = 0;
+        this->posY = 15;
+    }
+    else if(index == PLAY_AGAIN)
+    {
+        this->posX = SCREEN_WIDTH - 105;
+        this->posY = SCREEN_HEIGHT - 50;
     }
     else if(index == NEXT_LEVEL)
     {
-        this->posX = SCREEN_WIDTH - 100 + camX;
-        this->posY = SCREEN_HEIGHT - 50 + camY;
+        this->posX = SCREEN_WIDTH - 100;
+        this->posY = SCREEN_HEIGHT - 50;
     }
 }
 
@@ -53,33 +63,45 @@ bool loadText(SDL_Renderer*& aRenderer, LTexture textMenuTexture[], TTF_Font*& a
 	aFont = TTF_OpenFont( "lazy.ttf", 18 );
     SDL_Color textColor[TOTAL_TEXT];
 
-    textColor[NAME_PLAYER] = { 237,157,84 };
-    textColor[NAME_GAME] = { 237,157,84 };
-    textColor[PLAY_GAME] = { 237,157,84 };
-    textColor[EXIT_GAME] = { 255, 0, 31 };
+    textColor[GAME_HEALING] = { 255,255,255 };
+    textColor[GAME_GO_GET_CAKE] = { 255,255,255 };
+    textColor[GAME_GOT_CAKE] = { 248, 241, 119 };
+    textColor[GAME_CURSE_NOT_LIFTED] = { 255, 255, 255 };
+    textColor[GAME_CURSE_LIFTED] = { 248, 241, 119 };
+    textColor[PLAY_AGAIN] = { 255, 0, 31 };
     textColor[NEXT_LEVEL] = { 255, 0, 31 };
 
-    if( !textMenuTexture[NAME_PLAYER].loadFromRenderedText( "tran mtr", textColor[NAME_PLAYER], aFont, aRenderer ) )
+    if( !textMenuTexture[GAME_HEALING].loadFromRenderedText( "YOU ARE HEALING.", textColor[GAME_HEALING], aFont, aRenderer ) )
     {
         printf( "Failed to render text texture!\n" );
         success = false;
     }
-    if( !textMenuTexture[NAME_GAME].loadFromRenderedText( "RESCUE", textColor[NAME_GAME], aFont, aRenderer ) )
+    if( !textMenuTexture[GAME_GO_GET_CAKE].loadFromRenderedText( "GO GET THE CAKE.", textColor[GAME_GO_GET_CAKE], aFont, aRenderer ) )
     {
         printf( "Failed to render text texture!\n" );
         success = false;
     }
-    if( !textMenuTexture[PLAY_GAME].loadFromRenderedText( "PLAY", textColor[PLAY_GAME], aFont, aRenderer ) )
+    if( !textMenuTexture[GAME_GOT_CAKE].loadFromRenderedText( "YOU'VE GOT THE CAKE.", textColor[GAME_GOT_CAKE], aFont, aRenderer ) )
     {
         printf( "Failed to render text texture!\n" );
         success = false;
     }
-    if( !textMenuTexture[EXIT_GAME].loadFromRenderedText( "EXIT", textColor[EXIT_GAME], aFont, aRenderer ) )
+    if( !textMenuTexture[GAME_CURSE_NOT_LIFTED].loadFromRenderedText( "THE CURSE ON THE PRINCESS HAS NOT BEEN LIFTED YET.", textColor[GAME_CURSE_NOT_LIFTED], aFont, aRenderer ) )
     {
         printf( "Failed to render text texture!\n" );
         success = false;
     }
-    if( !textMenuTexture[NEXT_LEVEL].loadFromRenderedText( "NEXT LEVEL", textColor[EXIT_GAME], aFont, aRenderer ) )
+    if( !textMenuTexture[GAME_CURSE_LIFTED].loadFromRenderedText( "THE CURSE ON THE PRINCESS HAS BEEN LIFTED.", textColor[GAME_CURSE_LIFTED], aFont, aRenderer ) )
+    {
+        printf( "Failed to render text texture!\n" );
+        success = false;
+    }
+    if( !textMenuTexture[PLAY_AGAIN].loadFromRenderedText( "PLAY AGAIN", textColor[PLAY_AGAIN], aFont, aRenderer ) )
+    {
+        printf( "Failed to render text texture!\n" );
+        success = false;
+    }
+    if( !textMenuTexture[NEXT_LEVEL].loadFromRenderedText( "NEXT LEVEL", textColor[NEXT_LEVEL], aFont, aRenderer ) )
     {
         printf( "Failed to render text texture!\n" );
         success = false;

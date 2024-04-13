@@ -232,7 +232,7 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
     }
     if(collisionIceSlow(this->mBox, tiles, TOTAL_TILES))
     {
-        //cout << "SLOW" << endl;
+        cout << "ICE" << endl;
     }
     if(collisionCakeFast(this->mBox, tiles, TOTAL_TILES))
     {
@@ -251,7 +251,8 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
 }
 
 void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
-                    int& frameIdle, int& frameRun, int& frameDie, int& frameAttack, LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY)
+                    int& frameIdle, int& frameRun, int& frameDie, int& frameAttack, LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
+                    Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[])
 {
     if(this->checkstatus == ANIMATION_STATUS_DIE)
     {
@@ -301,7 +302,43 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie
 
     SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
     SDL_RenderFillRect(aRenderer, &this->bloodFigure);
-    //cout << "bloodFigure.w = "<< bloodFigure.w << endl;
+
+    if(collisionIceSlow(this->mBox, tiles, TOTAL_TILES))
+    {
+        textMenu[GAME_HEALING].setText(GAME_HEALING);
+        textMenu[GAME_HEALING].renderText(aRenderer, textMenuTexture[GAME_HEALING]);
+    }
+    if(collisionCakeFast(this->mBox, tiles, TOTAL_TILES))
+    {
+        textMenu[GAME_GOT_CAKE].setText(GAME_GOT_CAKE);
+        textMenu[GAME_GOT_CAKE].renderText(aRenderer, textMenuTexture[GAME_GOT_CAKE]);
+    }
+    if(collisionPrincess(this->mBox, this->princessBox))
+    {
+        {
+            if(this->checkCake == true)
+            {
+                textMenu[GAME_CURSE_LIFTED].setText(GAME_CURSE_LIFTED);
+                textMenu[GAME_CURSE_LIFTED].renderText(aRenderer, textMenuTexture[GAME_CURSE_LIFTED]);
+            }
+            else
+            {
+                textMenu[GAME_GO_GET_CAKE].setText(GAME_GO_GET_CAKE);
+                textMenu[GAME_GO_GET_CAKE].renderText(aRenderer, textMenuTexture[GAME_GO_GET_CAKE]);
+                textMenu[GAME_CURSE_NOT_LIFTED].setText(GAME_CURSE_NOT_LIFTED);
+                textMenu[GAME_CURSE_NOT_LIFTED].renderText(aRenderer, textMenuTexture[GAME_CURSE_NOT_LIFTED]);
+            }
+        }
+    }
+    if(collisionFinishVictory(this->mBox, tiles, TOTAL_TILES))
+    {
+
+        if(this->checkPrincess == false)
+        {
+            textMenu[GAME_CURSE_NOT_LIFTED].setText(GAME_CURSE_NOT_LIFTED);
+            textMenu[GAME_CURSE_NOT_LIFTED].renderText(aRenderer, textMenuTexture[GAME_CURSE_NOT_LIFTED]);
+        }
+    }
 }
 
 int Figure::getBoxX()

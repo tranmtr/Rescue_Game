@@ -63,6 +63,9 @@ int main( int argc, char* args[] )
         //Next level
         LTexture nextLevelTexture;
 
+        //Again
+        LTexture levelAgainTexture;
+
         // Load wall, floor
         LTexture wallTexture;
         LTexture floorTexture;
@@ -139,7 +142,8 @@ int main( int argc, char* args[] )
             //Load media
             if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
                      fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze, startTexture, finishTexture,
-                     victoryTexture, defeatTexture, princessTexture, nextLevelTexture, menuTexture, arrowrightMenuTexture, arrowleftMenuTexture)
+                     victoryTexture, defeatTexture, princessTexture, nextLevelTexture, menuTexture, arrowrightMenuTexture, arrowleftMenuTexture,
+                     levelAgainTexture)
                || !loadText(aRenderer,textMenuTexture, aFont))
             {
                 cout << "Failed to load media!\n" ;
@@ -166,13 +170,14 @@ int main( int argc, char* args[] )
 
 
                 //While application is running
-                while( mouse.getNextLevel()== false  && quit == false )
+                while( mouse.getNextLevel()== false  && mouse.getLevelAgain() == false && quit == false )
                 {
                     //cout << "Chua quit" << endl;
                     //Handle events on queue
                     while( SDL_PollEvent( &e ) != 0 )
                     {
                         mouse.handleEvent(e, Figure, arrowrightMenuRect, arrowleftMenuRect, aRenderer, start);
+                        cout << "NEXT LEVEL = " << mouse.getNextLevel() << endl;
                         //User requests quit
                         if( e.type == SDL_QUIT )
                         {
@@ -199,82 +204,86 @@ int main( int argc, char* args[] )
                         else if(Figure.getVictory() == true)
                         {
                             Figure.resetVel();
-                            //choose = choose + 1;
                         }
-                        //cout << "Figure.getStatus() = " << Figure.getStatus() << endl;
-                        //cout << mouse.getNextLevel() << endl;
 
                     }
 
                     if(start == true)
                     {
 
-                    //Move the figure
-                    Figure.move(tileSet, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES);
+                        //Move the figure
+                        Figure.move(tileSet, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES);
 
-                    //Load camera:
-                    loadCamera(camera, Figure, LEVEL_WIDTH, LEVEL_HEIGHT);
+                        //Load camera:
+                        loadCamera(camera, Figure, LEVEL_WIDTH, LEVEL_HEIGHT);
 
-                    //Clear screen
-                    SDL_SetRenderDrawColor( aRenderer, 255, 255, 255, 255 );
-                    SDL_RenderClear( aRenderer );
+                        //Clear screen
+                        SDL_SetRenderDrawColor( aRenderer, 255, 255, 255, 255 );
+                        SDL_RenderClear( aRenderer );
 
-                    //Render level
+                        //Render level
 
-                    for( int i = 0; i < TOTAL_TILES; i++ )
-                    {
-                        tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture, startTexture, finishTexture );
-                    }
-
-                    setDragon(tileSet, dragon, TOTAL_TILES);
-
-                    //Render objects
-                    Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture, aRenderer, camera.x, camera.y);
-
-                    if(Figure.getVictory() == false)
-                    {
-                        for(int i = 0; i < TOTAL_DRAGON; i++)
+                        for( int i = 0; i < TOTAL_TILES; i++ )
                         {
-                            //Render ice bullet
-                            iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
-                            if(dragon[i].getBloodDragon() != 0 && checkCollision(camera, dragon[i].getBox()))
-                            {
-                                dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
-                                dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
-                            }
+                            tileSet[ i ]->render( camera, floorTexture, wallTexture, aRenderer,lavaTexture,iceTexture,cakeTexture, startTexture, finishTexture );
                         }
 
+                        setDragon(tileSet, dragon, TOTAL_TILES);
+
+                        //Render objects
+                        Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture,
+                                      aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES, textMenu, textMenuTexture);
+
+                        if(Figure.getVictory() == false)
+                        {
+                            for(int i = 0; i < TOTAL_DRAGON; i++)
+                            {
+                                //Render ice bullet
+                                iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
+                                if(dragon[i].getBloodDragon() != 0 && checkCollision(camera, dragon[i].getBox()))
+                                {
+                                    dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
+                                    dragon[i].fireMove(Figure, fireTexture, aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
+                                }
+                            }
+
+                        }
+
+
+                        princessTexture.render(Figure.getPrincessBox().x - camera.x, Figure.getPrincessBox().y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+
+                        if(Figure.getVictory() == true)
+                        {
+                            victoryTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+                            textMenu[NEXT_LEVEL].setText(NEXT_LEVEL);
+                            textMenu[NEXT_LEVEL].renderText(aRenderer, textMenuTexture[NEXT_LEVEL]);
+                            nextLevelTexture.render(SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+                        }
+
+                        if(Figure.getStatus() == ANIMATION_STATUS_DIE)
+                        {
+                            defeatTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+                            textMenu[PLAY_AGAIN].setText(PLAY_AGAIN);
+                            textMenu[PLAY_AGAIN].renderText(aRenderer, textMenuTexture[PLAY_AGAIN]);
+                            levelAgainTexture.render(SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
+                        }
                     }
-
-
-                    princessTexture.render(Figure.getPrincessBox().x - camera.x, Figure.getPrincessBox().y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
-                    for(int i = 0; i < TOTAL_TEXT; i++)
-                    {
-                        textMenu[i].setText(i, Figure, camera.x, camera.y);
-                        textMenu[i].renderText(aRenderer, textMenuTexture[i], camera.x, camera.y);
-                    }
-                    if(Figure.getVictory() == true)
-                    {
-                        victoryTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
-                    }
-
-                    if(Figure.getStatus() == ANIMATION_STATUS_DIE)
-                    {
-                        defeatTexture.render(161,167,NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
-                    }
-                    nextLevelTexture.render(SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer );
-
-                    //menuTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
-
+                    SDL_RenderPresent( aRenderer );
                 }
-                SDL_RenderPresent( aRenderer );
+                if(mouse.getNextLevel() == true)
+                {
+                    choose = choose + 1;
+                }
+                else if(mouse.getLevelAgain() == true)
+                {
+                    choose = choose;
                 }
             }
         }
 
         //Free resources and close SDL
         close(aWindow, aRenderer,figureTexture, wallTexture, floorTexture,lavaTexture, iceTexture,cakeTexture, aFont);
-        choose = choose + 1;
+
     }
 	return 0;
 }

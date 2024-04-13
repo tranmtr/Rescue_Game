@@ -65,12 +65,14 @@ const int BUTTON_SPRITE_MOUSE_UP = 3;
 const int BUTTON_SPRITE_TOTAL = 4;
 
 // Text
-const int NAME_PLAYER = 0;
-const int NAME_GAME = 1;
-const int PLAY_GAME = 2;
-const int EXIT_GAME = 3;
-const int NEXT_LEVEL = 4;
-const int TOTAL_TEXT = 5;
+const int GAME_HEALING = 0;
+const int GAME_GO_GET_CAKE = 1;
+const int GAME_GOT_CAKE = 2;
+const int GAME_CURSE_NOT_LIFTED = 3;
+const int GAME_CURSE_LIFTED = 4;
+const int PLAY_AGAIN = 5;
+const int NEXT_LEVEL = 6;
+const int TOTAL_TEXT = 7;
 
 // Menu
 const int START_MENU = 0;

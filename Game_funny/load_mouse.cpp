@@ -6,17 +6,15 @@ load_Mouse::load_Mouse()
     levelMenu = {258, 198, 102, 54};
     howToPlay = {208, 285, 214, 62};
     quitMenu  = {271, 364,  81, 51};
+    nextMenu  = {SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, 75, 35};
+    againMenu = {SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, 75, 35};
     mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
     nextLevel = false;
     rightLeft = false;
+    levelAgain = false;
 }
 
-void load_Mouse::setBoxMouse()
-{
-
-}
-
-void load_Mouse::handleEvent( SDL_Event& e, Figure Figure,  SDL_Rect& arrowrightMenuRect, SDL_Rect& arrowleftMenuRect, SDL_Renderer*& aRenderer, bool& start )
+void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrightMenuRect, SDL_Rect& arrowleftMenuRect, SDL_Renderer*& aRenderer, bool& start )
 {
     rightLeft = false ;
     //If mouse event happened
@@ -31,16 +29,11 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure Figure,  SDL_Rect& arrowright
 		bool inside = true;
 
 		if(SDL_PointInRect(&p, &this->startMenu) == false && SDL_PointInRect(&p, &this->levelMenu) == false
-            &&SDL_PointInRect(&p, &this->howToPlay) == false && SDL_PointInRect(&p, &this->quitMenu) == false)
+            &&SDL_PointInRect(&p, &this->howToPlay) == false && SDL_PointInRect(&p, &this->quitMenu) == false
+            && SDL_PointInRect(&p, &this->nextMenu) == false)
         {
             inside = false;
         }
-        /*
-        else if(SDL_PointInRect(&p, &this->nextMenu) == false)
-        {
-            inside = false;
-        }*/
-
 		//Mouse is outside button
 
 		if( inside == false )
@@ -84,6 +77,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure Figure,  SDL_Rect& arrowright
                     arrowleftMenuRect  = {271 + 81 + 5, 364 + 5,45,35};
                     cout << "QUIT" << endl;
                 }
+
 				break;
 
 				case SDL_MOUSEBUTTONDOWN:
@@ -95,9 +89,13 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure Figure,  SDL_Rect& arrowright
                     start = true;
                 }
 
-				if(Figure.getVictory() == true)
+				if(Figure.getVictory() == true && SDL_PointInRect(&p, &this->nextMenu) == true)
                 {
                     this->nextLevel = true;
+                }
+                if(Figure.getStatus() == ANIMATION_STATUS_DIE && SDL_PointInRect(&p, &this->againMenu) == true)
+                {
+                    this->levelAgain = true;
                 }
 				break;
 
@@ -122,4 +120,8 @@ void load_Mouse::render(LTexture& arrowrightMenuTexture, LTexture& arrowleftMenu
 bool load_Mouse::getNextLevel()
 {
     return this->nextLevel;
+}
+bool load_Mouse::getLevelAgain()
+{
+    return this->levelAgain;
 }
