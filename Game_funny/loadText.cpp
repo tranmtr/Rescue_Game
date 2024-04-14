@@ -22,7 +22,7 @@ void LText::setText(const int& index)
     if(index == GAME_HEALING)
     {
         this->posX = 0;
-        this->posY = 15;
+        this->posY = 30;
     }
     else if(index == GAME_GO_GET_CAKE)
     {

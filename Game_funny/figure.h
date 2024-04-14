@@ -35,8 +35,8 @@ class Figure
 
 		//Shows the figure on the screen
 		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
-              int& frameIdle, int& frameRun, int& frameDie, int& frameAttack, LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
-              Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[]);
+               LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
+              Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[], LTexture& princessTexture, SDL_Rect clipsPrincessRun[]);
 
         //Get mPosX:
         int getBoxX();
@@ -65,6 +65,9 @@ class Figure
         // decreasedBlood
         void decreasedBlood();
 
+        //healing
+        void healingBlood();
+
         // get bloodFigure
         int getBloodFigure();
 
@@ -82,12 +85,18 @@ class Figure
 
         SDL_Rect getPrincessBox();
 
+
     private:
         //The velocity of the figure
 		int mVelX, mVelY;
 
 		//Collision box of the figure
 		SDL_Rect mBox;
+
+        int frameIdle;
+        int frameRun;
+        int frameDie;
+        int frameAttack;
 
 		//princess
 		SDL_Rect princessBox;
@@ -109,6 +118,7 @@ class Figure
         bool checkVictory;
 
         bool checkPrincess;
+        int framePrincess;
         bool checkCake;
 
 };

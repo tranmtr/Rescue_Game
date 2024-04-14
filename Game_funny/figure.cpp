@@ -24,6 +24,11 @@ Figure::Figure()
     //Initialize animation flip
     flipType = SDL_FLIP_NONE;
 
+    frameIdle = 0;
+    frameRun = 0;
+    frameDie = 0;
+    frameAttack = 0;
+
     bloodFigure.x = 0;
     bloodFigure.y = 2150;
     bloodFigure.w = FIGURE_WIDTH;
@@ -39,6 +44,8 @@ Figure::Figure()
     princessBox.w = PRINCESS_WIDTH;
     princessBox.h = PRINCESS_HEIGHT;
 
+    framePrincess = 0;
+
 }
 
 void Figure::setBoxFigure(const int& choose)
@@ -50,7 +57,7 @@ void Figure::setBoxFigure(const int& choose)
         this->princessBox.x = 160;
         this->princessBox.y = 2160;
     }
-    else
+    else if(choose == 2)
     {
         this->mBox.x = 1520;
         this->mBox.y = 0;
@@ -62,7 +69,7 @@ void Figure::setBoxFigure(const int& choose)
 void Figure::setDie()
 {
     this->checkstatus = ANIMATION_STATUS_DIE;
-    cout << "DIE" << endl;
+    //cout << "DIE" << endl;
 }
 
 SDL_Rect Figure::getBoxFigure()
@@ -83,6 +90,15 @@ void Figure::decreasedBlood()
         bloodFigure.w = 0;
     }
 }
+void Figure::healingBlood()
+{
+    this->bloodFigure.w += 1;
+    if(bloodFigure.w > FIGURE_WIDTH)
+    {
+        bloodFigure.w = FIGURE_WIDTH;
+    }
+}
+
 
 void Figure::resetVel()
 {
@@ -233,6 +249,7 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
     if(collisionIceSlow(this->mBox, tiles, TOTAL_TILES))
     {
         cout << "ICE" << endl;
+        this->healingBlood();
     }
     if(collisionCakeFast(this->mBox, tiles, TOTAL_TILES))
     {
@@ -251,49 +268,49 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
 }
 
 void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
-                    int& frameIdle, int& frameRun, int& frameDie, int& frameAttack, LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
-                    Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[])
+                     LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
+                    Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[], LTexture& princessTexture, SDL_Rect clipsPrincessRun[])
 {
     if(this->checkstatus == ANIMATION_STATUS_DIE)
     {
-        if(frameDie / 16 < ANIMATION_FRAMES_DIE-1)
+        if(this->frameDie / 16 < ANIMATION_FRAMES_DIE-1)
         {
-            ++frameDie;
+            ++this->frameDie;
         }
-        figureTexture[ANIMATION_STATUS_DIE].render( this->mBox.x - camX, this->mBox.y - camY, &clipsDie[ frameDie / 16 ], 0, NULL, this->flipType, aRenderer  );
+        figureTexture[ANIMATION_STATUS_DIE].render( this->mBox.x - camX, this->mBox.y - camY, &clipsDie[ this->frameDie / 16 ], 0, NULL, this->flipType, aRenderer  );
         //cout << "DIE" << endl;
 
 
     }
     else if(this->checkstatus == ANIMATION_STATUS_IDLE)
     {
-        ++frameIdle;
-        if( frameIdle / 4 >= ANIMATION_FRAMES_IDLE )
+        ++this->frameIdle;
+        if( this->frameIdle / 4 >= ANIMATION_FRAMES_IDLE )
         {
-            frameIdle = 0;
+            this->frameIdle = 0;
         }
-        figureTexture[ANIMATION_STATUS_IDLE].render( this->mBox.x - camX, this->mBox.y - camY, &clipsIdle[ frameIdle / 4 ], 0, NULL, this->flipType, aRenderer  );
+        figureTexture[ANIMATION_STATUS_IDLE].render( this->mBox.x - camX, this->mBox.y - camY, &clipsIdle[ this->frameIdle / 4 ], 0, NULL, this->flipType, aRenderer  );
         //cout << "dung yen" << endl;
 
     }
     else if(this->checkstatus == ANIMATION_STATUS_RUN)
     {
-        ++frameRun;
-        if(frameRun / 4 >= ANIMATION_FRAMES_RUN)
+        ++this->frameRun;
+        if(this->frameRun / 4 >= ANIMATION_FRAMES_RUN)
         {
-            frameRun = 0;
+            this->frameRun = 0;
         }
-        figureTexture[ANIMATION_STATUS_RUN].render( this->mBox.x - camX, this->mBox.y - camY, &clipsRun[ frameRun / 4 ], 0, NULL, this->flipType, aRenderer  );
+        figureTexture[ANIMATION_STATUS_RUN].render( this->mBox.x - camX, this->mBox.y - camY, &clipsRun[ this->frameRun / 4 ], 0, NULL, this->flipType, aRenderer  );
         //cout << "chay" << endl;
     }
     else if(this->checkstatus == ANIMATION_STATUS_ATTACK)
     {
-        ++frameAttack;
-        if(frameAttack / 4 >= ANIMATION_FRAMES_ATTACK)
+        ++this->frameAttack;
+        if(this->frameAttack / 4 >= ANIMATION_FRAMES_ATTACK)
         {
-            frameAttack = 0;
+            this->frameAttack = 0;
         }
-        figureTexture[ANIMATION_STATUS_ATTACK].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
+        figureTexture[ANIMATION_STATUS_ATTACK].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ this->frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
         cout << "Attack" << endl;
     }
 
@@ -302,6 +319,22 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie
 
     SDL_SetRenderDrawColor(aRenderer, 255, 0, 0, 255);
     SDL_RenderFillRect(aRenderer, &this->bloodFigure);
+
+    if(this->checkPrincess == false)
+    {
+        princessTexture.render(this->princessBox.x - camX, this->princessBox.y - camY, &clipsPrincessRun[0], 0, NULL, SDL_FLIP_NONE, aRenderer);
+    }
+    else
+    {
+        this->princessBox.x = this->mBox.x + FIGURE_WIDTH ;
+        this->princessBox.y = this->mBox.y;
+        this->framePrincess++;
+        if(this->framePrincess / 2 >= ANIMATION_FRAMES_PRINCESS_RUN)
+        {
+            this->framePrincess = 0;
+        }
+        princessTexture.render(this->princessBox.x - camX, this->princessBox.y - camY, &clipsPrincessRun[framePrincess / 2], 0, NULL, SDL_FLIP_NONE, aRenderer);
+    }
 
     if(collisionIceSlow(this->mBox, tiles, TOTAL_TILES))
     {

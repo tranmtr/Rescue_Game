@@ -16,6 +16,8 @@ int main( int argc, char* args[] )
     int choose = 1;
     bool start = false;
     bool quit = false;
+    bool checkChooseLevel = false;
+    bool checkHowToPlay = false;
     string pathMaze;
     int LEVEL_WIDTH;
     int LEVEL_HEIGHT;
@@ -48,6 +50,9 @@ int main( int argc, char* args[] )
 
         //Clip DRAGON
         SDL_Rect clipsDragon[ANIMATION_FRAMES_DRAGON];
+
+        //Clip princess run
+        SDL_Rect clipsPrincessRun[ANIMATION_FRAMES_PRINCESS_RUN];
 
         //blood
         SDL_Rect bloodDragon;
@@ -103,31 +108,21 @@ int main( int argc, char* args[] )
         // arrowMenu
         LTexture arrowrightMenuTexture;
         LTexture arrowleftMenuTexture;
+        LTexture arrowdownMenuTexture;
 
         SDL_Rect arrowrightMenuRect;
         SDL_Rect arrowleftMenuRect;
+        SDL_Rect arrowdownMenuRect;
+
+        //Menu
+        LTexture chooseLevelTexture;
+        LTexture howToPlayTexture;
 
         // ice bullet damage
         LIce iceDamage;
 
         //fire dragon
         dragon dragon[TOTAL_DRAGON];
-
-        // animation fire
-        int frameFireDragon = 0;
-
-        //Current animation frame Idle
-        int frameIdle = 0;
-
-        //Current animation frame Run
-        int frameRun = 0;
-
-        //Current animation frame Die
-        int frameDie = 0;
-
-        //Current animation frame Attack
-        int frameAttack = 0;
-
 
         //Start up SDL and create window
         if( !init(aWindow, aRenderer) )
@@ -143,7 +138,7 @@ int main( int argc, char* args[] )
             if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
                      fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze, startTexture, finishTexture,
                      victoryTexture, defeatTexture, princessTexture, nextLevelTexture, menuTexture, arrowrightMenuTexture, arrowleftMenuTexture,
-                     levelAgainTexture)
+                     levelAgainTexture, arrowdownMenuTexture, chooseLevelTexture, howToPlayTexture)
                || !loadText(aRenderer,textMenuTexture, aFont))
             {
                 cout << "Failed to load media!\n" ;
@@ -151,7 +146,7 @@ int main( int argc, char* args[] )
             else
             {
                 // Load Rec Animation
-                loadRectAnimation(clipsIdle, clipsRun, clipsDie, clipsAttack, clipsDragon);
+                loadRectAnimation(clipsIdle, clipsRun, clipsDie, clipsAttack, clipsDragon, clipsPrincessRun);
 
                 //Main loop flag
                 //bool quit = false;
@@ -176,20 +171,15 @@ int main( int argc, char* args[] )
                     //Handle events on queue
                     while( SDL_PollEvent( &e ) != 0 )
                     {
-                        mouse.handleEvent(e, Figure, arrowrightMenuRect, arrowleftMenuRect, aRenderer, start);
+                        mouse.handleEvent(e, Figure, arrowrightMenuRect, arrowleftMenuRect, aRenderer, start, checkChooseLevel, checkHowToPlay, quit);
+                        mouse.render(arrowrightMenuTexture, arrowleftMenuTexture, arrowrightMenuRect, arrowleftMenuRect, menuTexture,
+                                     chooseLevelTexture, howToPlayTexture, aRenderer, start, quit, checkChooseLevel, checkHowToPlay);
                         cout << "NEXT LEVEL = " << mouse.getNextLevel() << endl;
                         //User requests quit
                         if( e.type == SDL_QUIT )
                         {
                             quit = true;
                             cout << "QUIT" << endl;
-                        }
-                        if(start == false)
-                        {
-                            menuTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
-                            mouse.render(arrowrightMenuTexture, arrowleftMenuTexture, arrowrightMenuRect, arrowleftMenuRect, aRenderer);
-                            //cout << "O day" << endl;
-
                         }
                         if(Figure.getStatus() != ANIMATION_STATUS_DIE && Figure.getVictory() != true)
                         {
@@ -231,8 +221,8 @@ int main( int argc, char* args[] )
                         setDragon(tileSet, dragon, TOTAL_TILES);
 
                         //Render objects
-                        Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, frameIdle, frameRun, frameDie, frameAttack, figureTexture,
-                                      aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES, textMenu, textMenuTexture);
+                        Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, figureTexture,
+                                      aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES, textMenu, textMenuTexture, princessTexture, clipsPrincessRun);
 
                         if(Figure.getVictory() == false)
                         {
@@ -248,9 +238,6 @@ int main( int argc, char* args[] )
                             }
 
                         }
-
-
-                        princessTexture.render(Figure.getPrincessBox().x - camera.x, Figure.getPrincessBox().y - camera.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
 
                         if(Figure.getVictory() == true)
                         {

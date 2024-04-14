@@ -52,6 +52,8 @@ const int ANIMATION_STATUS_TOTAL = 4;
 const int ANIMATION_FRAMES_DRAGON = 15;
 const int TOTAL_DRAGON = 10;
 
+//Princess
+const int ANIMATION_FRAMES_PRINCESS_RUN = 12;
 
 //Dramage
 const int DAMAGE_ICE = 25;
@@ -81,3 +83,7 @@ const int HOW_TO_PLAY = 2;
 const int QUIT_MENU = 3;
 const int NEXT_MENU = 4;
 const int TOTAL_MENU = 5;
+
+// LEVEL_MENU
+
+const int TOTAL_LEVEL = 16;
