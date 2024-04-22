@@ -25,7 +25,6 @@ int main( int argc, char* args[] )
     int TOTAL_DRAGON;
     while(choose <= TOTAL_LEVEL && quit == false)
     {
-        int checkChoose = choose;
         loadLevel(choose, pathMaze, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES, TOTAL_DRAGON);
         //The window we'll be rendering to
         SDL_Window* aWindow = NULL;
@@ -176,7 +175,7 @@ int main( int argc, char* args[] )
                         mouse.render(arrowrightMenuTexture, arrowleftMenuTexture, arrowrightMenuRect, arrowleftMenuRect, menuTexture,
                                      chooseLevelTexture, howToPlayTexture, aRenderer, start, quit, checkChooseLevel, checkHowToPlay,
                                      arrowdownMenuTexture, arrowdownMenuRect);
-                        cout << "NEXT LEVEL = " << mouse.getNextLevel() << endl;
+                        //cout << "NEXT LEVEL = " << mouse.getNextLevel() << endl;
                         //User requests quit
                         if( e.type == SDL_QUIT )
                         {
@@ -263,11 +262,6 @@ int main( int argc, char* args[] )
                 {
                     choose = choose + 1;
                 }
-                //cout <<"choose = "<< choose << endl;
-//                else if(mouse.getLevelAgain() == true)
-//                {
-//                    choose = choose;
-//                }
             }
         }
 

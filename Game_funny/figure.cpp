@@ -65,12 +65,19 @@ void Figure::setBoxFigure(const int& choose)
         this->princessBox.x = 1040;
         this->princessBox.y = 1040;
     }
-    if(choose == 3)
+    else if(choose == 3)
     {
         this->mBox.x = 0;
         this->mBox.y = 2160;
         this->princessBox.x = 2560;
         this->princessBox.y = 2480;
+    }
+    else if(choose == 4)
+    {
+        this->mBox.x = 0;
+        this->mBox.y = 80;
+        this->princessBox.x = 2240;
+        this->princessBox.y = 3200;
     }
 }
 

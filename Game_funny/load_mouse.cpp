@@ -59,20 +59,16 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
             &&SDL_PointInRect(&p, &this->howToPlay) == false && SDL_PointInRect(&p, &this->quitMenu) == false
             && SDL_PointInRect(&p, &this->nextMenu) == false  && SDL_PointInRect(&p, &this->buttonX) == false)
         {
-            cout << "LLLLLLLLLLLLLLLLLLLLLLLLLL" << endl;
+            //cout << "LLLLLLLLLLLLLLLLLLLLLLLLLL" << endl;
             bool check = false;
             for(int i = 1; i <= TOTAL_LEVEL; i++)
             {
-                cout << "OOOOO = " << i << endl;
-                cout << this->someLevelsMenu[15].x << ' ' << this->someLevelsMenu[15].y << ' ' << this->someLevelsMenu[15].w <<" "<< this->someLevelsMenu[15].h<< endl;
+                //cout << "OOOOO = " << i << endl;
+                //cout << this->someLevelsMenu[15].x << ' ' << this->someLevelsMenu[15].y << ' ' << this->someLevelsMenu[15].w <<" "<< this->someLevelsMenu[15].h<< endl;
 
-                if(i == TOTAL_LEVEL || i == 14)
-                {
-                    cout << this->someLevelsMenu[i].x << ' ' << this->someLevelsMenu[i].y << ' ' << this->someLevelsMenu[i].w <<" "<< this->someLevelsMenu[i].h<< endl;
-                }
                 if(SDL_PointInRect(&p, &this->someLevelsMenu[i]) == true)
                 {
-                    cout << "I = " << i << endl;
+                    //cout << "I = " << i << endl;
                     check = true; // o trong
                     break;
                 }
@@ -88,13 +84,13 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
 		if( inside == false )
 		{
 			mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
-			cout << "O ngoai" << endl;
+			//cout << "O ngoai" << endl;
 		}
 
 		else
 		{
-		    cout << "checkChooseLevel = " << checkChooseLevel << endl;
-		    cout << "o trong" << endl;
+		    //cout << "checkChooseLevel = " << checkChooseLevel << endl;
+		    //cout << "o trong" << endl;
 			switch( e.type )
 			{
 				case SDL_MOUSEMOTION:
@@ -188,7 +184,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                 }
                 if(checkChooseLevel == true )
                 {
-                    cout << "Nhan Vao" << endl;
+                    //cout << "Nhan Vao" << endl;
 
                     if(SDL_PointInRect(&p, &this->buttonX) == true)
                     {
@@ -199,13 +195,13 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                     {
                         for(int i = 1; i <= TOTAL_LEVEL ; i++)
                         {
-                            cout << "IIII = " << i << endl;
-                            cout << p.x <<  " " << p.y << endl;
+                            //cout << "IIII = " << i << endl;
+                            //cout << p.x <<  " " << p.y << endl;
                             if(SDL_PointInRect(&p, &this->someLevelsMenu[i]) == true)
                             {
-                                cout << "ne i = " << i << endl;
+                                //cout << "ne i = " << i << endl;
                                 choose = i;
-                                cout << p.x <<  " " << p.y << endl;
+                                //cout << p.x <<  " " << p.y << endl;
                                 arrowdownMenuRect.x = someLevelsMenu[i].x;
                                 arrowdownMenuRect.y = someLevelsMenu[i].y;
                                 break;

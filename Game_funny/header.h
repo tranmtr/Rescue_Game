@@ -56,7 +56,7 @@ const int ANIMATION_FRAMES_DRAGON = 15;
 const int ANIMATION_FRAMES_PRINCESS_RUN = 12;
 
 //Dramage
-const int DAMAGE_ICE = 25;
+const int DAMAGE_ICE = 120;
 const int DAMAGE_FIRE = 25;
 
 // Mouse
