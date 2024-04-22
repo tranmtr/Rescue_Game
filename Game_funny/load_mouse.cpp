@@ -8,35 +8,41 @@ load_Mouse::load_Mouse()
     quitMenu  = {271, 364,  81, 51};
     nextMenu  = {SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, 75, 35};
     againMenu = {SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, 75, 35};
-    someLevelsMenu[ 1 ] = {19, 137, 91, 33};
-    someLevelsMenu[ 2 ] = {120, 137, 91, 33};
-    someLevelsMenu[ 3 ] = {229, 137, 91, 33};
-    someLevelsMenu[ 4 ] = {339, 137, 91, 33};
-    someLevelsMenu[ 5 ] = {453, 137, 91, 33};
 
-    someLevelsMenu[ 6 ] = {19, 211, 91, 33};
-    someLevelsMenu[ 7 ] = {120, 211, 91, 33};
-    someLevelsMenu[ 8 ] = {229, 211, 91, 33};
-    someLevelsMenu[ 9 ] = {339, 211, 91, 33};
-    someLevelsMenu[ 10 ] = {453, 211, 91, 33};
 
-    someLevelsMenu[ 11 ] = {19, 283, 91, 33};
-    someLevelsMenu[ 12 ] = {120, 283, 91, 33};
-    someLevelsMenu[ 13 ] = {229, 283, 91, 33};
-    someLevelsMenu[ 14 ] = {339, 283, 91, 33};
-    someLevelsMenu[ 15 ] = {453, 283, 91, 33};
+    someLevelsMenu[ 1 ] = {64, 184, 91, 33};
+    someLevelsMenu[ 2 ] = {165, 184, 91, 33};
+    someLevelsMenu[ 3 ] = {274, 184, 91, 33};
+    someLevelsMenu[ 4 ] = {384, 184, 91, 33};
+    someLevelsMenu[ 5 ] = {496, 184, 91, 33};
 
-    buttonX = {0, 0, 50, 50};
+    someLevelsMenu[ 6 ] = {64, 258, 91, 33};
+    someLevelsMenu[ 7 ] = {165, 258, 91, 33};
+    someLevelsMenu[ 8 ] = {274, 258, 91, 33};
+    someLevelsMenu[ 9 ] = {384, 258, 91, 33};
+    someLevelsMenu[ 10 ] = {496, 258, 91, 33};
+
+    someLevelsMenu[ 11 ] = {64, 328, 91, 33};
+    someLevelsMenu[ 12 ] = {165, 328, 91, 33};
+    someLevelsMenu[ 13 ] = {274, 328, 91, 33};
+    someLevelsMenu[ 14 ] = {384, 328, 91, 33};
+    someLevelsMenu[ 15 ] = {496, 328, 91, 33};
 
     mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
     nextLevel = false;
     rightLeft = false;
     levelAgain = false;
+
+    buttonX = {568, 47, 25, 25};
+    //buttonX = {0, 0, 0, 0};
 }
 
 void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrightMenuRect, SDL_Rect& arrowleftMenuRect,
-                             SDL_Renderer*& aRenderer, bool& start, bool& checkChooseLevel, bool& checkHowToPlay, bool& quit )
+                             SDL_Renderer*& aRenderer, bool& start, bool& checkChooseLevel, bool& checkHowToPlay, bool& quit,
+                             int& choose, SDL_Rect& arrowdownMenuRect )
 {
+    arrowdownMenuRect.x = someLevelsMenu[choose].x;
+    arrowdownMenuRect.y = someLevelsMenu[choose].y;
     rightLeft = false ;
     //If mouse event happened
 	if( e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP )
@@ -53,9 +59,17 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
             &&SDL_PointInRect(&p, &this->howToPlay) == false && SDL_PointInRect(&p, &this->quitMenu) == false
             && SDL_PointInRect(&p, &this->nextMenu) == false  && SDL_PointInRect(&p, &this->buttonX) == false)
         {
+            cout << "LLLLLLLLLLLLLLLLLLLLLLLLLL" << endl;
             bool check = false;
-            for(int i = 1; i < TOTAL_LEVEL; i++)
+            for(int i = 1; i <= TOTAL_LEVEL; i++)
             {
+                cout << "OOOOO = " << i << endl;
+                cout << this->someLevelsMenu[15].x << ' ' << this->someLevelsMenu[15].y << ' ' << this->someLevelsMenu[15].w <<" "<< this->someLevelsMenu[15].h<< endl;
+
+                if(i == TOTAL_LEVEL || i == 14)
+                {
+                    cout << this->someLevelsMenu[i].x << ' ' << this->someLevelsMenu[i].y << ' ' << this->someLevelsMenu[i].w <<" "<< this->someLevelsMenu[i].h<< endl;
+                }
                 if(SDL_PointInRect(&p, &this->someLevelsMenu[i]) == true)
                 {
                     cout << "I = " << i << endl;
@@ -79,13 +93,14 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
 
 		else
 		{
+		    cout << "checkChooseLevel = " << checkChooseLevel << endl;
 		    cout << "o trong" << endl;
 			switch( e.type )
 			{
 				case SDL_MOUSEMOTION:
 				mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
-				cout << "checkCHooseLevel = " << checkChooseLevel << endl;
-                cout <<"HOW TO PLAY = " << checkHowToPlay << endl;
+				//cout << "checkCHooseLevel = " << checkChooseLevel << endl;
+                //cout <<"HOW TO PLAY = " << checkHowToPlay << endl;
 				if(checkChooseLevel == false && checkHowToPlay == false)
                 {
                     if(SDL_PointInRect(&p, &this->startMenu) == true)
@@ -93,28 +108,28 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                         rightLeft = true;
                         arrowrightMenuRect = {257 - 45 + 10, 155,45,35};
                         arrowleftMenuRect  = {257 + 111 , 155,45,35};
-                        cout << "start" << endl;
+                        //cout << "start" << endl;
                     }
                     else if(SDL_PointInRect(&p, &this->levelMenu) == true)
                     {
                         rightLeft = true;
                         arrowrightMenuRect = {258 - 45 + 10, 198 + 20,45,35};
                         arrowleftMenuRect  = {258 + 102 , 198 + 20,45,35};
-                        cout << "level " << endl;
+                        //cout << "level " << endl;
                     }
                     else if(SDL_PointInRect(&p, &this->howToPlay) == true)
                     {
                         rightLeft = true;
                         arrowrightMenuRect = {208 - 45 , 285 + 10,45,35};
                         arrowleftMenuRect  = {208 + 214 , 285 + 10,45,35};
-                        cout << "how to play" << endl;
+                        //cout << "how to play" << endl;
                     }
                     else if(SDL_PointInRect(&p, &this->quitMenu) == true)
                     {
                         rightLeft = true;
                         arrowrightMenuRect = {271 - 45 + 5, 364 + 5,45,35};
                         arrowleftMenuRect  = {271 + 81 + 5, 364 + 5,45,35};
-                        cout << "QUIT" << endl;
+                        //cout << "QUIT" << endl;
                     }
                 }
 
@@ -122,9 +137,9 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
 
 				case SDL_MOUSEBUTTONDOWN:
 				mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
-				cout << "Nhan" << endl;
-                cout << "checkCHooseLevel = " << checkChooseLevel << endl;
-                cout <<"HOW TO PLAY = " << checkHowToPlay << endl;
+				//cout << "Nhan" << endl;
+                //cout << "checkCHooseLevel = " << checkChooseLevel << endl;
+                //cout <<"HOW TO PLAY = " << checkHowToPlay << endl;
 
 				if(checkChooseLevel == false && checkHowToPlay == false)
                 {
@@ -132,7 +147,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                     {
                         if(SDL_PointInRect(&p, &this->startMenu) == true)
                         {
-                            cout << "1" <<endl;
+                            //cout << "1" <<endl;
                             start = true;
                             if(Figure.getVictory() == true && SDL_PointInRect(&p, &this->nextMenu) == true)
                             {
@@ -173,11 +188,29 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                 }
                 if(checkChooseLevel == true )
                 {
-                    cout << "Vao" << endl;
+                    cout << "Nhan Vao" << endl;
+
                     if(SDL_PointInRect(&p, &this->buttonX) == true)
                     {
                         checkChooseLevel = false;
-                        cout << "LEVEL" << endl;
+                        //cout << "LEVEL" << endl;
+                    }
+                    else
+                    {
+                        for(int i = 1; i <= TOTAL_LEVEL ; i++)
+                        {
+                            cout << "IIII = " << i << endl;
+                            cout << p.x <<  " " << p.y << endl;
+                            if(SDL_PointInRect(&p, &this->someLevelsMenu[i]) == true)
+                            {
+                                cout << "ne i = " << i << endl;
+                                choose = i;
+                                cout << p.x <<  " " << p.y << endl;
+                                arrowdownMenuRect.x = someLevelsMenu[i].x;
+                                arrowdownMenuRect.y = someLevelsMenu[i].y;
+                                break;
+                            }
+                        }
                     }
                 }
                 if(checkHowToPlay == true )
@@ -185,7 +218,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                     if(SDL_PointInRect(&p, &this->buttonX) == true)
                     {
                         checkHowToPlay = false;
-                        cout << "HOW" << endl;
+                        //cout << "HOW" << endl;
                     }
                 }
 				break;
@@ -196,17 +229,18 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
 			}
 		}
 	}
-	cout << "RightLeft = " << rightLeft << endl;
+	//cout << "RightLeft = " << rightLeft << endl;
 }
 
 void load_Mouse::render(LTexture& arrowrightMenuTexture, LTexture& arrowleftMenuTexture, SDL_Rect& arrowrightMenuRect,
                         SDL_Rect& arrowleftMenuRect, LTexture& menuTexture, LTexture& chooseLevelTexture, LTexture& howToPlayTexture,
-                        SDL_Renderer*& aRenderer, const bool& start, const bool& quit, const bool& checkChooseLevel, const bool& checkHowToPlay)
+                        SDL_Renderer*& aRenderer, const bool& start, const bool& quit, const bool& checkChooseLevel,
+                        const bool& checkHowToPlay, LTexture& arrowdownMenuTexture, SDL_Rect& arrowdownMenuRect)
 {
     //cout << "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLll" << endl;
     if(checkChooseLevel == false && checkHowToPlay == false && start == false )
     {
-        cout << "IN MENU" << endl << endl;;
+        //cout << "IN MENU" << endl << endl;;
         menuTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
         if(this->rightLeft == true)
         {
@@ -217,12 +251,13 @@ void load_Mouse::render(LTexture& arrowrightMenuTexture, LTexture& arrowleftMenu
     else if(checkChooseLevel == true)
     {
         //cout << "IN LEVEL" << endl;
-        chooseLevelTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+        chooseLevelTexture.render(45, 47, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+        arrowdownMenuTexture.render(arrowdownMenuRect.x, arrowdownMenuRect.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
     }
     else if(checkHowToPlay == true)
     {
         //cout << "IN HOW" << endl;
-        howToPlayTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+        howToPlayTexture.render(45, 47, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
     }
 }
 

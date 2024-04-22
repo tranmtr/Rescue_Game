@@ -20,7 +20,7 @@ LIce::~LIce()
 
 }
 
-void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES)
+void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES, const int& TOTAL_DRAGON)
 {
     if(Figure.getSpace() == true && this->framesIce == 0 )
     {

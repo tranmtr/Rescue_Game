@@ -50,7 +50,7 @@ const int ANIMATION_STATUS_TOTAL = 4;
 
 //Dragon
 const int ANIMATION_FRAMES_DRAGON = 15;
-const int TOTAL_DRAGON = 10;
+
 
 //Princess
 const int ANIMATION_FRAMES_PRINCESS_RUN = 12;
@@ -86,4 +86,4 @@ const int TOTAL_MENU = 5;
 
 // LEVEL_MENU
 
-const int TOTAL_LEVEL = 16;
+const int TOTAL_LEVEL = 15;

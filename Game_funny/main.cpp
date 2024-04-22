@@ -22,11 +22,11 @@ int main( int argc, char* args[] )
     int LEVEL_WIDTH;
     int LEVEL_HEIGHT;
     int TOTAL_TILES;
-
-    while(choose <= 2 && quit == false)
+    int TOTAL_DRAGON;
+    while(choose <= TOTAL_LEVEL && quit == false)
     {
-
-        loadLevel(choose, pathMaze, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES);
+        int checkChoose = choose;
+        loadLevel(choose, pathMaze, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES, TOTAL_DRAGON);
         //The window we'll be rendering to
         SDL_Window* aWindow = NULL;
 
@@ -165,15 +165,17 @@ int main( int argc, char* args[] )
 
 
                 //While application is running
-                while( mouse.getNextLevel()== false  && mouse.getLevelAgain() == false && quit == false )
+                while( mouse.getNextLevel()== false  && mouse.getLevelAgain() == false && quit == false)
                 {
                     //cout << "Chua quit" << endl;
                     //Handle events on queue
                     while( SDL_PollEvent( &e ) != 0 )
                     {
-                        mouse.handleEvent(e, Figure, arrowrightMenuRect, arrowleftMenuRect, aRenderer, start, checkChooseLevel, checkHowToPlay, quit);
+                        mouse.handleEvent(e, Figure, arrowrightMenuRect, arrowleftMenuRect, aRenderer, start, checkChooseLevel, checkHowToPlay, quit,
+                                          choose, arrowdownMenuRect);
                         mouse.render(arrowrightMenuTexture, arrowleftMenuTexture, arrowrightMenuRect, arrowleftMenuRect, menuTexture,
-                                     chooseLevelTexture, howToPlayTexture, aRenderer, start, quit, checkChooseLevel, checkHowToPlay);
+                                     chooseLevelTexture, howToPlayTexture, aRenderer, start, quit, checkChooseLevel, checkHowToPlay,
+                                     arrowdownMenuTexture, arrowdownMenuRect);
                         cout << "NEXT LEVEL = " << mouse.getNextLevel() << endl;
                         //User requests quit
                         if( e.type == SDL_QUIT )
@@ -229,7 +231,7 @@ int main( int argc, char* args[] )
                             for(int i = 0; i < TOTAL_DRAGON; i++)
                             {
                                 //Render ice bullet
-                                iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES);
+                                iceDamage.moveIce(Figure, iceImageTexture, dragon[i], aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES, TOTAL_DRAGON);
                                 if(dragon[i].getBloodDragon() != 0 && checkCollision(camera, dragon[i].getBox()))
                                 {
                                     dragon[i].render(fireDragonTexture, clipsDragon, aRenderer, camera.x, camera.y);
@@ -261,10 +263,11 @@ int main( int argc, char* args[] )
                 {
                     choose = choose + 1;
                 }
-                else if(mouse.getLevelAgain() == true)
-                {
-                    choose = choose;
-                }
+                //cout <<"choose = "<< choose << endl;
+//                else if(mouse.getLevelAgain() == true)
+//                {
+//                    choose = choose;
+//                }
             }
         }
 

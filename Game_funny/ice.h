@@ -15,7 +15,7 @@ class LIce
 
         LIce();
         ~LIce();
-        void moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES);
+        void moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES, const int& TOTAL_DRAGON);
         bool checkCollisionIceWithDragon(int camX, int camY, dragon dragon);
         void renderIce(Figure Figure, LTexture& iceDamegeTexture, SDL_Renderer*& aRenderer, int camX, int camY );
 
