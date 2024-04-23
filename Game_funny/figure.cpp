@@ -50,29 +50,56 @@ Figure::Figure()
 
 void Figure::setBoxFigure(const int& choose)
 {
-
     if(choose == 1)
+    {
+        this->mBox.x = 0;
+        this->mBox.y = 80;
+        this->princessBox.x = 640;
+        this->princessBox.y = 400;
+    }
+    else if(choose == 2)
+    {
+        this->mBox.x = 1520;
+        this->mBox.y = 1200;
+        this->princessBox.x = 1360;
+        this->princessBox.y = 80;
+    }
+    else if(choose == 3)
     {
         this->mBox.x = 560;
         this->mBox.y = 1200;
         this->princessBox.x = 1200;
         this->princessBox.y = 1120;
     }
-    else if(choose == 2)
+    else if(choose == 4)
+    {
+        this->mBox.x = 640;
+        this->mBox.y = 0;
+        this->princessBox.x = 1360;
+        this->princessBox.y = 1360;
+    }
+    else if(choose == 5)
     {
         this->mBox.x = 1520;
         this->mBox.y = 0;
         this->princessBox.x = 1040;
         this->princessBox.y = 1040;
     }
-    else if(choose == 3)
+    else if(choose == 6)
+    {
+        this->mBox.x = 1200;
+        this->mBox.y = 0;
+        this->princessBox.x = 80;
+        this->princessBox.y = 1120;
+    }
+    else if(choose == 7)
     {
         this->mBox.x = 0;
         this->mBox.y = 2160;
         this->princessBox.x = 2560;
         this->princessBox.y = 2480;
     }
-    else if(choose == 4)
+    else if(choose == 8)
     {
         this->mBox.x = 0;
         this->mBox.y = 80;

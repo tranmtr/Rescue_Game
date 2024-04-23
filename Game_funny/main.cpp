@@ -13,7 +13,7 @@
 
 int main( int argc, char* args[] )
 {
-    int choose = 1;
+    int choose = 7;
     bool start = false;
     bool quit = false;
     bool checkChooseLevel = false;
