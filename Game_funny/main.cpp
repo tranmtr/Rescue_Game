@@ -13,7 +13,7 @@
 
 int main( int argc, char* args[] )
 {
-    int choose = 7;
+    int choose = 1;
     bool start = false;
     bool quit = false;
     bool checkChooseLevel = false;
@@ -23,6 +23,7 @@ int main( int argc, char* args[] )
     int LEVEL_HEIGHT;
     int TOTAL_TILES;
     int TOTAL_DRAGON;
+
     while(choose <= TOTAL_LEVEL && quit == false)
     {
         loadLevel(choose, pathMaze, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES, TOTAL_DRAGON);
@@ -162,9 +163,11 @@ int main( int argc, char* args[] )
                 //The camera area
                 SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
+                //choose level
+                mouse.setButtonDownLevel();
 
                 //While application is running
-                while( mouse.getNextLevel()== false  && mouse.getLevelAgain() == false && quit == false)
+                while( mouse.getNextLevel()== false  && mouse.getLevelAgain() == false && quit == false && mouse.getButtonDownLevel() == false)
                 {
                     //cout << "Chua quit" << endl;
                     //Handle events on queue
@@ -181,6 +184,11 @@ int main( int argc, char* args[] )
                         {
                             quit = true;
                             cout << "QUIT" << endl;
+                        }
+                        if(mouse.getButtonDownLevel() == true)
+                        {
+                            cout << "DAY" << endl;
+                            break;
                         }
                         if(Figure.getStatus() != ANIMATION_STATUS_DIE && Figure.getVictory() != true)
                         {
@@ -269,5 +277,6 @@ int main( int argc, char* args[] )
         close(aWindow, aRenderer,figureTexture, wallTexture, floorTexture,lavaTexture, iceTexture,cakeTexture, aFont);
 
     }
+
 	return 0;
 }

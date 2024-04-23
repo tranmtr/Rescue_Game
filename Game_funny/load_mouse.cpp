@@ -32,9 +32,10 @@ load_Mouse::load_Mouse()
     nextLevel = false;
     rightLeft = false;
     levelAgain = false;
+    checkButtonDownLevel = false;
 
     buttonX = {568, 47, 25, 25};
-    //buttonX = {0, 0, 0, 0};
+
 }
 
 void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrightMenuRect, SDL_Rect& arrowleftMenuRect,
@@ -141,6 +142,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                 {
                     if(start == false)
                     {
+                        cout << "START FALSE" << endl;
                         if(SDL_PointInRect(&p, &this->startMenu) == true)
                         {
                             //cout << "1" <<endl;
@@ -172,8 +174,10 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                     }
                     if(start == true)
                     {
+                        cout << "START TRUE" << endl;
                         if(Figure.getVictory() == true && SDL_PointInRect(&p, &this->nextMenu) == true)
                         {
+                            cout << "Ne " << endl;
                             this->nextLevel = true;
                         }
                         else if(Figure.getStatus() == ANIMATION_STATUS_DIE && SDL_PointInRect(&p, &this->againMenu) == true)
@@ -182,7 +186,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                         }
                     }
                 }
-                if(checkChooseLevel == true )
+                else if(checkChooseLevel == true )
                 {
                     //cout << "Nhan Vao" << endl;
 
@@ -204,12 +208,15 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                                 //cout << p.x <<  " " << p.y << endl;
                                 arrowdownMenuRect.x = someLevelsMenu[i].x;
                                 arrowdownMenuRect.y = someLevelsMenu[i].y;
+                                this->checkButtonDownLevel = true;
+                                start = true;
+                                checkChooseLevel = false;
                                 break;
                             }
                         }
                     }
                 }
-                if(checkHowToPlay == true )
+                else if(checkHowToPlay == true )
                 {
                     if(SDL_PointInRect(&p, &this->buttonX) == true)
                     {
@@ -264,4 +271,14 @@ bool load_Mouse::getNextLevel()
 bool load_Mouse::getLevelAgain()
 {
     return this->levelAgain;
+}
+
+bool load_Mouse::getButtonDownLevel()
+{
+    return this->checkButtonDownLevel;
+}
+
+void load_Mouse::setButtonDownLevel()
+{
+    this->checkButtonDownLevel = false;
 }

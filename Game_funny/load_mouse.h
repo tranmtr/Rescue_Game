@@ -22,6 +22,10 @@ class load_Mouse
 
         bool getLevelAgain();
 
+        bool getButtonDownLevel();
+
+        void setButtonDownLevel();
+
     private:
         SDL_Rect startMenu, levelMenu, howToPlay, quitMenu, nextMenu, againMenu, buttonX;
 
@@ -35,6 +39,6 @@ class load_Mouse
 
 		bool rightLeft;
 
-
+		bool checkButtonDownLevel;
 
 };
