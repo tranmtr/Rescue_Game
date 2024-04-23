@@ -156,7 +156,7 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
                 const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture,
                 LTexture& princessTexture,LTexture& nextLevelTexture, LTexture& menuTexture, LTexture& arrowrightMenuTexture,
                 LTexture& arrowleftMenuTexture, LTexture& levelAgainTexture, LTexture& arrowdownMenuTexture, LTexture& chooseLevelTexture,
-                LTexture& howToPlayTexture)
+                LTexture& howToPlayTexture, LTexture& backHomeTexture)
 {
 	//Loading success flag
 	bool success = true;
@@ -307,6 +307,11 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 		success = false;
     }
     if( !howToPlayTexture.loadFromFile("File_Image/image_Menu/How_to_play_menu(550_382).png", aRenderer))
+    {
+        cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+    }
+    if( !backHomeTexture.loadFromFile("File_Image/image_Menu/way_back_home.png", aRenderer))
     {
         cout << "Failed to load walking animation texture!\n" ;
 		success = false;

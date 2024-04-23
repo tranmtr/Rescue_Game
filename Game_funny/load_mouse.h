@@ -27,7 +27,7 @@ class load_Mouse
         void setButtonDownLevel();
 
     private:
-        SDL_Rect startMenu, levelMenu, howToPlay, quitMenu, nextMenu, againMenu, buttonX;
+        SDL_Rect startMenu, levelMenu, howToPlay, quitMenu, nextMenu, againMenu, buttonX, backHome;
 
         SDL_Rect someLevelsMenu[TOTAL_LEVEL + 1];
 

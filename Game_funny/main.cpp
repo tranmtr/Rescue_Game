@@ -71,6 +71,9 @@ int main( int argc, char* args[] )
         //Again
         LTexture levelAgainTexture;
 
+        //Home
+        LTexture backHomeTexture;
+
         // Load wall, floor
         LTexture wallTexture;
         LTexture floorTexture;
@@ -138,7 +141,7 @@ int main( int argc, char* args[] )
             if( !loadMedia(aRenderer, figureTexture,wallTexture ,floorTexture, lavaTexture, iceTexture, cakeTexture, iceImageTexture,
                      fireDragonTexture, fireTexture, tileSet, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze, startTexture, finishTexture,
                      victoryTexture, defeatTexture, princessTexture, nextLevelTexture, menuTexture, arrowrightMenuTexture, arrowleftMenuTexture,
-                     levelAgainTexture, arrowdownMenuTexture, chooseLevelTexture, howToPlayTexture)
+                     levelAgainTexture, arrowdownMenuTexture, chooseLevelTexture, howToPlayTexture, backHomeTexture)
                || !loadText(aRenderer,textMenuTexture, aFont))
             {
                 cout << "Failed to load media!\n" ;
@@ -232,6 +235,8 @@ int main( int argc, char* args[] )
                         //Render objects
                         Figure.render(clipsIdle, clipsRun, clipsDie, clipsAttack, figureTexture,
                                       aRenderer, camera.x, camera.y, tileSet, TOTAL_TILES, textMenu, textMenuTexture, princessTexture, clipsPrincessRun);
+
+                        backHomeTexture.render(SCREEN_WIDTH - 50, 20, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
 
                         if(Figure.getVictory() == false)
                         {

@@ -28,13 +28,15 @@ load_Mouse::load_Mouse()
     someLevelsMenu[ 14 ] = {384, 328, 91, 33};
     someLevelsMenu[ 15 ] = {496, 328, 91, 33};
 
+    buttonX = {568, 47, 25, 25};
+
+    backHome = {SCREEN_WIDTH - 50, 20, 32, 32};
+
     mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
     nextLevel = false;
     rightLeft = false;
     levelAgain = false;
     checkButtonDownLevel = false;
-
-    buttonX = {568, 47, 25, 25};
 
 }
 
@@ -58,7 +60,8 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
 
 		if(SDL_PointInRect(&p, &this->startMenu) == false && SDL_PointInRect(&p, &this->levelMenu) == false
             &&SDL_PointInRect(&p, &this->howToPlay) == false && SDL_PointInRect(&p, &this->quitMenu) == false
-            && SDL_PointInRect(&p, &this->nextMenu) == false  && SDL_PointInRect(&p, &this->buttonX) == false)
+            && SDL_PointInRect(&p, &this->nextMenu) == false  && SDL_PointInRect(&p, &this->buttonX) == false
+            && SDL_PointInRect(&p, &this->backHome) == false)
         {
             //cout << "LLLLLLLLLLLLLLLLLLLLLLLLLL" << endl;
             bool check = false;
@@ -183,6 +186,11 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                         else if(Figure.getStatus() == ANIMATION_STATUS_DIE && SDL_PointInRect(&p, &this->againMenu) == true)
                         {
                             this->levelAgain = true;
+                        }
+                        if(SDL_PointInRect(&p, &this->backHome) == true)
+                        {
+                            start = false;
+                            cout << "HEHE" << endl;
                         }
                     }
                 }
