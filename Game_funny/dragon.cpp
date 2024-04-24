@@ -25,6 +25,7 @@ dragon::dragon()
 
     fireCol = false;
     fireVel = 0;
+
 }
 
 dragon::~dragon()
@@ -73,10 +74,15 @@ void dragon::setBox(int x, int y)
     this->box.x = x;
     this->box.y = y;
 }
-void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES)
+void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[],
+                      const int& TOTAL_TILES, Mix_Chunk*& fireDragonChuck, bool& checkSound)
 {
     if(this->framesFire == 0)
     {
+        if(checkSound == true)
+        {
+            Mix_PlayChannel( -1, fireDragonChuck, 0 );
+        }
         this->framesDragon = 7;
         this->fireBox.x = this->box.x;
         this->fireBox.y = this->box.y;
@@ -133,6 +139,7 @@ bool dragon::checkCollisionFireWithFigure(int camX, int camY, Figure Figure)
     return checkCollision(Figure.getBoxFigure(), this->fireBox);
 }
 
+
 void setDragon(Tile* tiles[], dragon dragon[], const int& TOTAL_TILES)
 {
     int indexDragon = 0;
@@ -145,3 +152,4 @@ void setDragon(Tile* tiles[], dragon dragon[], const int& TOTAL_TILES)
         }
     }
 }
+

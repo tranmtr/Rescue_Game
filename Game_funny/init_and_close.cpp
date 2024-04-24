@@ -9,7 +9,7 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& aRenderer)
 	bool success = true;
 
 	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	if( SDL_Init( SDL_INIT_VIDEO||SDL_INIT_AUDIO ) < 0 )
 	{
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 		success = false;
@@ -56,6 +56,12 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& aRenderer)
 					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
 					success = false;
 				}
+				//Initialize SDL_mixer
+				if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+				{
+					printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+					success = false;
+				}
 
 			}
 		}
@@ -65,8 +71,17 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& aRenderer)
 }
 
 void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture,
-           LTexture& iceTexture, LTexture& cakeTexture, TTF_Font*& aFont)
+           LTexture& iceTexture, LTexture& cakeTexture, TTF_Font*& aFont, Mix_Music*& soundTrackMusic, Mix_Chunk*& iceDamageChuck, Mix_Chunk*& fireDragonChuck)
 {
+    Mix_FreeChunk( iceDamageChuck );
+	Mix_FreeChunk( fireDragonChuck );
+	iceDamageChuck = NULL;
+    fireDragonChuck = NULL;
+
+	//Free the music
+	Mix_FreeMusic( soundTrackMusic );
+    soundTrackMusic = NULL;
+
 	//Free loaded images
 	figureTexture[ANIMATION_STATUS_IDLE].free();
 	figureTexture[ANIMATION_STATUS_RUN].free();
@@ -81,11 +96,12 @@ void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTextur
 	aWindow = NULL;
 	aRenderer = NULL;
 
-	//Free global font
+	//Free font
 	TTF_CloseFont( aFont );
 	aFont = NULL;
 	//Quit SDL subsystems
 	TTF_Quit();
 	IMG_Quit();
+	Mix_Quit();
 	SDL_Quit();
 }

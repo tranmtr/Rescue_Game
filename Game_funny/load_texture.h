@@ -83,11 +83,14 @@ bool setTiles( Tile *tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, co
 //Loads media
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                LTexture& lavaTexture,LTexture& iceTexture,LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
-               LTexture& fireTexture,Tile* tiles[], const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT, const string& pathMaze,
-               LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture, LTexture& princessTexture,
+               LTexture& fireTexture, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture, LTexture& princessTexture,
                LTexture& nextLevelTexture, LTexture& menuTexture, LTexture& arrowrightMenuTexture, LTexture& arrowleftMenuTexture,
                LTexture& levelAgainTexture, LTexture& arrowdownMenuTexture, LTexture& chooseLevelTexture, LTexture& howToPlayTexture,
-               LTexture& backHomeTexture );
+               LTexture& backHomeTexture, LTexture& soundOnTexture, LTexture& soundOffTexture );
+//Loads sound
+bool loadSound(Mix_Music*& soundTrackMusic, Mix_Chunk*& iceDamageChuck, Mix_Chunk*& fireDragonChuck);
+
+void makeSound(bool& checkSound, Mix_Music*& soundTrackMusic);
 
 //Load rec animation
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[], SDL_Rect clipsDragon[], SDL_Rect clipsPrincessRun[]);

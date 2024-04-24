@@ -12,13 +12,15 @@ class dragon
         dragon();
         ~dragon();
         void render(LTexture& fireDragonTexture, SDL_Rect clipsDragon[], SDL_Renderer*& aRenderer, int camX, int camY);
-        void fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[], const int& TOTAL_TILES );
+        void fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[],
+                      const int& TOTAL_TILES, Mix_Chunk*& fireDragonChuck, bool& checkSound );
         int getBloodDragon();
         void decreasedBloodDragon();
         SDL_Rect getBox();
         void setBox(int x, int y);
         void renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY);
         bool checkCollisionFireWithFigure(int camX, int camY, Figure Figure);
+
     private:
         SDL_Rect box;
         int framesDragon;
@@ -27,7 +29,6 @@ class dragon
         SDL_Rect fireBox;
         bool fireCol;
         int fireVel;
-
 };
 
 void setDragon(Tile* tiles[], dragon dragon[], const int& TOTAL_TILES);

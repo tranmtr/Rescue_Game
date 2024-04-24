@@ -152,11 +152,10 @@ int LTexture::getHeight()
 
 bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture,
                 LTexture& lavaTexture, LTexture& iceTexture, LTexture& cakeTexture, LTexture& iceImageTexture, LTexture& fireDragonTexture,
-                LTexture& fireTexture, Tile* tiles[],const int& TOTAL_TILES, const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT,
-                const string& pathMaze, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture,
+                LTexture& fireTexture, LTexture& startTexture, LTexture& finishTexture, LTexture& victoryTexture, LTexture& defeatTexture,
                 LTexture& princessTexture,LTexture& nextLevelTexture, LTexture& menuTexture, LTexture& arrowrightMenuTexture,
                 LTexture& arrowleftMenuTexture, LTexture& levelAgainTexture, LTexture& arrowdownMenuTexture, LTexture& chooseLevelTexture,
-                LTexture& howToPlayTexture, LTexture& backHomeTexture)
+                LTexture& howToPlayTexture, LTexture& backHomeTexture, LTexture& soundOnTexture, LTexture& soundOffTexture)
 {
 	//Loading success flag
 	bool success = true;
@@ -239,11 +238,11 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 
 
     //Load tile map
-	if( !setTiles( tiles, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze ) )
-	{
-		cout << "Failed to load tile set!\n" ;
-		success = false;
-	}
+//	if( !setTiles( tiles, TOTAL_TILES, LEVEL_WIDTH, LEVEL_HEIGHT, pathMaze ) )
+//	{
+//		cout << "Failed to load tile set!\n" ;
+//		success = false;
+//	}
 
 	if( !startTexture.loadFromFile( "File_Image/image_Maze/start_mau_ghi(80_80).jpg", aRenderer ) )
 	{
@@ -316,10 +315,70 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
         cout << "Failed to load walking animation texture!\n" ;
 		success = false;
     }
+    if( !soundOnTexture.loadFromFile("File_Image/image_Menu/bat_loa(37_32).png", aRenderer))
+    {
+        cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+    }
+    if( !soundOffTexture.loadFromFile("File_Image/image_Menu/tat_loa(37_42).png", aRenderer))
+    {
+        cout << "Failed to load walking animation texture!\n" ;
+		success = false;
+    }
 	return success;
 }
 
+//Loads sound
+bool loadSound(Mix_Music*& soundTrackMusic, Mix_Chunk*& iceDamageChuck, Mix_Chunk*& fireDragonChuck)
+{
+    //Loading success flag
+	bool success = true;
 
+	//Load music
+	soundTrackMusic = Mix_LoadMUS( "music/soundTrack.wav" );
+	if( soundTrackMusic == NULL )
+	{
+		printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+
+	//Load sound effects
+	iceDamageChuck = Mix_LoadWAV( "music/iceDamage.wav" );
+	if( iceDamageChuck == NULL )
+	{
+		printf( "Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+
+	fireDragonChuck = Mix_LoadWAV( "music/fireDragon.wav" );
+	if( fireDragonChuck == NULL )
+	{
+		printf( "Failed to load high sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+
+	return success;
+}
+
+void makeSound(bool& checkSound, Mix_Music*& soundTrackMusic)
+{
+    if(checkSound == true)
+    {
+        if( Mix_PlayingMusic() == 0 )
+        {
+            //Play the music
+            cout << Mix_PlayMusic( soundTrackMusic, -1 ) << endl;
+        }
+        else
+        {
+            Mix_ResumeMusic();
+        }
+    }
+    else
+    {
+        Mix_PauseMusic();
+    }
+}
 
 void loadRectAnimation(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[], SDL_Rect clipsDragon[], SDL_Rect clipsPrincessRun[])
 {

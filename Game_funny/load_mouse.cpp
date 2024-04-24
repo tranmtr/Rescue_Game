@@ -6,6 +6,7 @@ load_Mouse::load_Mouse()
     levelMenu = {258, 198, 102, 54};
     howToPlay = {208, 285, 214, 62};
     quitMenu  = {271, 364,  81, 51};
+    soundHome = {0, 0, 50, 50};
     nextMenu  = {SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, 75, 35};
     againMenu = {SCREEN_WIDTH - 75, SCREEN_HEIGHT - 35, 75, 35};
 
@@ -42,7 +43,7 @@ load_Mouse::load_Mouse()
 
 void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrightMenuRect, SDL_Rect& arrowleftMenuRect,
                              SDL_Renderer*& aRenderer, bool& start, bool& checkChooseLevel, bool& checkHowToPlay, bool& quit,
-                             int& choose, SDL_Rect& arrowdownMenuRect )
+                             int& choose, SDL_Rect& arrowdownMenuRect, bool& checkSound )
 {
     arrowdownMenuRect.x = someLevelsMenu[choose].x;
     arrowdownMenuRect.y = someLevelsMenu[choose].y;
@@ -61,7 +62,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
 		if(SDL_PointInRect(&p, &this->startMenu) == false && SDL_PointInRect(&p, &this->levelMenu) == false
             &&SDL_PointInRect(&p, &this->howToPlay) == false && SDL_PointInRect(&p, &this->quitMenu) == false
             && SDL_PointInRect(&p, &this->nextMenu) == false  && SDL_PointInRect(&p, &this->buttonX) == false
-            && SDL_PointInRect(&p, &this->backHome) == false)
+            && SDL_PointInRect(&p, &this->backHome) == false && SDL_PointInRect(&p, &this->soundHome) == false)
         {
             //cout << "LLLLLLLLLLLLLLLLLLLLLLLLLL" << endl;
             bool check = false;
@@ -174,6 +175,17 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                         {
                             quit = true;
                         }
+                        if(SDL_PointInRect(&p, &this->soundHome) == true)
+                        {
+                            if(checkSound == true)
+                            {
+                                checkSound = false;
+                            }
+                            else
+                            {
+                                checkSound = true;
+                            }
+                        }
                     }
                     if(start == true)
                     {
@@ -246,7 +258,8 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
 void load_Mouse::render(LTexture& arrowrightMenuTexture, LTexture& arrowleftMenuTexture, SDL_Rect& arrowrightMenuRect,
                         SDL_Rect& arrowleftMenuRect, LTexture& menuTexture, LTexture& chooseLevelTexture, LTexture& howToPlayTexture,
                         SDL_Renderer*& aRenderer, const bool& start, const bool& quit, const bool& checkChooseLevel,
-                        const bool& checkHowToPlay, LTexture& arrowdownMenuTexture, SDL_Rect& arrowdownMenuRect)
+                        const bool& checkHowToPlay, LTexture& arrowdownMenuTexture, SDL_Rect& arrowdownMenuRect,
+                        bool& checkSound, LTexture& soundOnTexture, LTexture& soundOffTexture)
 {
     //cout << "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLll" << endl;
     if(checkChooseLevel == false && checkHowToPlay == false && start == false )
@@ -257,6 +270,16 @@ void load_Mouse::render(LTexture& arrowrightMenuTexture, LTexture& arrowleftMenu
         {
             arrowrightMenuTexture.render(arrowrightMenuRect.x, arrowrightMenuRect.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
             arrowleftMenuTexture.render(arrowleftMenuRect.x, arrowleftMenuRect.y, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+        }
+        if(checkSound == true)
+        {
+            soundOnTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
+        }
+
+        else
+        {
+            cout << "NE" << endl;
+            soundOffTexture.render(0, 0, NULL, 0, NULL, SDL_FLIP_NONE, aRenderer);
         }
     }
     else if(checkChooseLevel == true)
