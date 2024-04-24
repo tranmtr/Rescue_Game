@@ -106,6 +106,28 @@ int main( int argc, char* args[] )
     //Rendered texture
     LTexture textMenuTexture[TOTAL_TEXT];
 
+    //Clip idle
+    SDL_Rect clipsIdle[ANIMATION_FRAMES_IDLE];
+
+    //Clip run
+    SDL_Rect clipsRun[ANIMATION_FRAMES_RUN];
+
+    //Clip die
+    SDL_Rect clipsDie[ANIMATION_FRAMES_DIE];
+
+    //Clip attack
+    SDL_Rect clipsAttack[ANIMATION_FRAMES_ATTACK];
+
+    //Clip DRAGON
+    SDL_Rect clipsDragon[ANIMATION_FRAMES_DRAGON];
+
+    //Clip princess run
+    SDL_Rect clipsPrincessRun[ANIMATION_FRAMES_PRINCESS_RUN];
+
+    //blood
+    SDL_Rect bloodDragon;
+
+
     //Init window, renderer
 
     if(init(aWindow, aRenderer) == false)
@@ -135,27 +157,6 @@ int main( int argc, char* args[] )
     while(choose <= TOTAL_LEVEL && quit == false)
     {
         loadLevel(choose, pathMaze, LEVEL_WIDTH, LEVEL_HEIGHT, TOTAL_TILES, TOTAL_DRAGON);
-
-        //Clip idle
-        SDL_Rect clipsIdle[ANIMATION_FRAMES_IDLE];
-
-        //Clip run
-        SDL_Rect clipsRun[ANIMATION_FRAMES_RUN];
-
-        //Clip die
-        SDL_Rect clipsDie[ANIMATION_FRAMES_DIE];
-
-        //Clip attack
-        SDL_Rect clipsAttack[ANIMATION_FRAMES_ATTACK];
-
-        //Clip DRAGON
-        SDL_Rect clipsDragon[ANIMATION_FRAMES_DRAGON];
-
-        //Clip princess run
-        SDL_Rect clipsPrincessRun[ANIMATION_FRAMES_PRINCESS_RUN];
-
-        //blood
-        SDL_Rect bloodDragon;
 
         //mouse
         load_Mouse mouse;
@@ -309,7 +310,6 @@ int main( int argc, char* args[] )
         }
     }
     //Free resources and close SDL
-    close(aWindow, aRenderer,figureTexture, wallTexture, floorTexture,lavaTexture, iceTexture,cakeTexture, aFont,
-              soundTrackMusic, iceDamageChuck, fireDragonChuck);
+    close(aWindow, aRenderer, aFont, soundTrackMusic, iceDamageChuck, fireDragonChuck);
 	return 0;
 }

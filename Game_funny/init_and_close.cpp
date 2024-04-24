@@ -70,8 +70,7 @@ bool init(SDL_Window*& aWindow, SDL_Renderer*& aRenderer)
 	return success;
 }
 
-void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wallTexture, LTexture& floorTexture, LTexture& lavaTexture,
-           LTexture& iceTexture, LTexture& cakeTexture, TTF_Font*& aFont, Mix_Music*& soundTrackMusic, Mix_Chunk*& iceDamageChuck, Mix_Chunk*& fireDragonChuck)
+void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, TTF_Font*& aFont, Mix_Music*& soundTrackMusic, Mix_Chunk*& iceDamageChuck, Mix_Chunk*& fireDragonChuck)
 {
     Mix_FreeChunk( iceDamageChuck );
 	Mix_FreeChunk( fireDragonChuck );
@@ -82,14 +81,6 @@ void close(SDL_Window*& aWindow, SDL_Renderer*& aRenderer, LTexture figureTextur
 	Mix_FreeMusic( soundTrackMusic );
     soundTrackMusic = NULL;
 
-	//Free loaded images
-	figureTexture[ANIMATION_STATUS_IDLE].free();
-	figureTexture[ANIMATION_STATUS_RUN].free();
-    wallTexture.free();
-    floorTexture.free();
-    lavaTexture.free();
-    iceTexture.free();
-    cakeTexture.free();
 	//Destroy window
 	SDL_DestroyRenderer( aRenderer );
 	SDL_DestroyWindow( aWindow );

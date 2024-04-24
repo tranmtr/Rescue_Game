@@ -14,6 +14,7 @@ LTexture::LTexture()
 LTexture::~LTexture()
 {
 	//Deallocate
+	//cout << 1 << endl;
 	free();
 }
 
