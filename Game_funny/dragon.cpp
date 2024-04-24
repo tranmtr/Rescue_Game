@@ -33,7 +33,7 @@ dragon::~dragon()
 
 }
 
-void dragon::render(LTexture& fireDragonTexture, SDL_Rect clipsDragon[], SDL_Renderer*& aRenderer, int camX, int camY)
+void dragon::render(LTexture& fireDragonTexture, SDL_Rect clipsDragon[], SDL_Renderer*& aRenderer, const int& camX, const int& camY)
 {
     this->framesDragon++;
     if(this->framesDragon / 8 >= ANIMATION_FRAMES_DRAGON)
@@ -69,12 +69,12 @@ SDL_Rect dragon::getBox()
     return this->box;
 }
 
-void dragon::setBox(int x, int y)
+void dragon::setBox(const int& x, const int& y)
 {
     this->box.x = x;
     this->box.y = y;
 }
-void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[],
+void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, const int& camX, const int& camY, Tile* Tiles[],
                       const int& TOTAL_TILES, Mix_Chunk*& fireDragonChuck, bool& checkSound)
 {
     if(this->framesFire == 0)
@@ -122,7 +122,7 @@ void dragon::fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRen
     //cout << "framesFire = " << framesFire << endl;
 }
 
-void dragon::renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY)
+void dragon::renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, const int& camX, const int& camY)
 {
     this->fireBox.x += this->fireVel;
     if(this->fireCol == true)
@@ -133,7 +133,7 @@ void dragon::renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, int cam
     //cout << "Vao fire" << endl;
 }
 
-bool dragon::checkCollisionFireWithFigure(int camX, int camY, Figure Figure)
+bool dragon::checkCollisionFireWithFigure(const int& camX, const int& camY, Figure Figure)
 {
     //cout <<"FireBox.x = " << fireBox.x << endl;
     return checkCollision(Figure.getBoxFigure(), this->fireBox);

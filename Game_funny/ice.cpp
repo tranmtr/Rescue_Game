@@ -20,7 +20,7 @@ LIce::~LIce()
 
 }
 
-void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[],
+void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SDL_Renderer*& aRenderer, const int& camX, const int& camY, Tile* Tiles[],
                    const int& TOTAL_TILES, const int& TOTAL_DRAGON, Mix_Chunk*& iceDamageChuck, bool& checkSound)
 {
     if(Figure.getSpace() == true && this->framesIce == 0 )
@@ -28,15 +28,7 @@ void LIce::moveIce(Figure Figure, LTexture& iceDamegeTexture, dragon& dragon, SD
         if(checkSound == true)
         {
             Mix_PlayChannel( -1, iceDamageChuck, 0 );
-            cout << "NE" << endl;
-        }
-        if(iceDamageChuck == NULL)
-        {
-            cout << "NULL" << endl;
-        }
-        else
-        {
-            cout << "LOAD DUOC" << endl;
+            //cout << "NE" << endl;
         }
         this->mIce.x = Figure.getBoxX() + Figure.FIGURE_WIDTH / 2;
         this->mIce.y = Figure.getBoxY() ;

@@ -63,47 +63,47 @@ bool loadText(SDL_Renderer*& aRenderer, LTexture textMenuTexture[], TTF_Font*& a
 	aFont = TTF_OpenFont( "lazy.ttf", 18 );
     SDL_Color textColor[TOTAL_TEXT];
 
-    textColor[GAME_HEALING] = { 255,255,255 };
-    textColor[GAME_GO_GET_CAKE] = { 255,255,255 };
-    textColor[GAME_GOT_CAKE] = { 248, 241, 119 };
-    textColor[GAME_CURSE_NOT_LIFTED] = { 255, 255, 255 };
-    textColor[GAME_CURSE_LIFTED] = { 248, 241, 119 };
-    textColor[PLAY_AGAIN] = { 255, 0, 31 };
-    textColor[NEXT_LEVEL] = { 255, 0, 31 };
+    textColor[GAME_HEALING] = { 255, 255, 255 }; // white
+    textColor[GAME_GO_GET_CAKE] = { 255, 255, 255 }; //white
+    textColor[GAME_GOT_CAKE] = { 248, 241, 119 }; // yellow
+    textColor[GAME_CURSE_NOT_LIFTED] = { 255, 255, 255 }; //white
+    textColor[GAME_CURSE_LIFTED] = { 248, 241, 119 }; // yellow
+    textColor[PLAY_AGAIN] = { 255, 0, 31 }; //red
+    textColor[NEXT_LEVEL] = { 255, 0, 31 }; //red
 
     if( !textMenuTexture[GAME_HEALING].loadFromRenderedText( "YOU ARE HEALING.", textColor[GAME_HEALING], aFont, aRenderer ) )
     {
-        printf( "Failed to render text texture!\n" );
+        cout << "Failed to render text texture!\n";
         success = false;
     }
     if( !textMenuTexture[GAME_GO_GET_CAKE].loadFromRenderedText( "GO GET THE CAKE.", textColor[GAME_GO_GET_CAKE], aFont, aRenderer ) )
     {
-        printf( "Failed to render text texture!\n" );
+        cout << "Failed to render text texture!\n";
         success = false;
     }
     if( !textMenuTexture[GAME_GOT_CAKE].loadFromRenderedText( "YOU'VE GOT THE CAKE.", textColor[GAME_GOT_CAKE], aFont, aRenderer ) )
     {
-        printf( "Failed to render text texture!\n" );
+        cout << "Failed to render text texture!\n";
         success = false;
     }
     if( !textMenuTexture[GAME_CURSE_NOT_LIFTED].loadFromRenderedText( "THE CURSE ON THE PRINCESS HAS NOT BEEN LIFTED YET.", textColor[GAME_CURSE_NOT_LIFTED], aFont, aRenderer ) )
     {
-        printf( "Failed to render text texture!\n" );
+        cout << "Failed to render text texture!\n";
         success = false;
     }
     if( !textMenuTexture[GAME_CURSE_LIFTED].loadFromRenderedText( "THE CURSE ON THE PRINCESS HAS BEEN LIFTED.", textColor[GAME_CURSE_LIFTED], aFont, aRenderer ) )
     {
-        printf( "Failed to render text texture!\n" );
+        cout << "Failed to render text texture!\n";
         success = false;
     }
     if( !textMenuTexture[PLAY_AGAIN].loadFromRenderedText( "PLAY AGAIN", textColor[PLAY_AGAIN], aFont, aRenderer ) )
     {
-        printf( "Failed to render text texture!\n" );
+        cout << "Failed to render text texture!\n";
         success = false;
     }
     if( !textMenuTexture[NEXT_LEVEL].loadFromRenderedText( "NEXT LEVEL", textColor[NEXT_LEVEL], aFont, aRenderer ) )
     {
-        printf( "Failed to render text texture!\n" );
+        cout << "Failed to render text texture!\n";
         success = false;
     }
 

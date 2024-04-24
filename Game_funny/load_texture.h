@@ -90,6 +90,7 @@ bool loadMedia(SDL_Renderer*& aRenderer, LTexture figureTexture[], LTexture& wal
 //Loads sound
 bool loadSound(Mix_Music*& soundTrackMusic, Mix_Chunk*& iceDamageChuck, Mix_Chunk*& fireDragonChuck);
 
+// make sound
 void makeSound(bool& checkSound, Mix_Music*& soundTrackMusic);
 
 //Load rec animation

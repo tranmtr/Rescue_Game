@@ -8,18 +8,18 @@
 class dragon
 {
     public:
-        static const int DRAGON_BLOOD = 100;
+        const int DRAGON_BLOOD = 100;
         dragon();
         ~dragon();
-        void render(LTexture& fireDragonTexture, SDL_Rect clipsDragon[], SDL_Renderer*& aRenderer, int camX, int camY);
-        void fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY, Tile* Tiles[],
+        void render(LTexture& fireDragonTexture, SDL_Rect clipsDragon[], SDL_Renderer*& aRenderer, const int& camX, const int& camY);
+        void fireMove(Figure& Figure, LTexture& fireTexture, SDL_Renderer*& aRenderer, const int& camX, const int& camY, Tile* Tiles[],
                       const int& TOTAL_TILES, Mix_Chunk*& fireDragonChuck, bool& checkSound );
         int getBloodDragon();
         void decreasedBloodDragon();
         SDL_Rect getBox();
-        void setBox(int x, int y);
-        void renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, int camX, int camY);
-        bool checkCollisionFireWithFigure(int camX, int camY, Figure Figure);
+        void setBox(const int& x, const int& y);
+        void renderFire(LTexture& fireTexture, SDL_Renderer*& aRenderer, const int& camX, const int& camY);
+        bool checkCollisionFireWithFigure(const int& camX, const int& camY, Figure Figure);
 
     private:
         SDL_Rect box;

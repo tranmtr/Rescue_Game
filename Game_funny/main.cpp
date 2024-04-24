@@ -40,15 +40,19 @@ int main( int argc, char* args[] )
 
     // Figure
     LTexture figureTexture[ANIMATION_STATUS_TOTAL];
+
     // Load wall, floor
     LTexture wallTexture;
     LTexture floorTexture;
+
     // Load lava, ice, cake
     LTexture lavaTexture;
     LTexture iceTexture;
     LTexture cakeTexture;
+
     // Image ice bullet
     LTexture iceImageTexture;
+
     // Dragon
     LTexture fireDragonTexture;
 
@@ -179,9 +183,6 @@ int main( int argc, char* args[] )
             // Load Rec Animation
             loadRectAnimation(clipsIdle, clipsRun, clipsDie, clipsAttack, clipsDragon, clipsPrincessRun);
 
-            //Main loop flag
-            //bool quit = false;
-
              //Event handler
             SDL_Event e;
 
@@ -306,6 +307,10 @@ int main( int argc, char* args[] )
             if(mouse.getNextLevel() == true)
             {
                 choose = choose + 1;
+            }
+            if(choose > TOTAL_LEVEL)
+            {
+                choose = 1;
             }
         }
     }

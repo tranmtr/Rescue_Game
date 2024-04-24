@@ -64,7 +64,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
             && SDL_PointInRect(&p, &this->nextMenu) == false  && SDL_PointInRect(&p, &this->buttonX) == false
             && SDL_PointInRect(&p, &this->backHome) == false && SDL_PointInRect(&p, &this->soundHome) == false)
         {
-            //cout << "LLLLLLLLLLLLLLLLLLLLLLLLLL" << endl;
+            //cout << "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNn" << endl;
             bool check = false;
             for(int i = 1; i <= TOTAL_LEVEL; i++)
             {
@@ -220,7 +220,7 @@ void load_Mouse::handleEvent( SDL_Event& e, Figure& Figure,  SDL_Rect& arrowrigh
                             //cout << p.x <<  " " << p.y << endl;
                             if(SDL_PointInRect(&p, &this->someLevelsMenu[i]) == true)
                             {
-                                cout << "ne i = " << i << endl;
+                                //cout << "ne i = " << i << endl;
                                 choose = i;
                                 //cout << p.x <<  " " << p.y << endl;
                                 //arrowdownMenuRect.x = someLevelsMenu[i].x + (someLevelsMenu[i].w)/2 ;

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1713951296 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
+1713972223 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\main.cpp
 	"header.h"
 	"init_and_close.h"
 	"load_texture.h"
@@ -13,7 +13,7 @@
 	"loadText.h"
 	"load_mouse.h"
 
-1713889155 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\header.h
+1713970009 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\header.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -24,17 +24,17 @@
 	<fstream>
 	<vector>
 
-1713012035 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.h
+1713971464 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.h
 	"header.h"
 	"load_texture.h"
 	"loadText.h"
 
 1710901603 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\tile.h
 
-1713869502 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.cpp
+1713971465 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\figure.cpp
 	"figure.h"
 
-1713951476 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_texture.cpp
+1713969928 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_texture.cpp
 	"load_texture.h"
 
 1713951280 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\init_and_close.cpp
@@ -44,17 +44,17 @@
 	"header.h"
 	"load_texture.h"
 
-1713948396 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_texture.h
+1713970294 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_texture.h
 	"header.h"
 	"load_maze.h"
 
-1711459031 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\check_collision.h
+1713970884 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\check_collision.h
 	"header.h"
 
-1711467199 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\check_collision.cpp
+1713970883 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\check_collision.cpp
 	"check_collision.h"
 
-1711534734 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_maze.h
+1713971670 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_maze.h
 	"header.h"
 	"check_collision.h"
 	"load_texture.h"
@@ -70,10 +70,10 @@
 	"header.h"
 	"figure.h"
 
-1713931747 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.cpp
+1713971554 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.cpp
 	"ice.h"
 
-1713926883 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.h
+1713971571 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\ice.h
 	"header.h"
 	"load_texture.h"
 	"figure.h"
@@ -81,16 +81,16 @@
 	"dragon.h"
 	<ctime>
 
-1713927428 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\dragon.cpp
+1713971349 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\dragon.cpp
 	"dragon.h"
 
-1713926741 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\dragon.h
+1713971349 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\dragon.h
 	"header.h"
 	"load_texture.h"
 	"figure.h"
 	"check_collision.h"
 
-1713950423 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_mouse.cpp
+1713970099 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_mouse.cpp
 	"load_mouse.h"
 
 1713927419 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\load_mouse.h
@@ -98,13 +98,13 @@
 	"load_texture.h"
 	"figure.h"
 
-1713868875 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\chooselevel.cpp
+1713970948 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\chooselevel.cpp
 	"chooseLevel.h"
 
 1713179859 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\chooselevel.h
 	"header.h"
 
-1713002848 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\loadtext.cpp
+1713970479 source:f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\loadtext.cpp
 	"loadText.h"
 
 1712978847 f:\dai_hoc\ki2nam2324\laptrinhnangcao\3.big_exercise\rescue_game\game_funny\loadtext.h

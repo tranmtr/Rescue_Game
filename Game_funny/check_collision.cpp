@@ -2,7 +2,7 @@
 
 #include "check_collision.h"
 
-bool checkCollision( SDL_Rect a, SDL_Rect b )
+bool checkCollision( const SDL_Rect& a, const SDL_Rect& b )
 {
     //The sides of the rectangles
     int leftA, leftB;

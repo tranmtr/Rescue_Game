@@ -1,6 +1,5 @@
 #pragma once
 
-
 //Using SDL, SDL_image, standard IO, and strings
 #include <SDL.h>
 #include <SDL_image.h>
@@ -14,10 +13,6 @@
 
 using namespace std;
 
-////The dimensions of the level
-//const int LEVEL_WIDTH = /*34*/22*80;
-//const int LEVEL_HEIGHT = 33*80;
-
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -25,7 +20,8 @@ const int SCREEN_HEIGHT = 480;
 //Tile constants
 const int TILE_WIDTH = 80;
 const int TILE_HEIGHT = 80;
-//const int TOTAL_TILES = 22*33;
+
+// type tile
 const int TOTAL_TILE_SPRITES = 7;
 const int TILE_FLOOR = 0;
 const int TILE_LAVA = 1;
@@ -87,4 +83,4 @@ const int TOTAL_MENU = 5;
 
 // LEVEL_MENU
 
-const int TOTAL_LEVEL = 15;
+const int TOTAL_LEVEL = 8;

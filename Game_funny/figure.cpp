@@ -290,13 +290,13 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
     }
     if(collisionIceSlow(this->mBox, tiles, TOTAL_TILES))
     {
-        cout << "ICE" << endl;
+        //cout << "ICE" << endl;
         this->healingBlood();
     }
     if(collisionCakeFast(this->mBox, tiles, TOTAL_TILES))
     {
         this->checkCake = true;
-        cout << "CAKE" << endl;
+        //cout << "CAKE" << endl;
     }
     if(collisionFinishVictory(this->mBox, tiles, TOTAL_TILES) && this->checkPrincess == true)
     {
@@ -305,12 +305,12 @@ void Figure::move(Tile *tiles[], const int& LEVEL_WIDTH, const int& LEVEL_HEIGHT
     if(collisionPrincess(this->mBox, this->princessBox) && this->checkCake == true)
     {
         this->checkPrincess = true;
-        cout << "Giai cuu thanh cong" << endl;
+        //cout << "Giai cuu thanh cong" << endl;
     }
 }
 
 void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
-                     LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
+                     LTexture figureTexture[], SDL_Renderer* aRenderer, const int& camX, const int& camY,
                     Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[], LTexture& princessTexture, SDL_Rect clipsPrincessRun[])
 {
     if(this->checkstatus == ANIMATION_STATUS_DIE)
@@ -353,7 +353,7 @@ void Figure::render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie
             this->frameAttack = 0;
         }
         figureTexture[ANIMATION_STATUS_ATTACK].render( this->mBox.x - camX, this->mBox.y - camY, &clipsAttack[ this->frameAttack / 4 ], 0, NULL, this->flipType, aRenderer  );
-        cout << "Attack" << endl;
+        //cout << "Attack" << endl;
     }
 
     this->bloodFigure.x = this->mBox.x - camX;

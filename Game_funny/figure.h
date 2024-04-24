@@ -17,13 +17,13 @@ class Figure
 		//static const int FIGURE_WIDTH_ATTACK = 76;
 		//static const int FIGURE_HEIGHT_ATTACK = 54;
 
-        static const int PRINCESS_WIDTH = 32;
-		static const int PRINCESS_HEIGHT = 52;
+        const int PRINCESS_WIDTH = 32;
+		const int PRINCESS_HEIGHT = 52;
 
 		//Maximum axis velocity of the figure
-		static const int FIGURE_VEL = 5;
+		const int FIGURE_VEL = 5;
 
-		static const int FIGURE_BLOOD = 100;
+		const int FIGURE_BLOOD = 100;
 		//Initializes the variables
 		Figure();
 
@@ -35,7 +35,7 @@ class Figure
 
 		//Shows the figure on the screen
 		void render(SDL_Rect clipsIdle[], SDL_Rect clipsRun[], SDL_Rect clipsDie[], SDL_Rect clipsAttack[],
-               LTexture figureTexture[], SDL_Renderer* aRenderer, int camX, int camY,
+               LTexture figureTexture[], SDL_Renderer* aRenderer, const int& camX, const int& camY,
               Tile *tiles[], const int& TOTAL_TILES, LText textMenu[], LTexture textMenuTexture[], LTexture& princessTexture, SDL_Rect clipsPrincessRun[]);
 
         //Get mPosX:

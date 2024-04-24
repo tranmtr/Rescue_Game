@@ -3,4 +3,4 @@
 #include "header.h"
 
 //Box collision detector
-bool checkCollision( SDL_Rect a, SDL_Rect b );
+bool checkCollision(const SDL_Rect& a, const SDL_Rect& b );
