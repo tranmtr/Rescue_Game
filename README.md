@@ -25,7 +25,7 @@
 # Cấu trúc, các thành phần trong game
 ## 1. Nhân vật chính
 ### Knight
-![Knight_Image](https://github.com/tranmtr/Rescue_Game/blob/main/Game_funny/File_Image/image_Figure/figure.pngy.png) 
+![Knight_Image](https://github.com/tranmtr/Rescue_Game/blob/main/Game_funny/File_Image/image_Figure/figure.png) 
 - Bạn sẽ điều khiển nhân vật này di chuyển tìm đường đi trong mê cung, tránh né những quả cầu lửa, tấn công rồng và giải cứu công chúa.
 
 ## 2. Các đối tượng tương tác với nhân vật chính
