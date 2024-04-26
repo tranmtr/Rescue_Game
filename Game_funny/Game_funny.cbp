@@ -49,7 +49,6 @@
 		<Unit filename="load_camera.cpp" />
 		<Unit filename="load_camera.h" />
 		<Unit filename="load_maze.cpp" />
-		<Unit filename="load_maze.h" />
 		<Unit filename="load_mouse.cpp" />
 		<Unit filename="load_mouse.h" />
 		<Unit filename="load_texture.cpp" />
